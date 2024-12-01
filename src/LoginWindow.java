@@ -10,11 +10,13 @@ public class LoginWindow extends JFrame{
     private JPasswordField passwordField;
     private JButton loginButton;
     private JPanel loginWindow;
+    private JButton backButton;
 
     public LoginWindow(StartWindow sw) {
         setTitle("Login");
         setSize(new Dimension(500,400));
         setContentPane(loginWindow);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         loginButton.addActionListener(new ActionListener() {
@@ -24,9 +26,9 @@ public class LoginWindow extends JFrame{
             }
         });
 
-        addWindowListener(new WindowAdapter() {
+        backButton.addActionListener(new ActionListener() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 sw.setVisible(true);
             }

@@ -20,6 +20,7 @@ public class SignUpWindow extends JFrame{
     private JPasswordField confirmPasswordField;
     private JPanel dateWindow;
     private JPasswordField passwordField;
+    private JButton backButton;
 
     public SignUpWindow(StartWindow sw) {
         setTitle("Sign Up");
@@ -34,6 +35,7 @@ public class SignUpWindow extends JFrame{
         JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         dateWindow.add(datePicker);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         signUpWindow.revalidate();
         signUpWindow.repaint();
@@ -44,9 +46,9 @@ public class SignUpWindow extends JFrame{
                 
             }
         });
-        addWindowListener(new WindowAdapter() {
+        backButton.addActionListener(new ActionListener() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 dispose();
                 sw.setVisible(true);
             }
