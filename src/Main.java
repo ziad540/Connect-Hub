@@ -1,7 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-
+CreateUser u=new CreateUser(8661,"Youssef");
 
 
     }
