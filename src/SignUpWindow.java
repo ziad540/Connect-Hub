@@ -21,6 +21,9 @@ public class SignUpWindow extends JFrame{
     private JPanel dateWindow;
     private JPasswordField passwordField;
     private JButton backButton;
+    private TestEmail testEmail=new TestEmail();
+    private TestPassword testPassword=new TestPassword();
+    private TestUsername testUsername=new TestUsername();
 
     public SignUpWindow(StartWindow sw) {
         setTitle("Sign Up");
@@ -43,7 +46,27 @@ public class SignUpWindow extends JFrame{
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                String checkEmail = emailField.getText();
+                String checkUsername = usernameField.getText();
+                String checkPassword = passwordField.getText();
+                String checkConfirmPassword = confirmPasswordField.getText();
+                Boolean validEmail = testEmail.checkEmail(checkEmail);
+                Boolean validPassword =testPassword.testPassword(checkPassword);
+                Boolean validUsername = testUsername.testUsername(checkUsername);
+                if (checkConfirmPassword.isEmpty()||checkPassword.isEmpty()||checkEmail.isEmpty()||checkUsername.isEmpty()) {
+                    JOptionPane.showMessageDialog(signUpWindow, "Please enter all the fields correctly.","Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else if(!validEmail){
+                    JOptionPane.showMessageDialog(dateWindow, "Invalid Email Address", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (!validPassword) {
+                    JOptionPane.showMessageDialog(dateWindow, "Invalid Password", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (!validUsername) {
+                    JOptionPane.showMessageDialog(dateWindow, "Invalid Username", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                if(!(checkConfirmPassword.equals(checkPassword))){
+                    JOptionPane.showMessageDialog(dateWindow, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
         backButton.addActionListener(new ActionListener() {
