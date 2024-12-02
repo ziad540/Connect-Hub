@@ -23,10 +23,10 @@ public class ProfileDetails extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(profileDetailsWindow);
         setLocationRelativeTo(null);
-        ImageIcon profile = new ImageIcon("C:\\Users\\Nour_Azab\\Pictures\\Screenshots\\wallpaper1.png");
+        ImageIcon profile = new ImageIcon("src/wallpaper1.png");
         Image profileImage = profile.getImage().getScaledInstance(300,200,Image.SCALE_SMOOTH);
         profilePhoto.setIcon(new ImageIcon(profileImage));
-        ImageIcon cover = new ImageIcon("C:\\Users\\Nour_Azab\\Pictures\\Screenshots\\wallpaper2.png");
+        ImageIcon cover = new ImageIcon("src/wallpaper2.png");
         Image coverImage = cover.getImage().getScaledInstance(300,200,Image.SCALE_SMOOTH);
         coverPhoto.setIcon(new ImageIcon(coverImage));
         setVisible(true);
