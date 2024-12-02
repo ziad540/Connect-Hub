@@ -1,5 +1,6 @@
-public class TestEmail {
-    Boolean checkEmail(String  email){
+public class TestEmail implements Validation {
+    @Override
+     public Boolean checker(String  email){
         if(email.isEmpty()) {
         return false;
     }

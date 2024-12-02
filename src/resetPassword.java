@@ -16,7 +16,7 @@ public class resetPassword extends JFrame {
     public resetPassword(Profile p) {
         setTitle("Reset Password");
         setSize(new Dimension(400,400));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panel1);
         setLocationRelativeTo(null);
         setVisible(true);

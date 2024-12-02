@@ -1,5 +1,5 @@
-public class TestUsername {
-    public Boolean testUsername(String username) {
+public class TestUsername implements Validation{
+    public Boolean checker(String username) {
         if(username.length()<3||username.length()>16){
             return false;
         }

@@ -34,43 +34,63 @@ public class ProfileDetails extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-//                p.setVisible(true);
+                p.setVisible(true);
             }
         });
         editCoverPhotoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Load cover photo");
+                int selected = fileChooser.showOpenDialog(profileDetailsWindow);
+                if (selected == JFileChooser.APPROVE_OPTION) {
+                    String path = fileChooser.getSelectedFile().getPath();
+                    ImageIcon originalIcon = new ImageIcon(path);
+                    Image coverImage = originalIcon.getImage().getScaledInstance(300,200,Image.SCALE_SMOOTH);
+                    coverPhoto.setIcon(new ImageIcon(coverImage));
+                }
 
             }
         });
         editProfilePhotoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Load profile photo");
+                int selected = fileChooser.showOpenDialog(profileDetailsWindow);
+                if (selected == JFileChooser.APPROVE_OPTION) {
+                    String path = fileChooser.getSelectedFile().getPath();
+                    ImageIcon originalIcon = new ImageIcon(path);
+                    Image profileImage = originalIcon.getImage().getScaledInstance(300,200,Image.SCALE_SMOOTH);
+                    profilePhoto.setIcon(new ImageIcon(profileImage));
+                }
 
             }
         });
         editBioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new resetBio();
+                // show new bio in section
             }
         });
         editUsernameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new resetUsername();
+                // show new username in section
             }
         });
         editPasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new resetPassword(p);
             }
         });
         saveChangesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                // save to file
             }
         });
     }
