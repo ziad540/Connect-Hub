@@ -34,7 +34,7 @@ public class ProfileDetails extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                p.setVisible(true);
+//                p.setVisible(true);
             }
         });
         editCoverPhotoButton.addActionListener(new ActionListener() {
