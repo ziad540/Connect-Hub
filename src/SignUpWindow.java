@@ -28,7 +28,6 @@ public class SignUpWindow extends JFrame{
     public SignUpWindow(StartWindow sw) {
         setTitle("Sign Up");
         setSize(new Dimension(500,600));
-        setContentPane(signUpWindow);
         UtilDateModel model = new UtilDateModel();
         model.setValue(Calendar.getInstance().getTime());
         Properties properties = new Properties();
@@ -38,11 +37,12 @@ public class SignUpWindow extends JFrame{
         JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
         dateWindow.add(datePicker);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setContentPane(signUpWindow);
         signUpWindow.revalidate();
         signUpWindow.repaint();
         setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
