@@ -8,7 +8,7 @@ public abstract class Content {
     LocalDateTime timestamp = LocalDateTime.now();
 
     public Content(String contentId,String autherId,String content,String imagePath){
-       this.content=contentId;
+       this.content=content;
        this.autherId=autherId;
        this.content=content;
        this.imagePath=imagePath;
