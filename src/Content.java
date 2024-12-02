@@ -8,7 +8,7 @@ public abstract class Content {
     LocalDateTime timestamp = LocalDateTime.now();
 
     public Content(String contentId,String autherId,String content,String imagePath){
-       this.content=content;
+       this.contentId=contentId;
        this.autherId=autherId;
        this.content=content;
        this.imagePath=imagePath;
@@ -37,8 +37,8 @@ public abstract class Content {
 
 
     @Override
-    public String toString() {
-        return "Content ID: " + contentId + ", Author ID: " + autherId + ", Timestamp: " + timestamp;
+    public String toString(){
+    return "Content ID: " + contentId + ", Author ID: " + autherId + ", Content" + content + ", Image Path" + imagePath +  ", Timestamp: " + timestamp;
     }
 }
 
