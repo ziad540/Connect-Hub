@@ -145,12 +145,47 @@ public class NewsFeedgui {
             }
         });
 
+        JButton back = new JButton();
+        ImageIcon image5=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\back.png");
+        back.setContentAreaFilled(false);
+        back.setFont(new Font("Arial", Font.BOLD, 16));
+        back.setPreferredSize(new Dimension(50,50));
+        back.setIcon(image5);
+        back.setBorderPainted(false);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("back post");
 
 
+
+            }
+        });
+
+
+        JButton freinds = new JButton();
+        ImageIcon image6=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\freinds.png");
+        freinds.setContentAreaFilled(false);
+        freinds.setFont(new Font("Arial", Font.BOLD, 16));
+        freinds.setPreferredSize(new Dimension(50,50));
+        freinds.setIcon(image6);
+        freinds.setBorderPainted(false);
+        freinds.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("back post");
+
+
+
+            }
+        });
+
+
+       //
         bottomPanel.add(profile);
         bottomPanel.add(stories);
-        bottomPanel.add(new JButton());
-        bottomPanel.add(new JButton());
+        bottomPanel.add(freinds); bottomPanel.add(back);
+
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -198,7 +233,7 @@ public class NewsFeedgui {
 
 
 
-        JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel actionPanel = new JPanel();
         actionPanel.setPreferredSize(new Dimension(30,20));
 
         postPanel.add(actionPanel);
