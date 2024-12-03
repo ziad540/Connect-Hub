@@ -17,6 +17,7 @@ public class Profile extends JFrame{
     private JButton viewProfileButton;
     private JLabel profilePhotoLabel;
     private JLabel bioDetails;
+    private JButton backButton;
 
     public Profile() {
         setTitle("Profile");
@@ -51,6 +52,12 @@ public class Profile extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 ProfileDetails profileDetails = new ProfileDetails(Profile.this);
                 setVisible(false);
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
