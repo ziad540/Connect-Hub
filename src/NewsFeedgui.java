@@ -210,7 +210,7 @@ public class NewsFeedgui {
 
 
         try {
-            ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg");
+            ImageIcon originalIcon = new ImageIcon("src/469015492_1119563023507666_3019382420093762731_n.jpg");
             Image scaledImage = originalIcon.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
             postPanel.add(imageLabel);
