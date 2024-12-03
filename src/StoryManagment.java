@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class StoryManagment implements AddStory, DeleteStory, RemoveExpiredStory{
 
 
+
     @Override
     public void addStory(ArrayList<Story> stories, Story s) {
        stories.add(s);
