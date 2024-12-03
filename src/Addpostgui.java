@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Addpost {
+public class Addpostgui {
 
-    Addpost() {
+    Addpostgui() {
         JFrame frame = new JFrame("NewsFeed");
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,10 +115,6 @@ public class Addpost {
 
             }
         });
-
-
-
-
 
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
