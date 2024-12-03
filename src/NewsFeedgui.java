@@ -14,6 +14,7 @@ public class NewsFeedgui {
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(102,205,170));
@@ -24,7 +25,7 @@ public class NewsFeedgui {
 
 
         JButton addPostButton = new JButton();
-        ImageIcon image=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
+        ImageIcon image=new ImageIcon("src/new-post.png");
         addPostButton.setContentAreaFilled(false);
         addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
         addPostButton.setPreferredSize(new Dimension(50,50));
@@ -108,7 +109,7 @@ public class NewsFeedgui {
 
 
         JButton profile = new JButton();
-        ImageIcon image3=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
+        ImageIcon image3=new ImageIcon("src/user.png");
         profile.setContentAreaFilled(false);
 
         profile.setPreferredSize(new Dimension(50,50));
@@ -117,10 +118,10 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("profile");
+                new Profile(NewsFeedgui.this);
+             frame.setVisible(false);
 
-
-
+//                System.out.println("profile");
             }
         });
 
@@ -129,7 +130,7 @@ public class NewsFeedgui {
 
 
         JButton stories = new JButton();
-        ImageIcon image4=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\stories.png");
+        ImageIcon image4=new ImageIcon("src/story.png");
         stories.setContentAreaFilled(false);
 
         stories.setPreferredSize(new Dimension(50,50));
@@ -164,7 +165,7 @@ public class NewsFeedgui {
 
 
         JButton freinds = new JButton();
-        ImageIcon image6=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\freinds.png");
+        ImageIcon image6=new ImageIcon("src/team.png");
         freinds.setContentAreaFilled(false);
         freinds.setFont(new Font("Arial", Font.BOLD, 16));
         freinds.setPreferredSize(new Dimension(50,50));
