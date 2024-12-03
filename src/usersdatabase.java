@@ -1,48 +1,49 @@
 import java.io.File;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 public class usersdatabase {
 
     private String filename;
 
+    public usersdatabase(String filename) {
+        this.filename = "C:\\Users\\Abdallah\\IdeaProjects\\Connect-Hub\\users.json";
+    }
 
-    public void write(ArrayList<User> users)
-    {
-
+    public void write(ArrayList<User> users) {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         try {
-            objectMapper.writeValue(new File(filename), users);
+            objectMapper.writeValue(new File("C:\\Users\\Abdallah\\IdeaProjects\\Connect-Hub\\users.json"), users);
             System.out.println("JSON file created successfully!");
         } catch (Exception e) {
+            System.err.println("Error writing JSON file: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-
-    public ArrayList<User>  load()
-
-    {
-
+    public ArrayList<User> load() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
         try {
-            // Read JSON file and map it to an ArrayList of Person objects
-            ArrayList<User> Users = objectMapper.readValue(new (filename), new TypeReference<ArrayList<User>>() {});
+            ArrayList<User> users = objectMapper.readValue(
+                    new File("C:\\Users\\Abdallah\\IdeaProjects\\Connect-Hub\\src\\users.json"),
+                    new TypeReference<ArrayList<User>>() {}
+            );
 
-            // Print the ArrayList
-            System.out.println("People read from JSON file:");
+
             for (User user : users) {
-                System.out.println(user);
+                System.out.println(user.getUserId() + " - " + user.getUserName()+" "+user.getEmail()+" "+user.getDateOfBirth());
             }
-            return Users;
-
+            return users;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
-
-
-
-
 }

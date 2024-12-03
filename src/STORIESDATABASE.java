@@ -1,6 +1,9 @@
 import java.io.File;
 import java.util.ArrayList;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class STORIESDATABASE {
     private String filename;
@@ -22,13 +25,13 @@ public class STORIESDATABASE {
     {
 
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
         try {
-            // Read JSON file and map it to an ArrayList of Person objects
-            ArrayList<Story> stories = objectMapper.readValue(new (filename), new TypeReference<ArrayList<Story>>() {});
 
-            // Print the ArrayList
-            System.out.println("People read from JSON file:");
+            ArrayList<Story> stories = objectMapper.readValue(new File("C:\\Users\\Abdallah\\IdeaProjects\\Connect-Hub\\src\\stories.json"), new TypeReference<ArrayList<Story>>() {});
+
+
             for (Story story : stories) {
                 System.out.println(story);
             }
@@ -36,6 +39,7 @@ public class STORIESDATABASE {
             return stories;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 

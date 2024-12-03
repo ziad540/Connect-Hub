@@ -25,5 +25,20 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/jackson-datatype-jsr310-2.18.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/jackson-databind-2.18.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/jackson-core-2.18.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/jackson-annotations-2.18.2.jar!/" />
+          <root url="file://$MODULE_DIR$" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
