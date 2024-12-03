@@ -120,13 +120,10 @@ public class NewsFeedgui {
             public void actionPerformed(ActionEvent e) {
                 new Profile(NewsFeedgui.this);
              frame.setVisible(false);
-
-//                System.out.println("profile");
             }
         });
 
 
-        // "C:\Users\Abdallah\Desktop\stories.png"
 
 
         JButton stories = new JButton();
@@ -140,9 +137,6 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("stories");
-
-
-
             }
         });
 
@@ -181,8 +175,7 @@ public class NewsFeedgui {
             }
         });
 
-
-       //
+        
         bottomPanel.add(profile);
         bottomPanel.add(stories);
         bottomPanel.add(freinds); bottomPanel.add(back);
