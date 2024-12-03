@@ -11,7 +11,7 @@ public class NewsFeedgui {
 
 
         JFrame frame = new JFrame("NewsFeed");
-        frame.setSize(400, 800);
+        frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -189,6 +189,8 @@ public class NewsFeedgui {
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
+        FreindGui gui = new FreindGui();
+        frame.add(gui.createFriendPanel(),BorderLayout.EAST);
 
         frame.setVisible(true);
     }
