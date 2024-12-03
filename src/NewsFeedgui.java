@@ -202,6 +202,7 @@ public class NewsFeedgui {
 
 
         JLabel userInfo = new JLabel(name + " - " + date);
+        userInfo.setIcon(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\868320_people_512x512.png"));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         postPanel.add(userInfo);
 
