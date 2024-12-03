@@ -14,6 +14,7 @@ public class StoryProcessor {
 
     public void setStories(ArrayList<Story> stories) {
         this.stories =stories;
+
     }
 
 
