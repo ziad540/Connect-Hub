@@ -17,7 +17,7 @@ public class NewsFeedgui {
         frame.setLocationRelativeTo(null);
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(new Color(102,205,170));
+        topPanel.setBackground(new Color(240,255,255));
         topPanel.setPreferredSize(new Dimension(400, 60));
         JLabel titleLabel = new JLabel("Posts", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
@@ -25,7 +25,7 @@ public class NewsFeedgui {
 
 
         JButton addPostButton = new JButton();
-        ImageIcon image=new ImageIcon("src/new-post.png");
+        ImageIcon image=new ImageIcon("src/new-post (2).png");
         addPostButton.setContentAreaFilled(false);
         addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
         addPostButton.setPreferredSize(new Dimension(50,50));
@@ -52,7 +52,7 @@ public class NewsFeedgui {
 
 
         JButton refresh = new JButton();
-        ImageIcon image2=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\refresh.png");
+        ImageIcon image2=new ImageIcon("src/refresh.png");
         refresh.setContentAreaFilled(false);
         refresh.setFont(new Font("Arial", Font.BOLD, 16));
         refresh.setPreferredSize(new Dimension(50,50));
@@ -102,6 +102,7 @@ public class NewsFeedgui {
         }
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
+        bottomPanel.setBackground(new Color(240,255,255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
 
@@ -141,7 +142,7 @@ public class NewsFeedgui {
         });
 
         JButton back = new JButton();
-        ImageIcon image5=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\back.png");
+        ImageIcon image5=new ImageIcon("src/logout.png");
         back.setContentAreaFilled(false);
         back.setFont(new Font("Arial", Font.BOLD, 16));
         back.setPreferredSize(new Dimension(50,50));
