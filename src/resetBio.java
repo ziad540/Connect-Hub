@@ -7,7 +7,7 @@ public class resetBio extends JFrame {
     private JPanel panel1;
     private JTextField newBioFiled;
     private JButton resetButton;
-    public resetBio() {
+    public resetBio(JLabel label) {
         setTitle("Reset Bio");
         setSize(new Dimension(400,400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -20,10 +20,12 @@ public class resetBio extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String newBio = newBioFiled.getText();
                 if(newBio.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please enter a file name", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please enter bio", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                     // add to array not file
+                    label.setText(newBio);
+                    dispose();
                 }
 
             }

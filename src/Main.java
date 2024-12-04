@@ -12,13 +12,14 @@ public class Main {
 ////        new Addpost();
 
       //  Profile profile =new Profile();
-        usersdatabase user =new usersdatabase("src/users.json");
-        user.load();
-
-        postdatabase post= new postdatabase();
-        post.load();
-
-        STORIESDATABASE ST=new STORIESDATABASE();
-        ST.load();
+//        usersdatabase user =new usersdatabase("src/users.json");
+//        user.load();
+//
+//        postdatabase post= new postdatabase();
+//        post.load();
+//
+//        STORIESDATABASE ST=new STORIESDATABASE();
+//        ST.load();
+        //FriendProfile friendProfile = new FriendProfile();
 
 }}
