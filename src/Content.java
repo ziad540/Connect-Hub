@@ -15,6 +15,26 @@ public abstract class Content {
        this.timestamp = LocalDateTime.now();
     }
 
+    private void setContentId(String contentId) {
+        this.contentId = contentId;
+    }
+
+    private void setAutherId(String autherId) {
+        this.autherId = autherId;
+    }
+
+    private void setContent(String content) {
+        this.content = content;
+    }
+
+    private void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    private void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getContentId() {
         return contentId;
     }
@@ -33,6 +53,10 @@ public abstract class Content {
 
     public LocalDateTime getTimestamp() {
         return timestamp;
+    }
+    public Content()
+    {
+
     }
 
 

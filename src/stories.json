@@ -1,0 +1,23 @@
+[
+  {
+    "contentId": "1",
+    "autherId": "123",
+    "content": "This is my first post!",
+    "imagePath": "images/post1.jpg",
+    "timestamp": "2024-12-03T10:15:30"
+  },
+  {
+    "contentId": "2",
+    "autherId": "456",
+    "content": "Excited to share my journey.",
+    "imagePath": "images/post2.jpg",
+    "timestamp": "2024-12-02T09:00:00"
+  },
+  {
+    "contentId": "3",
+    "autherId": "789",
+    "content": "Check out this amazing recipe!",
+    "imagePath": "images/post3.jpg",
+    "timestamp": "2024-12-01T18:30:00"
+  }
+]

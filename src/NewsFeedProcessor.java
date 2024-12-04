@@ -16,6 +16,24 @@ public class NewsFeedProcessor {
         this.posts = posts;
     }
 
+    public ArrayList<Post> getFreindsposts(ArrayList<Post>posts,int id)
+    {
+        ShowFreindsPosts show=new ShowFreindsPosts();
+        return show.getfreindsposts(posts,0);
+    }
 
 
+    public void AddPost(ArrayList<Post>posts,Post p)
+    {  //Addpost add=new Addpost();
+      // add.Addpost(posts,p);
+
+    }
+
+    public void Deletepost(ArrayList<Post>posts,Post p)
+
+    {
+        Deletepost delete=new Deletepost();
+        delete.Deletepost(posts,p);
+
+    }
 }

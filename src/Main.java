@@ -1,11 +1,17 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-// add to gui
-        new NewsFeedgui();
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+// add to gui 
+    new NewsFeedgui();
 //        new FreindGui();
 //        new Addpost();
 
-        //  Profile profile =new Profile();
+      //  Profile profile =new Profile();
         usersdatabase user =new usersdatabase("src/users.json");
         user.load();
 
@@ -15,7 +21,4 @@ public class Main {
         STORIESDATABASE ST=new STORIESDATABASE();
         ST.load();
 
-
-    }
-
-}
+}}
