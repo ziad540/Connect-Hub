@@ -50,6 +50,8 @@
           <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
+          <font size="20"/>
           <horizontalAlignment value="2"/>
           <horizontalTextPosition value="2"/>
           <text value="Bio:"/>
@@ -61,6 +63,7 @@
           <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
+          <font size="20"/>
           <text value="Username:"/>
         </properties>
       </component>
@@ -138,6 +141,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <font size="20"/>
           <text value="Label"/>
         </properties>
       </component>
@@ -147,6 +151,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <font size="20"/>
           <text value="Label"/>
         </properties>
       </component>

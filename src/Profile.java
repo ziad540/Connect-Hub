@@ -21,7 +21,7 @@ public class Profile extends JFrame{
     public Profile(NewsFeedgui newGui) {
         setTitle("Profile");
         setSize(new Dimension(600,800));
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(profileWindow);
         setLocationRelativeTo(null);
         BufferedImage profile = null;
