@@ -11,7 +11,7 @@ public class NewsFeedgui {
 
 
         JFrame frame = new JFrame("NewsFeed");
-        frame.setSize(400, 800);
+        frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
@@ -184,6 +184,8 @@ public class NewsFeedgui {
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
+        FreindGui gui = new FreindGui();
+        frame.add(gui.createFriendPanel(),BorderLayout.EAST);
 
         frame.setVisible(true);
     }
@@ -203,7 +205,7 @@ public class NewsFeedgui {
 
 
         try {
-            ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg");
+            ImageIcon originalIcon = new ImageIcon("src/licensed-image (2).jpeg");
             Image scaledImage = originalIcon.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
             postPanel.add(imageLabel);

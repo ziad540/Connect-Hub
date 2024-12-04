@@ -24,7 +24,7 @@ public class NewsFeedProcessor {
 
 
     public void AddPost(ArrayList<Post>posts,Post p)
-    {  Addpost add=new Addpost();
+    {  //Addpost add=new Addpost();
       // add.Addpost(posts,p);
 
     }
