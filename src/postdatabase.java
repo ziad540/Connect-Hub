@@ -6,6 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class postdatabase {
     private String filename;
+    public postdatabase() {
+        this.filename = "src/posts.json";
+    }
 
     public void write(ArrayList<Post> posts)
     {
@@ -22,14 +25,13 @@ public class postdatabase {
     public ArrayList<Post>  load()
 
     {
-
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.registerModule(new JavaTimeModule());
 
         try {
 
-            ArrayList<Post> posts = objectMapper.readValue(new File("C:\\Users\\Abdallah\\IdeaProjects\\Connect-Hub\\src\\posts.json"), new TypeReference<ArrayList<Post>>() {});
+            ArrayList<Post> posts = objectMapper.readValue(new File("src/posts.json"), new TypeReference<ArrayList<Post>>() {});
 
 
             for (Post post : posts) {

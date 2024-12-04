@@ -8,7 +8,7 @@ public class User {
     private String status;
     private LocalDate dateOfBirth;
     private String hashingPassword;
-    private usersdatabase userDatabase=new usersdatabase("src/users.json");
+    private usersdatabase userDatabase=new usersdatabase();
     private ArrayList<String>firndesId=new ArrayList<>();
     private ArrayList<String>postId=new ArrayList<>();
     private User() {

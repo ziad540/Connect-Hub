@@ -1,17 +1,5 @@
 [
   {
-    "userId": "1001",
-    "email": "example1@example.com",
-    "userName": "JohnDoe",
-    "status": "active",
-    "dateOfBirth": [
-      2000,
-      1,
-      1
-    ],
-    "hashingPassword": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"
-  },
-  {
     "userId": "1002",
     "email": "example2@example.com",
     "userName": "JaneDoe",
@@ -25,18 +13,6 @@
   },
   {
     "userId": "1001",
-    "email": "eziad8002@gmail.com",
-    "userName": "zz12",
-    "status": "online",
-    "dateOfBirth": [
-      2024,
-      12,
-      4
-    ],
-    "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
-  },
-  {
-    "userId": "1001",
     "email": "eziad80@gmail.com",
     "userName": "ziad12",
     "status": "online",
@@ -46,30 +22,6 @@
       4
     ],
     "hashingPassword": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e"
-  },
-  {
-    "userId": "1001",
-    "email": "eziad111@gmail.com",
-    "userName": "zzzz",
-    "status": "online",
-    "dateOfBirth": [
-      2024,
-      12,
-      4
-    ],
-    "hashingPassword": "63640264849a87c90356129d99ea165e37aa5fabc1fea46906df1a7ca50db492"
-  },
-  {
-    "userId": "6",
-    "email": "eziad8877@gmail.com",
-    "userName": "ziad1",
-    "status": "online",
-    "dateOfBirth": [
-      2024,
-      12,
-      4
-    ],
-    "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
   },
   {
     "userId": "1007",

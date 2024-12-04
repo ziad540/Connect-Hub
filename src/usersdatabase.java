@@ -9,7 +9,7 @@ public class usersdatabase {
 
     private String filename;
 
-    public usersdatabase(String filename) {
+    public usersdatabase() {
         this.filename = "src/users.json";
     }
 
