@@ -7,10 +7,11 @@ import java.awt.event.MouseEvent;
 
 public class NewsFeedgui {
     JPanel contentPanel;
-    JPanel right;
     JFrame frame;
+    JPanel right;
 
-   public NewsFeedgui() {
+
+    public NewsFeedgui() {
         frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,9 +73,7 @@ public class NewsFeedgui {
 //        frame.add(right,BorderLayout.EAST);
 
 
-
-
-        right=new JPanel();
+        right = new JPanel();
         right.setLayout(new BorderLayout());
 
         JPanel contentPanel2 = new JPanel();
@@ -98,14 +97,10 @@ public class NewsFeedgui {
 
 
         };
-        populatefreinds(contentPanel2,freinds);
+        populatefreinds(contentPanel2, freinds);
 
 
-
-
-        frame.add(right,BorderLayout.EAST);
-
-
+        frame.add(right, BorderLayout.EAST);
 
 
         // Refresh Button Logic
@@ -133,7 +128,7 @@ public class NewsFeedgui {
                 contentPanel.repaint();// Repaint the panel
 
                 contentPanel2.removeAll();
-                populatefreinds(contentPanel2,freinds);
+                populatefreinds(contentPanel2, freinds);
                 contentPanel2.revalidate();
                 contentPanel2.repaint();
 
@@ -142,10 +137,6 @@ public class NewsFeedgui {
         topPanel.add(refresh, BorderLayout.WEST);
 
         frame.add(topPanel, BorderLayout.NORTH);
-
-
-
-
 
 
         // Bottom Panel
@@ -185,8 +176,6 @@ public class NewsFeedgui {
                 System.out.println("friends");
             }
         });
-
-
 
 
         bottomPanel.add(profile);
@@ -268,7 +257,7 @@ public class NewsFeedgui {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String[] options = {"View profile", "Remove", "Block"};
-                int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,options[0]);
+                int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 switch (choice) {
                     case 0:
                         FriendProfile friendProfile = new FriendProfile(frame);
@@ -289,7 +278,6 @@ public class NewsFeedgui {
         postPanel.add(SPACE);
 
 
-
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
@@ -297,10 +285,6 @@ public class NewsFeedgui {
 
         return postPanel;
     }
-
-
-
-
 
 
 }

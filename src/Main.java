@@ -6,7 +6,6 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
  new StartWindow();
-//
 //    new NewsFeedgui();
 ////        new FreindGui();
 ////        new Addpost();
