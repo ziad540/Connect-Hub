@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Addpost {
+public class Addpostgui {
 
-    Addpost() {
+    Addpostgui() {
         JFrame frame = new JFrame("NewsFeed");
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +47,6 @@ public class Addpost {
         photoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
 
 
-
         photoLabel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
 
 
@@ -82,10 +81,10 @@ public class Addpost {
 
 
         JButton addPostButton = new JButton();
-        ImageIcon image=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
+        ImageIcon image = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
         addPostButton.setContentAreaFilled(false);
         addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
-        addPostButton.setPreferredSize(new Dimension(50,50));
+        addPostButton.setPreferredSize(new Dimension(50, 50));
         addPostButton.setIcon(image);
         addPostButton.setBorderPainted(false);
         addPostButton.addActionListener(new ActionListener() {
@@ -94,40 +93,7 @@ public class Addpost {
                 System.out.println("new post");
 
 
-
             }
         });
-
-
-        JButton back = new JButton();
-        ImageIcon image5=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\back.png");
-        back.setContentAreaFilled(false);
-        back.setFont(new Font("Arial", Font.BOLD, 16));
-        back.setPreferredSize(new Dimension(50,50));
-        back.setIcon(image5);
-        back.setBorderPainted(false);
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("back post");
-
-
-
-            }
-        });
-
-
-
-
-
-
-        JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
-        bottomPanel.setPreferredSize(new Dimension(400, 50));
-        bottomPanel.add(addPostButton);
-        bottomPanel.add(back);
-
-        frame.add(bottomPanel, BorderLayout.SOUTH);
-
-        frame.setVisible(true);
     }
 }

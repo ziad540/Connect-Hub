@@ -4,5 +4,4 @@ public interface DeleteStory {
 
     void deleteStory(ArrayList<Story>stories,Story story);
 
-
 }

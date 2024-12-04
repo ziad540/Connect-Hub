@@ -17,11 +17,12 @@ public class Profile extends JFrame{
     private JButton viewProfileButton;
     private JLabel profilePhotoLabel;
     private JLabel bioDetails;
+    private JButton backButton;
 
-    public Profile() {
+    public Profile(NewsFeedgui newGui) {
         setTitle("Profile");
         setSize(new Dimension(600,800));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(profileWindow);
         setLocationRelativeTo(null);
         BufferedImage profile = null;
@@ -51,6 +52,12 @@ public class Profile extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 ProfileDetails profileDetails = new ProfileDetails(Profile.this);
                 setVisible(false);
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

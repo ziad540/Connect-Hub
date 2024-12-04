@@ -1,0 +1,18 @@
+[
+  {
+    "userId": "1001",
+    "email": "example1@example.com",
+    "userName": "JohnDoe",
+    "status": "active",
+    "dateOfBirth": "2000-01-01",
+    "hashingPassword": "hashedPassword123"
+  },
+  {
+    "userId": "1002",
+    "email": "example2@example.com",
+    "userName": "JaneDoe",
+    "status": "inactive",
+    "dateOfBirth": "1995-06-15",
+    "hashingPassword": "hashedPassword456"
+  }
+]
