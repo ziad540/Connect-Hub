@@ -10,51 +10,51 @@ public class FreindGui {
         mainPanel.setLayout(new BorderLayout());
 
 
-//        JPanel topPanel = new JPanel(new BorderLayout());
-//        topPanel.setBackground(new Color(102, 205, 170));
-//        topPanel.setPreferredSize(new Dimension(400, 60));
-//        JLabel titleLabel = new JLabel("Friends", SwingConstants.CENTER);
-//        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-//        topPanel.add(titleLabel, BorderLayout.CENTER);
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(new Color(102, 205, 170));
+        topPanel.setPreferredSize(new Dimension(400, 60));
+        JLabel titleLabel = new JLabel("Friends", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        topPanel.add(titleLabel, BorderLayout.CENTER);
 
-//        JButton addPostButton = new JButton();
-//        ImageIcon image = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
-//        addPostButton.setContentAreaFilled(false);
-//        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
-//        addPostButton.setPreferredSize(new Dimension(50, 50));
-//        addPostButton.setIcon(image);
-//        addPostButton.setBorderPainted(false);
-//          addPostButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("new post");
-//
-//
-//
-//            }
-//        });
-//        topPanel.add(addPostButton, BorderLayout.EAST);
+        JButton addPostButton = new JButton();
+        ImageIcon image = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
+        addPostButton.setContentAreaFilled(false);
+        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
+        addPostButton.setPreferredSize(new Dimension(50, 50));
+        addPostButton.setIcon(image);
+        addPostButton.setBorderPainted(false);
+          addPostButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("new post");
 
-//
-//        JButton refreshButton = new JButton();
-//        ImageIcon image2 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\refresh.png");
-//        refreshButton.setContentAreaFilled(false);
-//        refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
-//        refreshButton.setPreferredSize(new Dimension(50, 50));
-//        refreshButton.setIcon(image2);
-//        refreshButton.setBorderPainted(false);
-//       refresh.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("refresh");
-//
-//
-//
-//            }
-//        });
-//        topPanel.add(refreshButton, BorderLayout.WEST);
-//
-//        mainPanel.add(topPanel, BorderLayout.NORTH);
+
+
+            }
+        });
+        topPanel.add(addPostButton, BorderLayout.EAST);
+
+
+        JButton refreshButton = new JButton();
+        ImageIcon image2 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\refresh.png");
+        refreshButton.setContentAreaFilled(false);
+        refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
+        refreshButton.setPreferredSize(new Dimension(50, 50));
+        refreshButton.setIcon(image2);
+        refreshButton.setBorderPainted(false);
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("refresh");
+
+
+
+            }
+        });
+        topPanel.add(refreshButton, BorderLayout.WEST);
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
 
 
         JPanel contentPanel = new JPanel();
@@ -84,43 +84,43 @@ public class FreindGui {
             contentPanel.add(createPostPanel((String) post[0], (String) post[1], (String) post[2], (String) post[4]));
         }
 
-//        // Bottom panel
-//        JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
-//        bottomPanel.setPreferredSize(new Dimension(200, 50));
-//
-//        // Profile Button
-//        JButton profileButton = new JButton();
-//        ImageIcon image3 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
-//        profileButton.setContentAreaFilled(false);
-//        profileButton.setPreferredSize(new Dimension(50, 50));
-//        profileButton.setIcon(image3);
-//        profileButton.setBorderPainted(false);
-//         profile.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("profile");
-//
-//
-//
-//            }
-//        });
-//        bottomPanel.add(profileButton);
-//
-//        // Stories Button
-//        JButton storiesButton = new JButton();
-//        ImageIcon image4 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\stories.png");
-//        storiesButton.setContentAreaFilled(false);
-//        storiesButton.setPreferredSize(new Dimension(50, 50));
-//        storiesButton.setIcon(image4);
-//        storiesButton.setBorderPainted(false);
-//        storiesButton.addActionListener(e -> System.out.println("Stories"));
-//        bottomPanel.add(storiesButton);
+        // Bottom panel
+        JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
+        bottomPanel.setPreferredSize(new Dimension(200, 50));
 
-        // Placeholder Buttons
-//        bottomPanel.add(new JButton());
-//        bottomPanel.add(new JButton());
-//
-//        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        // Profile Button
+        JButton profileButton = new JButton();
+        ImageIcon image3 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
+        profileButton.setContentAreaFilled(false);
+        profileButton.setPreferredSize(new Dimension(50, 50));
+        profileButton.setIcon(image3);
+        profileButton.setBorderPainted(false);
+        profileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("profile");
+
+
+
+            }
+        });
+        bottomPanel.add(profileButton);
+
+        // Stories Button
+        JButton storiesButton = new JButton();
+        ImageIcon image4 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\stories.png");
+        storiesButton.setContentAreaFilled(false);
+        storiesButton.setPreferredSize(new Dimension(50, 50));
+        storiesButton.setIcon(image4);
+        storiesButton.setBorderPainted(false);
+        storiesButton.addActionListener(e -> System.out.println("Stories"));
+        bottomPanel.add(storiesButton);
+
+
+        bottomPanel.add(new JButton());
+        bottomPanel.add(new JButton());
+
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         return mainPanel;
     }
