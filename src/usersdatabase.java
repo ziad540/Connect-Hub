@@ -31,7 +31,7 @@ public class usersdatabase {
 
         try {
             ArrayList<User> users = objectMapper.readValue(
-                    new File("C:\\Users\\Abdallah\\IdeaProjects\\Connect-Hub\\src\\users.json"),
+                    new File("src/users.json"),
                     new TypeReference<ArrayList<User>>() {}
             );
 
