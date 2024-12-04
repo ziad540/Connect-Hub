@@ -17,8 +17,13 @@ public class FriendProfile extends JFrame{
     private JPanel posts;
 
 
-    public FriendProfile() {
-        setTitle("Profile");
+    public FriendProfile(JFrame frame) {
+        JDialog dialog = new JDialog(frame, "Friend Profile", true);//to make window always on top
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setSize(600, 800);
+        dialog.setLocationRelativeTo(frame);
+        dialog.setAlwaysOnTop(true);
+
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(friendProfile);
@@ -44,11 +49,13 @@ public class FriendProfile extends JFrame{
         ImageIcon cover = new ImageIcon("src/wallpaper2.png");
         Image coverImage = cover.getImage().getScaledInstance(600,200,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
-        setVisible(true);
+        //setVisible(true);
+        dialog.add(friendProfile);
+        dialog.setVisible(true);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                dialog.dispose();
             }
         });
     }

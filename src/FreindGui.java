@@ -138,7 +138,6 @@ public class FreindGui {
                 int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,options[0]);
                 switch (choice) {
                     case 0:
-                    FriendProfile friendProfile = new FriendProfile();
                         break;
                     case 1:
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
