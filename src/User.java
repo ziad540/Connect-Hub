@@ -1,18 +1,19 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class User {
-    private static int CounterId=1;
     private  String userId;
     private String email;
     private String userName;
     private String status;
     private LocalDate dateOfBirth;
     private String hashingPassword;
+    private usersdatabase userDatabase=new usersdatabase("src/users.json");
     public User() {
     }
 
     public User( String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId = String.valueOf(1000+CounterId++);
+        this.userId =String.valueOf(1000+loadCounterId());
         this.email = email;
         this.userName = userName;
         this.status = status;
@@ -40,13 +41,10 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public static int getCounterId() {
-        return CounterId;
-    }
-
-    private static void setCounterId(int counterId) {
-        CounterId = counterId;
+    // to give unique id to new user
+    private int loadCounterId() {
+        ArrayList<User>users=userDatabase.load();
+        return users.size()+1;
     }
 
     public String getEmail() {

@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-
-// add to gui 
-    new NewsFeedgui();
-//        new FreindGui();
-//        new Addpost();
+ new StartWindow();
+//
+//    new NewsFeedgui();
+////        new FreindGui();
+////        new Addpost();
 
       //  Profile profile =new Profile();
         usersdatabase user =new usersdatabase("src/users.json");
