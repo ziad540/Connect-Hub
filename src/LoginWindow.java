@@ -13,8 +13,7 @@ public class LoginWindow extends JFrame {
     private JPanel loginWindow;
     private JButton backButton;
     private checkValid checkValid;
-    private usersdatabase userData = new usersdatabase("src/users.json");
-    private ArrayList<User> usersOperation = userData.load();
+    UserDatabaseManagement u = new UserDatabaseManagement();
 
     public LoginWindow(StartWindow sw) {
         setTitle("Login");
@@ -39,12 +38,13 @@ public class LoginWindow extends JFrame {
                     }
                 }
                 Boolean emailIsExist = false;// to check email in the database or not
-                for (int i = 0; i < usersOperation.size(); i++) {
-                    if (usersOperation.get(i).getEmail().equals(Email)) {
-                        String orignalPassword = usersOperation.get(i).getHashingPassword();
+                for (int i = 0; i < u.getUsers().size(); i++) {
+                    if (u.getUsers().get(i).getEmail().equals(Email)) {
+                        String orignalPassword = u.getUsers().get(i).getHashingPassword();
                         emailIsExist = true;
                         if (orignalPassword.equals(CheckPasswordHashed)) {
-                            new NewsFeedgui();
+                             User user = u.getUsers().get(i);
+                            new NewsFeedgui(user);
                         } else
                             JOptionPane.showMessageDialog(null, "Invalid email address and password", "Error", JOptionPane.ERROR_MESSAGE);
                     }

@@ -10,7 +10,7 @@ public class NewsFeedgui {
     JPanel right;
     JFrame frame;
 
-   public NewsFeedgui() {
+   public NewsFeedgui(User user) {//right version
         frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,7 +157,7 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(NewsFeedgui.this);
+                new Profile(frame,user);
                 frame.setVisible(false);
             }
         });

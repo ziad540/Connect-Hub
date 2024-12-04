@@ -13,7 +13,7 @@ public class resetPassword extends JFrame {
     private JLabel confirmPassword;
     private JButton Confirmbutton;
 
-    public resetPassword(Profile p) {
+    public resetPassword(Profile p,User u) {
         setTitle("Reset Password");
         setSize(new Dimension(400,400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

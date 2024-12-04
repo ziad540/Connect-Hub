@@ -17,7 +17,8 @@ public class ProfileDetails extends JFrame{
     private JLabel bioDetails;
     private JLabel usernameDetails;
 
-    public ProfileDetails(Profile p) {
+    public ProfileDetails(Profile p,User user) {
+        ProfileInformation tempProfile = user.getProfileInformation();
         setTitle("Profile Details");
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -48,6 +49,7 @@ public class ProfileDetails extends JFrame{
                     ImageIcon originalIcon = new ImageIcon(path);
                     Image coverImage = originalIcon.getImage().getScaledInstance(300,200,Image.SCALE_SMOOTH);
                     coverPhoto.setIcon(new ImageIcon(coverImage));
+                    tempProfile.setCoverPicPath(path);
                 }
 
             }
@@ -63,6 +65,7 @@ public class ProfileDetails extends JFrame{
                     ImageIcon originalIcon = new ImageIcon(path);
                     Image profileImage = originalIcon.getImage().getScaledInstance(300,200,Image.SCALE_SMOOTH);
                     profilePhoto.setIcon(new ImageIcon(profileImage));
+                   tempProfile.setProfilePicPath(path);
                 }
 
             }
@@ -70,7 +73,7 @@ public class ProfileDetails extends JFrame{
         editBioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new resetBio(bioDetails);
+                new resetBio(bioDetails,tempProfile);
                 // show new bio in section
             }
         });
@@ -84,13 +87,17 @@ public class ProfileDetails extends JFrame{
         editPasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new resetPassword(p);
+                new resetPassword(p,user);
             }
         });
         saveChangesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // save to file
+                // save updated user to file
+                user.setUserName(usernameDetails.getText());
+                user.setProfileInformation(tempProfile);
+
+
             }
         });
     }

@@ -18,7 +18,7 @@ public class Profile extends JFrame{
     private JButton backButton;
     private JPanel posts;
 
-    public Profile(NewsFeedgui newGui) {
+    public Profile(JFrame frame,User user) {
         setTitle("Profile");
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,13 +49,15 @@ public class Profile extends JFrame{
         viewProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProfileDetails profileDetails = new ProfileDetails(Profile.this);
+                ProfileDetails profileDetails = new ProfileDetails(Profile.this,user);
                 setVisible(false);
             }
         });
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
+                frame.setVisible(true);
 
             }
         });
