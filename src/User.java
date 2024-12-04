@@ -9,10 +9,27 @@ public class User {
     private LocalDate dateOfBirth;
     private String hashingPassword;
     private usersdatabase userDatabase=new usersdatabase("src/users.json");
-    public User() {
+    private ArrayList<String>firndesId=new ArrayList<>();
+    private ArrayList<String>postId=new ArrayList<>();
+    private User() {
     }
 
-    public User( String email, String userName, String password, String status, LocalDate dateOfBirth) {
+    public ArrayList<String> getFirndesId() {
+        return firndesId;
+    }
+
+    private void setFirndesId(ArrayList<String> firndesId) {
+        this.firndesId = firndesId;
+    }
+
+    public ArrayList<String> getPostId() {
+        return postId;
+    }
+
+    private void setPostId(ArrayList<String> postId) {
+        this.postId = postId;
+    }
+    public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
         this.userId =String.valueOf(1000+loadCounterId());
         this.email = email;
         this.userName = userName;
@@ -20,9 +37,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         hashingPassword=passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
     }
-
-
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
