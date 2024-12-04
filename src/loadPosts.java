@@ -12,7 +12,7 @@ public class loadPosts {
         posts = postDatebase.load();
         users = userDatabase.load();
         System.out.println(posts.size());
-        String userName = "";
+        String userName ="";
         LocalDate date;
         String content;
         String image;
