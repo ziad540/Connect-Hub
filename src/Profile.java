@@ -19,7 +19,7 @@ public class Profile extends JFrame{
     private JLabel bioDetails;
     private JButton backButton;
 
-    public Profile(NewsFeedgui newGui) {
+    public Profile(JFrame frame) {
         setTitle("Profile");
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,7 +57,8 @@ public class Profile extends JFrame{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                frame.setVisible(true);
             }
         });
     }
