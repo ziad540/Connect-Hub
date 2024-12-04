@@ -36,6 +36,8 @@ public class LoginWindow extends JFrame{
                         JOptionPane.showMessageDialog(loginWindow, "Invalid email address", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                // if email and pass correct
+                new NewsFeedgui();
             }
         });
 
