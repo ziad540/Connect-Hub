@@ -42,7 +42,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-15000091"/>
+          <background color="-13526070"/>
           <horizontalAlignment value="0"/>
           <opaque value="true"/>
           <text value="Email"/>
@@ -55,7 +55,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-15000091"/>
+          <background color="-13526070"/>
           <horizontalAlignment value="0"/>
           <opaque value="true"/>
           <text value="Username"/>
@@ -68,7 +68,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-15000091"/>
+          <background color="-13526070"/>
           <horizontalAlignment value="0"/>
           <opaque value="true"/>
           <text value="Date of Birth"/>
@@ -81,7 +81,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-15000091"/>
+          <background color="-13526070"/>
           <horizontalAlignment value="0"/>
           <opaque value="true"/>
           <text value="Password"/>
@@ -102,7 +102,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-15000091"/>
+          <background color="-13526070"/>
           <horizontalAlignment value="0"/>
           <opaque value="true"/>
           <text value="Confirm Password"/>
@@ -131,6 +131,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-264"/>
           <text value="&lt; Back"/>
         </properties>
       </component>

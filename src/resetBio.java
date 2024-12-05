@@ -4,32 +4,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class resetBio extends JFrame {
-    private JPanel panel1;
-    private JTextField newBioFiled;
+    private JPanel resetBioPanel;
+    private JTextField newBioField;
     private JButton resetButton;
     public resetBio(JLabel label,ProfileInformation p) {
-        setTitle("Reset Bio");
-        setSize(new Dimension(400,400));
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setContentPane(panel1);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        JDialog dialog = new JDialog((Frame) null, "Reset Bio", true);//to make window always on top
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setSize(400, 400);
+        dialog.setLocationRelativeTo(null);
+        dialog.setAlwaysOnTop(true);
+        dialog.add(resetBioPanel);
+
 
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String newBio = newBioFiled.getText();
+                String newBio = newBioField.getText();
                 if(newBio.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please enter bio", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(dialog, "Please enter bio", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                     // add to array not file
                     label.setText(newBio);
                     p.setBioData(newBio);
-                    dispose();
+                    dialog.dispose();
                 }
 
             }
         });
+        dialog.setVisible(true);
     }
 }

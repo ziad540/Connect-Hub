@@ -49,6 +49,8 @@ public class LoginWindow extends JFrame {
                         if (orignalPassword.equals(CheckPasswordHashed)) {
                              User user = u.getUsers().get(i);
                             new NewsFeedgui(user);
+                            dispose();
+                            setVisible(false);
                         } else
                             JOptionPane.showMessageDialog(null, "Invalid email address and password", "Error", JOptionPane.ERROR_MESSAGE);
                     }
