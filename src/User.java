@@ -13,6 +13,10 @@ public class User {
    // private usersdatabase userDatabase=new usersdatabase("src/users.json");
     private ArrayList<String>firndesId=new ArrayList<>();
     private ArrayList<String>postId=new ArrayList<>();
+    private ArrayList<String>storiesId=new ArrayList<>();
+
+    private ArrayList<String> freindrequestId=new ArrayList<>();
+    private ArrayList<String> blockedID=new ArrayList<>();
     public User() {
     }
 

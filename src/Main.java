@@ -8,6 +8,8 @@ public class Main {
        // new StartWindow();
         new FreindGui();
 
+
+
 }
 
 }
