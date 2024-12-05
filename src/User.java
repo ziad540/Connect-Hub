@@ -8,7 +8,10 @@ public class User {
     private String status;
     private LocalDate dateOfBirth;
     private String hashingPassword;
-    private usersdatabase userDatabase=new usersdatabase();
+
+    private ProfileInformation profileInformation;
+    private usersdatabase userDatabase=new usersdatabase("src/users.json");
+
     private ArrayList<String>firndesId=new ArrayList<>();
     private ArrayList<String>postId=new ArrayList<>();
     private User() {
@@ -87,5 +90,13 @@ public class User {
 
     public void setHashingPassword(String hashingPassword) {
         this.hashingPassword = hashingPassword;
+    }
+
+    public ProfileInformation getProfileInformation() {
+        return profileInformation;
+    }
+
+    public void setProfileInformation(ProfileInformation profileInformation) {
+        this.profileInformation = profileInformation;
     }
 }

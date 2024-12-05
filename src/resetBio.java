@@ -7,7 +7,7 @@ public class resetBio extends JFrame {
     private JPanel panel1;
     private JTextField newBioFiled;
     private JButton resetButton;
-    public resetBio(JLabel label) {
+    public resetBio(JLabel label,ProfileInformation p) {
         setTitle("Reset Bio");
         setSize(new Dimension(400,400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -25,6 +25,7 @@ public class resetBio extends JFrame {
                 else {
                     // add to array not file
                     label.setText(newBio);
+                    p.setBioData(newBio);
                     dispose();
                 }
 

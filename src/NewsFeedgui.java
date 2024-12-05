@@ -7,11 +7,13 @@ public class NewsFeedgui {
 
     JPanel contentPanel;
     JPanel right;
-    private loadPosts loadPosts = new loadPosts();
 
-    NewsFeedgui() {
+    JFrame frame;
+    PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
 
-        JFrame frame = new JFrame("NewsFeed");
+   public NewsFeedgui(User user) {//right version
+        frame = new JFrame("NewsFeed");
+
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -35,6 +37,7 @@ public class NewsFeedgui {
         addPostButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //postDatabaseManagement.addPost();
                 System.out.println("new post");
             }
         });
@@ -148,7 +151,7 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(NewsFeedgui.this);
+                new Profile(frame,user);
                 frame.setVisible(false);
             }
         });
