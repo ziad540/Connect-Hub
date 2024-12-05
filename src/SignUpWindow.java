@@ -21,7 +21,7 @@ public class SignUpWindow extends JFrame {
     private JPanel dateWindow;
     private JPasswordField passwordField;
     private JButton backButton;
-    private usersdatabase userData = new usersdatabase("src/users.json");
+    private usersdatabase userData = new usersdatabase();
     private ArrayList<User> usersOperation = userData.load();
 
     public SignUpWindow(StartWindow sw) {

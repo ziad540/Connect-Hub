@@ -12,8 +12,12 @@ public class LoginWindow extends JFrame {
     private JButton loginButton;
     private JPanel loginWindow;
     private JButton backButton;
+
     private checkValid checkValid;
+
     UserDatabaseManagement u = UserDatabaseManagement.getInstance();
+
+   
 
     public LoginWindow(StartWindow sw) {
         setTitle("Login");

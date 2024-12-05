@@ -2,23 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class NewsFeedgui {
+
     JPanel contentPanel;
     JPanel right;
+
     JFrame frame;
     PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
 
    public NewsFeedgui(User user) {//right version
         frame = new JFrame("NewsFeed");
+
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 
-        // Top Panel
+
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
@@ -63,7 +64,7 @@ public class NewsFeedgui {
                 {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "goallll oba"}
         };
 
-        populatePosts(contentPanel, posts); // Populate posts initially
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this); // Populate posts initially
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -74,9 +75,7 @@ public class NewsFeedgui {
 //        frame.add(right,BorderLayout.EAST);
 
 
-
-
-        right=new JPanel();
+        right = new JPanel();
         right.setLayout(new BorderLayout());
 
         JPanel contentPanel2 = new JPanel();
@@ -100,14 +99,9 @@ public class NewsFeedgui {
 
 
         };
-        populatefreinds(contentPanel2,freinds);
+        populatefreinds(contentPanel2, freinds);
 
-
-
-
-        frame.add(right,BorderLayout.EAST);
-
-
+        frame.add(right, BorderLayout.EAST);
 
 
         // Refresh Button Logic
@@ -129,13 +123,13 @@ public class NewsFeedgui {
 
                 // Clear and repopulate posts
                 contentPanel.removeAll();
-                populatePosts(contentPanel, newPosts);
+                loadPosts.showPosts(contentPanel, NewsFeedgui.this);
 
                 contentPanel.revalidate(); // Recalculate layout
                 contentPanel.repaint();// Repaint the panel
 
                 contentPanel2.removeAll();
-                populatefreinds(contentPanel2,freinds);
+                populatefreinds(contentPanel2, freinds);
                 contentPanel2.revalidate();
                 contentPanel2.repaint();
 
@@ -146,16 +140,14 @@ public class NewsFeedgui {
         frame.add(topPanel, BorderLayout.NORTH);
 
 
-
-
-
-
         // Bottom Panel
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setBackground(new Color(240, 255, 255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton profile = createIconButton("src/user.png");
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this);
+
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -189,8 +181,6 @@ public class NewsFeedgui {
         });
 
 
-
-
         bottomPanel.add(profile);
         bottomPanel.add(stories);
         bottomPanel.add(friends);
@@ -200,16 +190,6 @@ public class NewsFeedgui {
         frame.setVisible(true);
     }
 
-    private void populatePosts(JPanel panel, Object[][] posts) {
-        for (Object[] post : posts) {
-            contentPanel.add(createPostPanel(
-                    (String) post[0], // Name
-                    (String) post[1], // Date
-                    (String) post[2], // Status
-                    (String) post[4]  // Caption
-            ));
-        }
-    }
 
     private void populatefreinds(JPanel panel, Object[][] posts) {
         for (Object[] post : posts) {
@@ -217,7 +197,8 @@ public class NewsFeedgui {
         }
     }
 
-    private JPanel createPostPanel(String name, String date, String imagePath, String caption) {
+    public JPanel createPostPanel(String name, String date, String caption, String imagePath) {
+
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -229,7 +210,7 @@ public class NewsFeedgui {
         postPanel.add(userInfo);
 
         try {
-            ImageIcon originalIcon = new ImageIcon("src/licensed-image (2).jpeg");
+            ImageIcon originalIcon = new ImageIcon(imagePath);
             Image scaledImage = originalIcon.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
             postPanel.add(imageLabel);
@@ -246,6 +227,7 @@ public class NewsFeedgui {
             postPanel.add(captionLabel);
         }
 
+
         return postPanel;
     }
 
@@ -259,37 +241,18 @@ public class NewsFeedgui {
         return button;
     }
 
-    private JPanel createfreindspanel(String name, String date, String status, String caption) {
+    private static JPanel createfreindspanel(String name, String date, String status, String caption) {
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         postPanel.setBackground(Color.WHITE);
 
         JLabel userInfo = new JLabel(name);
-        userInfo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                String[] options = {"View profile", "Remove", "Block"};
-                int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,options[0]);
-                switch (choice) {
-                    case 0:
-                        FriendProfile friendProfile = new FriendProfile(frame);
-                        break;
-                    case 1:
-                        JOptionPane.showMessageDialog(postPanel, "Removed Friend");
-                        break;
-                    case 2:
-                        JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
-                        break;
-                }
-            }
-        });
         userInfo.setIcon(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\868320_people_512x512.png"));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         postPanel.add(userInfo);
         JLabel SPACE = new JLabel("  ");
         postPanel.add(SPACE);
-
 
 
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
@@ -299,10 +262,6 @@ public class NewsFeedgui {
 
         return postPanel;
     }
-
-
-
-
 
 
 }
