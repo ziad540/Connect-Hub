@@ -9,9 +9,15 @@ public class User {
     private LocalDate dateOfBirth;
     private String hashingPassword;
     private ProfileInformation profileInformation;
- 
-   private ArrayList<String> firndesId = new ArrayList<>();
-    private ArrayList<String> postId = new ArrayList<>();
+
+    //private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+   // private usersdatabase userDatabase=new usersdatabase("src/users.json");
+    private ArrayList<String>firndesId=new ArrayList<>();
+    private ArrayList<String>postId=new ArrayList<>();
+    private ArrayList<String>storiesId=new ArrayList<>();
+
+    private ArrayList<String> freindrequestId=new ArrayList<>();
+    private ArrayList<String> blockedID=new ArrayList<>();
 
     public User() {
     }
@@ -67,6 +73,30 @@ public class User {
         this.status = status;
     }
 
+
+    public ArrayList<String> getStoriesId() {
+        return storiesId;
+    }
+
+    public void setStoriesId(ArrayList<String> storiesId) {
+        this.storiesId = storiesId;
+    }
+
+    public ArrayList<String> getFreindrequestId() {
+        return freindrequestId;
+    }
+
+    public void setFreindrequestId(ArrayList<String> freindrequestId) {
+        this.freindrequestId = freindrequestId;
+    }
+
+    public ArrayList<String> getBlockedID() {
+        return blockedID;
+    }
+
+    public void setBlockedID(ArrayList<String> blockedID) {
+        this.blockedID = blockedID;
+    }
 
     public String getEmail() {
         return email;
