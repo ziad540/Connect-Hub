@@ -217,7 +217,8 @@ public class NewsFeedgui {
         freind.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("back post");
+                new FreindGui();
+                frame.setVisible(false);
 
 
 
