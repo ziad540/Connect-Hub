@@ -4,17 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NewsFeedgui {
+
     JPanel contentPanel;
     JPanel right;
-
+  private loadPosts loadPosts=new loadPosts();
     NewsFeedgui() {
+
         JFrame frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
 
-        // Top Panel
+
+
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
@@ -105,6 +108,7 @@ public class NewsFeedgui {
 
 
 
+
         // Refresh Button Logic
         refresh.addActionListener(new ActionListener() {
             @Override
@@ -151,6 +155,8 @@ public class NewsFeedgui {
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton profile = createIconButton("src/user.png");
+      loadPosts.showPosts(contentPanel,NewsFeedgui.this);
+
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -186,6 +192,7 @@ public class NewsFeedgui {
 
 
 
+
         bottomPanel.add(profile);
         bottomPanel.add(stories);
         bottomPanel.add(friends);
@@ -195,16 +202,7 @@ public class NewsFeedgui {
         frame.setVisible(true);
     }
 
-    private void populatePosts(JPanel panel, Object[][] posts) {
-        for (Object[] post : posts) {
-            contentPanel.add(createPostPanel(
-                    (String) post[0], // Name
-                    (String) post[1], // Date
-                    (String) post[2], // Status
-                    (String) post[4]  // Caption
-            ));
-        }
-    }
+
 
     private void populatefreinds(JPanel panel, Object[][] posts) {
         for (Object[] post : posts) {
@@ -212,7 +210,8 @@ public class NewsFeedgui {
         }
     }
 
-    private JPanel createPostPanel(String name, String date, String imagePath, String caption) {
+       public JPanel createPostPanel(String name, String date, String caption, String imagePath) {
+
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -224,7 +223,7 @@ public class NewsFeedgui {
         postPanel.add(userInfo);
 
         try {
-            ImageIcon originalIcon = new ImageIcon("src/licensed-image (2).jpeg");
+            ImageIcon originalIcon = new ImageIcon(imagePath);
             Image scaledImage = originalIcon.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
             postPanel.add(imageLabel);
@@ -240,6 +239,7 @@ public class NewsFeedgui {
             captionLabel.setForeground(Color.DARK_GRAY);
             postPanel.add(captionLabel);
         }
+
 
         return postPanel;
     }
@@ -276,6 +276,7 @@ public class NewsFeedgui {
 
         return postPanel;
     }
+
 
 
 

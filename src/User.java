@@ -1,27 +1,42 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class User {
-    private static int CounterId=1;
     private  String userId;
     private String email;
     private String userName;
     private String status;
     private LocalDate dateOfBirth;
     private String hashingPassword;
-    public User() {
+    private usersdatabase userDatabase=new usersdatabase();
+    private ArrayList<String>firndesId=new ArrayList<>();
+    private ArrayList<String>postId=new ArrayList<>();
+    private User() {
     }
 
-    public User( String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId = String.valueOf(1000+CounterId++);
+    public ArrayList<String> getFirndesId() {
+        return firndesId;
+    }
+
+    private void setFirndesId(ArrayList<String> firndesId) {
+        this.firndesId = firndesId;
+    }
+
+    public ArrayList<String> getPostId() {
+        return postId;
+    }
+
+    private void setPostId(ArrayList<String> postId) {
+        this.postId = postId;
+    }
+    public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
+        this.userId =String.valueOf(1000+loadCounterId());
         this.email = email;
         this.userName = userName;
         this.status = status;
         this.dateOfBirth = dateOfBirth;
         hashingPassword=passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
     }
-
-
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -40,13 +55,10 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public static int getCounterId() {
-        return CounterId;
-    }
-
-    private static void setCounterId(int counterId) {
-        CounterId = counterId;
+    // to give unique id to new user
+    private int loadCounterId() {
+        ArrayList<User>users=userDatabase.load();
+        return users.size()+1;
     }
 
     public String getEmail() {

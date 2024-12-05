@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class FreindGui {
 
@@ -132,6 +131,23 @@ public class FreindGui {
         postPanel.setBackground(Color.WHITE);
 
         JLabel userInfo = new JLabel(name);
+        userInfo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String[] options = {"View profile", "Remove", "Block"};
+                int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options,options[0]);
+                switch (choice) {
+                    case 0:
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(postPanel, "Removed Friend");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
+                        break;
+                }
+            }
+        });
         userInfo.setIcon(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\868320_people_512x512.png"));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         postPanel.add(userInfo);

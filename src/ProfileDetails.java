@@ -70,14 +70,14 @@ public class ProfileDetails extends JFrame{
         editBioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new resetBio();
+                new resetBio(bioDetails);
                 // show new bio in section
             }
         });
         editUsernameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new resetUsername();
+                new resetUsername(usernameDetails);
                 // show new username in section
             }
         });

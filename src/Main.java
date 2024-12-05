@@ -8,5 +8,23 @@ public class Main {
        new  NewsFeedgui();
 
 
+ //new StartWindow();
+//
+    new NewsFeedgui();
+
+////        new FreindGui();
+////        new Addpost();
+
+      //  Profile profile =new Profile();
+        usersdatabase user =new usersdatabase();
+        user.load();
+
+        postdatabase post= new postdatabase();
+        post.load();
+
+        STORIESDATABASE ST=new STORIESDATABASE();
+        ST.load();
+
+
 
 }}
