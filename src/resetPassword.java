@@ -12,10 +12,12 @@ public class resetPassword extends JFrame {
     private JLabel newPassword;
     private JLabel confirmPassword;
     private JButton Confirmbutton;
-     private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+    private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
+    private JPasswordField passwordField1;
 
-    public resetPassword(Profile profile, User user) {
+    public resetPassword(User u) {
+
         setTitle("Reset Password");
         setSize(new Dimension(400, 400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

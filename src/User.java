@@ -9,9 +9,8 @@ public class User {
     private LocalDate dateOfBirth;
     private String hashingPassword;
     private ProfileInformation profileInformation;
-    //private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
-    // private usersdatabase userDatabase=new usersdatabase("src/users.json");
-    private ArrayList<String> firndesId = new ArrayList<>();
+ 
+   private ArrayList<String> firndesId = new ArrayList<>();
     private ArrayList<String> postId = new ArrayList<>();
 
     public User() {
@@ -39,7 +38,10 @@ public class User {
         this.userName = userName;
         this.status = status;
         this.dateOfBirth = dateOfBirth;
-        hashingPassword = passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
+
+        profileInformation = new ProfileInformation("src/unknown user.png","src/unknown cover.png","");
+        hashingPassword=passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
+
     }
 
     public void setUserId(String userId) {
