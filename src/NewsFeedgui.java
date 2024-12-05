@@ -101,16 +101,6 @@ public class NewsFeedgui {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("refresh");
 
-                // Simulate new data
-                Object[][] newPosts = {
-                        {"Dodo Yasser", "20/5", "of", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zizooo"},
-                        {"Abdallah Yasser", "20/6", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "shika3333"},
-                        {"Nour Azab", "20/8", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zamalek"},
-                        {"Ziad", "20/3", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "ana zeh2t"},
-                        {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "goallll oba"},
-                        {"New User", "21/12", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "new post added"},
-                        {"Another User", "21/12", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "hello world"}
-                };
 
                 // Clear and repopulate posts
                 contentPanel.removeAll();
@@ -137,7 +127,6 @@ public class NewsFeedgui {
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton profile = createIconButton("src/user.png");
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
 
         profile.addActionListener(new ActionListener() {
             @Override
