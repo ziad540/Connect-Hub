@@ -12,8 +12,9 @@ public class LoginWindow extends JFrame {
     private JButton loginButton;
     private JPanel loginWindow;
     private JButton backButton;
+
     private checkValid checkValid;
-    private usersdatabase userData = new usersdatabase("src/users.json");
+    private usersdatabase userData = new usersdatabase();
     private ArrayList<User> usersOperation = userData.load();
 
     public LoginWindow(StartWindow sw) {

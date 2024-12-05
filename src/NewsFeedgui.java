@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 
 public class NewsFeedgui {
+    private loadPosts loadPosts=new loadPosts();
 
     NewsFeedgui(){
         JFrame frame = new JFrame("NewsFeed");
@@ -12,6 +13,7 @@ public class NewsFeedgui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
+
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(240,255,255));
@@ -79,35 +81,14 @@ public class NewsFeedgui {
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-
-        Object[][] posts = {
-                {"Dodo yasser", "20/5", "of", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zizooo"},
-                {"abdallah yasser", "20/6", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "shika3333"},
-                {"nour azab", "20/8", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zamalek"},
-                {"ziad", "20/3", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "ana zeh2t"},
-                {"jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "goallll oba"}
-        };
-        for (Object[] post : posts) {
-            contentPanel.add(createPostPanel(
-                    (String) post[0], // elesm
-                    (String) post[1], // tari5
-                    (String) post[2], // on wla off
-                    (String) post[4]  // Caption
-            ));
-        }
+        loadPosts.showPosts(contentPanel,NewsFeedgui.this);
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setBackground(new Color(240,255,255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
-
-
-
-
-
         JButton profile = new JButton();
         ImageIcon image3=new ImageIcon("src/user.png");
         profile.setContentAreaFilled(false);
-
         profile.setPreferredSize(new Dimension(50,50));
         profile.setIcon(image3);
         profile.setBorderPainted(false);
@@ -185,22 +166,19 @@ public class NewsFeedgui {
         frame.setVisible(true);
     }
 
-
-    private static JPanel createPostPanel(String name, String date, String imagePath, String caption) {
+    public JPanel createPostPanel(String name, String date, String caption, String imagePath) {
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         postPanel.setBackground(Color.WHITE);
-
 
         JLabel userInfo = new JLabel(name + " - " + date);
         userInfo.setIcon(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\868320_people_512x512.png"));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         postPanel.add(userInfo);
 
-
         try {
-            ImageIcon originalIcon = new ImageIcon("src/licensed-image (2).jpeg");
+            ImageIcon originalIcon = new ImageIcon(imagePath);
             Image scaledImage = originalIcon.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
             postPanel.add(imageLabel);
@@ -210,7 +188,6 @@ public class NewsFeedgui {
             postPanel.add(errorLabel);
         }
 
-
         if (!caption.isEmpty()) {
             JLabel captionLabel = new JLabel(caption);
             captionLabel.setFont(new Font("Arial", Font.ITALIC, 12));
@@ -218,21 +195,9 @@ public class NewsFeedgui {
             postPanel.add(captionLabel);
         }
 
-
-
-
-
-
-
-
-
-        JPanel actionPanel = new JPanel();
-        actionPanel.setPreferredSize(new Dimension(30,20));
-
-        postPanel.add(actionPanel);
-
         return postPanel;
     }
+
 }
 
 
