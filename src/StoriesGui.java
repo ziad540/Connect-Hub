@@ -2,16 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-        public class StoriesGui {
 
-            public JPanel createFriendPanel() {
-                JPanel mainPanel = new JPanel();
-                mainPanel.setLayout(new BorderLayout());
+public class StoriesGui {
 
-
-
-
-
+    public JPanel createFriendPanel() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -22,20 +18,17 @@ import java.awt.event.ActionListener;
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
 
-
-
         JButton addStoryButton = new JButton();
         ImageIcon image = new ImageIcon("src/AddStory.jpeg");
-                addStoryButton.setContentAreaFilled(false);
-                addStoryButton.setFont(new Font("Arial", Font.BOLD, 16));
-                addStoryButton.setPreferredSize(new Dimension(50, 50));
-                addStoryButton.setIcon(image);
-                addStoryButton.setBorderPainted(false);
-                addStoryButton.addActionListener(new ActionListener() {
+        addStoryButton.setContentAreaFilled(false);
+        addStoryButton.setFont(new Font("Arial", Font.BOLD, 16));
+        addStoryButton.setPreferredSize(new Dimension(50, 50));
+        addStoryButton.setIcon(image);
+        addStoryButton.setBorderPainted(false);
+        addStoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddStoryGui();
-
 
 
             }
@@ -49,8 +42,8 @@ import java.awt.event.ActionListener;
         refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
         refreshButton.setPreferredSize(new Dimension(30, 30));
         refreshButton.setIcon(image2);
-       refreshButton.setBorderPainted(false);
-       refreshButton.addActionListener(new ActionListener() {
+        refreshButton.setBorderPainted(false);
+        refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("refresh");
@@ -139,7 +132,6 @@ import java.awt.event.ActionListener;
         storyPanel.add(SPACE);
 
 
-
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
@@ -157,6 +149,7 @@ import java.awt.event.ActionListener;
         button.setPreferredSize(new Dimension(50, 50));
         return button;
     }
+}
 
 
 

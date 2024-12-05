@@ -9,14 +9,12 @@ public class NewsFeedgui {
     JPanel contentPanel;
     JPanel right;
     private JFrame frame;
-    NewsFeedgui() {
-
-    JFrame frame;
     PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
-   public NewsFeedgui(User user) {//right version
-       
-         frame = new JFrame("NewsFeed");
+
+    NewsFeedgui(User user) {//right version
+
+        frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -67,7 +65,7 @@ public class NewsFeedgui {
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement); // Populate posts initially
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, postDatabaseManagement); // Populate posts initially
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -127,7 +125,7 @@ public class NewsFeedgui {
 
                 // Clear and repopulate posts
                 contentPanel.removeAll();
-                loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
+                loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, postDatabaseManagement);
 
                 contentPanel.revalidate(); // Recalculate layout
                 contentPanel.repaint();// Repaint the panel
@@ -140,10 +138,9 @@ public class NewsFeedgui {
             }
         });
 
-     topPanel.add(refresh, BorderLayout.WEST);
+        topPanel.add(refresh, BorderLayout.WEST);
 
         frame.add(topPanel, BorderLayout.NORTH);
-
 
 
         // Bottom Panel
@@ -153,9 +150,7 @@ public class NewsFeedgui {
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton profile = createIconButton("src/user.png");
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
-
-        JButton profile = new JButton();
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, postDatabaseManagement);
         ImageIcon image3 = new ImageIcon("src/user.png");
         profile.setContentAreaFilled(false);
 
@@ -165,12 +160,11 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(frame);
+                new Profile(frame, user);
 
                 frame.setVisible(false);
             }
         });
-
 
 
         JButton stories = new JButton();
@@ -209,22 +203,21 @@ public class NewsFeedgui {
                 System.out.println("back post");
 
 
-
             }
         });
 
 
-        JButton freinds = new JButton();
-        ImageIcon image6 = new ImageIcon("src/team.png");
-        freinds.setContentAreaFilled(false);
-        freinds.setFont(new Font("Arial", Font.BOLD, 16));
-        freinds.setPreferredSize(new Dimension(50, 50));
-        freinds.setIcon(image6);
-        freinds.setBorderPainted(false);
-        freinds.addActionListener(new ActionListener() {
+       JButton freind = new JButton();
+        ImageIcon image6=new ImageIcon("src/team.png");
+        freind.setContentAreaFilled(false);
+        freind.setFont(new Font("Arial", Font.BOLD, 16));
+        freind.setPreferredSize(new Dimension(50,50));
+        freind.setIcon(image6);
+        freind.setBorderPainted(false);
+        freind.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Friends");
+                System.out.println("back post");
 
 
 
@@ -235,13 +228,11 @@ public class NewsFeedgui {
         bottomPanel.add(profile);
         bottomPanel.add(stories);
 
-        bottomPanel.add(freinds);
+       bottomPanel.add(freind);
         bottomPanel.add(back);
 
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
-
-
 
 
         frame.setVisible(true);
@@ -316,15 +307,6 @@ public class NewsFeedgui {
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
         postPanel.add(statusLabel);
-
-        return postPanel;
-    }
-
-
-        JPanel actionPanel = new JPanel();
-        actionPanel.setPreferredSize(new Dimension(30, 20));
-
-        postPanel.add(actionPanel);
 
         return postPanel;
     }
