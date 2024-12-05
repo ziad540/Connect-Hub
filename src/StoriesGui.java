@@ -5,9 +5,18 @@ import java.awt.event.ActionListener;
 
 public class StoriesGui {
 
-    public JPanel createFriendPanel() {
+    public StoriesGui(User user,JFrame frame) {
+         JFrame frame2=new JFrame();
+        frame2.setSize(400, 800);
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setLayout(new BorderLayout());
+        frame2.setVisible(true);
+        frame2.setLocationRelativeTo(null);
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+
+
 
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -16,6 +25,7 @@ public class StoriesGui {
         JLabel titleLabel = new JLabel("Friends", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
+
 
 
         JButton addStoryButton = new JButton();
@@ -97,13 +107,12 @@ public class StoriesGui {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                NewsFeedgui newsFeedGui = new NewsFeedgui();
-//                newsFeedGui.getFrame().setVisible(true);
 
-                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
-                if (currentFrame != null) {
-                    currentFrame.setVisible(false);
-                }
+
+                frame2.dispose();
+                frame.setVisible(true);
+
+
             }
         });
         bottomPanel.add(backButton);
@@ -115,7 +124,16 @@ public class StoriesGui {
 
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        return mainPanel;
+
+
+                    frame2.getContentPane().removeAll(); // Remove current content
+                    frame2.getContentPane().add(mainPanel); // Add the new panel
+                    frame2.revalidate();
+                    frame2.repaint();
+
+
+
+
     }
 
     private static JPanel createStoryPanel(String name, String date, String status, String caption) {
@@ -149,7 +167,16 @@ public class StoriesGui {
         button.setPreferredSize(new Dimension(50, 50));
         return button;
     }
-}
+
+
+
+
+
+    }
+
+
+
+
 
 
 

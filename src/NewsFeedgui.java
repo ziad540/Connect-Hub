@@ -42,7 +42,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new Addpostgui();
+                new Addpostgui(user);
                 frame.setVisible(false);
 
 
@@ -177,17 +177,22 @@ public class NewsFeedgui {
         stories.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(stories); // Get the parent frame
-                if (frame != null) {
-                    frame.getContentPane().removeAll(); // Remove current content
-                    frame.getContentPane().add(new StoriesGui().createFriendPanel()); // Add the new panel
-                    frame.revalidate();
-                    frame.repaint();
-                } else {
-                    System.err.println("Frame is null");
-                }
+  //             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(stories); // Get the parent frame
+//                if (frame != null) {
+//                    frame.getContentPane().removeAll(); // Remove current content
+//                    frame.getContentPane().add(new StoriesGui(user,frame).createFriendPanel()); // Add the new panel
+//                    frame.revalidate();
+//                    frame.repaint();
+//                } else {
+//                    System.err.println("Frame is null");
+//                }
+               new StoriesGui(user,frame);
+               frame.setVisible(false);
+
             }
-        });
+      });
+
+
 
 
         JButton back = new JButton();
