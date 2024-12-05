@@ -42,7 +42,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new Addpostgui(user);
+                new Addpostgui(user,frame);
                 frame.setVisible(false);
 
 
