@@ -10,7 +10,7 @@ public class NewsFeedgui {
 
     JFrame frame;
     PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
-
+    UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
    public NewsFeedgui(User user) {//right version
         frame = new JFrame("NewsFeed");
 
@@ -55,16 +55,7 @@ public class NewsFeedgui {
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-        // Sample Posts
-        Object[][] posts = {
-                {"Dodo Yasser", "20/5", "of", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zizooo"},
-                {"Abdallah Yasser", "20/6", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "shika3333"},
-                {"Nour Azab", "20/8", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zamalek"},
-                {"Ziad", "20/3", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "ana zeh2t"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "goallll oba"}
-        };
-
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this); // Populate posts initially
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement); // Populate posts initially
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -123,7 +114,7 @@ public class NewsFeedgui {
 
                 // Clear and repopulate posts
                 contentPanel.removeAll();
-                loadPosts.showPosts(contentPanel, NewsFeedgui.this);
+                loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
 
                 contentPanel.revalidate(); // Recalculate layout
                 contentPanel.repaint();// Repaint the panel
@@ -146,7 +137,7 @@ public class NewsFeedgui {
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton profile = createIconButton("src/user.png");
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this);
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
 
         profile.addActionListener(new ActionListener() {
             @Override

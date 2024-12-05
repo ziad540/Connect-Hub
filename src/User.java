@@ -8,13 +8,12 @@ public class User {
     private String status;
     private LocalDate dateOfBirth;
     private String hashingPassword;
-
     private ProfileInformation profileInformation;
-    private usersdatabase userDatabase=new usersdatabase("src/users.json");
-
+    //private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+   // private usersdatabase userDatabase=new usersdatabase("src/users.json");
     private ArrayList<String>firndesId=new ArrayList<>();
     private ArrayList<String>postId=new ArrayList<>();
-    private User() {
+    public User() {
     }
 
     public ArrayList<String> getFirndesId() {
@@ -33,7 +32,7 @@ public class User {
         this.postId = postId;
     }
     public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId =String.valueOf(1000+loadCounterId());
+        this.userId =String.valueOf(1000/*+loadCounterId()*/);
         this.email = email;
         this.userName = userName;
         this.status = status;
@@ -59,10 +58,10 @@ public class User {
         this.status = status;
     }
     // to give unique id to new user
-    private int loadCounterId() {
-        ArrayList<User>users=userDatabase.load();
+    /*private int loadCounterId() {
+        ArrayList<User>users=userDatabaseManagement.getUsers();
         return users.size()+1;
-    }
+    }*/
 
     public String getEmail() {
         return email;

@@ -21,8 +21,7 @@ public class SignUpWindow extends JFrame {
     private JPanel dateWindow;
     private JPasswordField passwordField;
     private JButton backButton;
-    private usersdatabase userData = new usersdatabase();
-    private ArrayList<User> usersOperation = userData.load();
+    private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
     public SignUpWindow(StartWindow sw) {
         setTitle("Sign Up");
@@ -62,6 +61,7 @@ public class SignUpWindow extends JFrame {
                 Boolean passwordCheck = checkPassword.test(Password);
                 Boolean emailIsExist = false;
                 Boolean UsernameIsExist = false;
+                ArrayList<User> usersOperation = userDatabaseManagement.getUsers();
 
 
                 // to check email or password or username is exist aleardy in database
@@ -96,8 +96,8 @@ public class SignUpWindow extends JFrame {
                             .atZone(java.time.ZoneId.systemDefault())
                             .toLocalDate();
                     User newUser = new User(Email, Username, Password, "online", localDate);
-                    usersOperation.add(newUser);
-                    userData.write(usersOperation);
+                    userDatabaseManagement.addUser(newUser);
+                    userDatabaseManagement.saveToFile();
                     new LoginWindow(sw);
                     JOptionPane.showMessageDialog(signUpWindow, "User successfully registered!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
