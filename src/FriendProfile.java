@@ -4,25 +4,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.IOException;
 
-public class Profile extends JFrame{
-    private JPanel profileWindow;
+public class FriendProfile extends JFrame{
+    private JPanel friendProfile;
     private JLabel coverPhotoLabel;
     private JLabel bioLabel;
-    private JButton viewProfileButton;
     private JLabel profilePhotoLabel;
     private JLabel bioDetails;
     private JButton backButton;
     private JPanel posts;
 
-    public Profile(NewsFeedgui newGui) {
-        setTitle("Profile");
+
+    public FriendProfile(JFrame frame) {
+        JDialog dialog = new JDialog(frame, "Friend Profile", true);//to make window always on top
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setSize(600, 800);
+        dialog.setLocationRelativeTo(frame);
+        dialog.setAlwaysOnTop(true);
+
         setSize(new Dimension(600,800));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(profileWindow);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setContentPane(friendProfile);
         setLocationRelativeTo(null);
         BufferedImage profile = null;
         try {
@@ -45,18 +49,13 @@ public class Profile extends JFrame{
         ImageIcon cover = new ImageIcon("src/wallpaper2.png");
         Image coverImage = cover.getImage().getScaledInstance(600,200,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
-        setVisible(true);
-        viewProfileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ProfileDetails profileDetails = new ProfileDetails(Profile.this);
-                setVisible(false);
-            }
-        });
+        //setVisible(true);
+        dialog.add(friendProfile);
+        dialog.setVisible(true);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dialog.dispose();
             }
         });
     }

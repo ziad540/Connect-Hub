@@ -8,9 +8,6 @@ public class NewsFeedgui {
     private loadPosts loadPosts=new loadPosts();
 
     NewsFeedgui(){
-
-
-
         JFrame frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,7 +80,9 @@ public class NewsFeedgui {
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+
         loadPosts.showPosts(contentPanel,NewsFeedgui.this);
+
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setBackground(new Color(240,255,255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
@@ -97,7 +96,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Profile(NewsFeedgui.this);
-             frame.setVisible(false);
+                frame.setVisible(false);
             }
         });
 
@@ -153,7 +152,7 @@ public class NewsFeedgui {
             }
         });
 
-        
+
         bottomPanel.add(profile);
         bottomPanel.add(stories);
         bottomPanel.add(freinds); bottomPanel.add(back);

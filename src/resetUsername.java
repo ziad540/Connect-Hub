@@ -8,7 +8,7 @@ public class resetUsername extends JFrame {
     private JTextField userNameFiled;
     private JButton resetButton;
 
-    public resetUsername() {
+    public resetUsername(JLabel label) {
         setTitle("Reset Username");
         setSize(new Dimension(400,400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -29,6 +29,8 @@ public class resetUsername extends JFrame {
                     JOptionPane.showMessageDialog(null, "Please enter a valid username", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
+                    label.setText(username);
+                    dispose();
                     // add to array not file
                 }
             }
