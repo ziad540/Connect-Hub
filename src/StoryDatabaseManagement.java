@@ -5,22 +5,22 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.util.ArrayList;
 
-public class PostDatabaseManagement {
+public class StoryDatabaseManagement {
 
-    private static volatile PostDatabaseManagement instance;//Singleton design pattern
-    private ArrayList<Post> posts;
+    private static volatile StoryDatabaseManagement instance;//Singleton design pattern
+    private ArrayList<Story> stories;
 
-    private PostDatabaseManagement(){
-        posts = new ArrayList<>();
+    private StoryDatabaseManagement(){
+        stories = new ArrayList<>();
         loadStoriesFromFile();
 
     }
 
-    public static PostDatabaseManagement getInstance() {
+    public static StoryDatabaseManagement getInstance() {
         if(instance==null){
-            synchronized (PostDatabaseManagement.class){
+            synchronized (StoryDatabaseManagement.class){
                 if(instance == null){
-                    instance = new PostDatabaseManagement();
+                    instance = new StoryDatabaseManagement();
                 }
             }
         }
@@ -32,7 +32,8 @@ public class PostDatabaseManagement {
         objectMapper.registerModule(new JavaTimeModule());
 
         try {
-            posts = objectMapper.readValue(new File("src/posts.json"), new TypeReference<ArrayList<Post>>() {});
+            stories = objectMapper.readValue(new File("src/stories.json"), new TypeReference<ArrayList<Story>>() {});
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +44,7 @@ public class PostDatabaseManagement {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         try {
-            objectMapper.writeValue(new File("src/posts.json"), posts);
+            objectMapper.writeValue(new File("src/users.json"), stories);
             System.out.println("JSON file saved successfully!");
         } catch (Exception e) {
             System.err.println("Error writing in JSON file: " + e.getMessage());
@@ -51,14 +52,15 @@ public class PostDatabaseManagement {
         }
     }
 
-    public ArrayList<Post> getPosts(){
-        return posts;
+    public ArrayList<Story> getUsers(){
+        return stories;
     }
 
-    public void addPost(Post post){
-        posts.add(post);
+    public void addUser(Story story){
+        stories.add(story);
     }
 
 
 
 }
+

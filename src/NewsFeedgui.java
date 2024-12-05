@@ -302,7 +302,8 @@ public class NewsFeedgui {
         JLabel SPACE = new JLabel("  ");
         postPanel.add(SPACE);
 
-
+        //if(search(friend.get(i)).getstatus.equals("online"))
+        //posts = search(friend.get(i)).getposts
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
