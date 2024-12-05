@@ -38,7 +38,7 @@ public class Addpostgui {
 
 
         JButton uploadButton = new JButton();
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\LENOVO\\Downloads\\download (4).png");
+        ImageIcon imageIcon = new ImageIcon("src/AddPhoto.png");
         uploadButton.setContentAreaFilled(false);
         uploadButton.setFont(new Font("Arial", Font.BOLD, 16));
         uploadButton.setPreferredSize(new Dimension(300, 50));
@@ -83,7 +83,7 @@ public class Addpostgui {
         bottomPanel.setPreferredSize(new Dimension(400, 80)); // Ensure bottom panel has enough space for buttons
 
         JButton addstoryButton = new JButton();
-        ImageIcon addStoryIcon = new ImageIcon("C:\\Users\\LENOVO\\Pictures\\Camera Roll\\images (66).png");
+        ImageIcon addStoryIcon = new ImageIcon("src/UploadPhoto.jpeg");
         addstoryButton.setContentAreaFilled(false);
         addstoryButton.setFont(new Font("Arial", Font.BOLD, 16));
         addstoryButton.setPreferredSize(new Dimension(50, 50));
@@ -92,7 +92,7 @@ public class Addpostgui {
         addstoryButton.addActionListener(e -> System.out.println("Add Story"));
 
         JButton backButton = new JButton();
-        ImageIcon image3 = new ImageIcon("C:\\Users\\LENOVO\\Pictures\\Camera Roll\\93634.png");
+        ImageIcon image3 = new ImageIcon("src/BackPhoto.png");
         backButton.setContentAreaFilled(false);
         backButton.setPreferredSize(new Dimension(50, 50));
         backButton.setIcon(image3);

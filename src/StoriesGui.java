@@ -29,7 +29,7 @@ import java.awt.event.ActionListener;
 
 
         JButton addStoryButton = new JButton();
-        ImageIcon image = new ImageIcon("C:\\Users\\LENOVO\\Pictures\\Camera Roll\\ab67656300005f1f6c8fd3203e34f680b1abe351.png");
+        ImageIcon image = new ImageIcon("src/AddStory.jpeg");
                 addStoryButton.setContentAreaFilled(false);
                 addStoryButton.setFont(new Font("Arial", Font.BOLD, 16));
                 addStoryButton.setPreferredSize(new Dimension(50, 50));
@@ -48,10 +48,10 @@ import java.awt.event.ActionListener;
 
 
         JButton refreshButton = new JButton();
-        ImageIcon image2 = new ImageIcon("C:\\Users\\LENOVO\\Pictures\\Camera Roll\\images (1).png");
+        ImageIcon image2 = new ImageIcon("src/RefreshPhoto.png");
         refreshButton.setContentAreaFilled(false);
         refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
-        refreshButton.setPreferredSize(new Dimension(50, 50));
+        refreshButton.setPreferredSize(new Dimension(30, 30));
         refreshButton.setIcon(image2);
        refreshButton.setBorderPainted(false);
        refreshButton.addActionListener(new ActionListener() {
@@ -100,7 +100,7 @@ import java.awt.event.ActionListener;
 
         // backButton
         JButton backButton = new JButton();
-        ImageIcon image3 = new ImageIcon("C:\\Users\\LENOVO\\Pictures\\Camera Roll\\93634.png");
+        ImageIcon image3 = new ImageIcon("src/BackPhoto.png");
                 backButton.setContentAreaFilled(false);
                 backButton.setPreferredSize(new Dimension(50, 50));
                 backButton.setIcon(image3);

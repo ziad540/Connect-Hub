@@ -40,7 +40,7 @@ public class AddStoryGui {
 
 
         JButton uploadButton = new JButton();
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\LENOVO\\Downloads\\download (4).png");
+        ImageIcon imageIcon = new ImageIcon("src/UploadPhoto.jpeg");
         uploadButton.setContentAreaFilled(false);
         uploadButton.setFont(new Font("Arial", Font.BOLD, 16));
         uploadButton.setPreferredSize(new Dimension(300, 50));
@@ -82,7 +82,7 @@ public class AddStoryGui {
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Center aligned buttons with spacing
         JButton addstoryButton = new JButton();
-        ImageIcon addStoryIcon = new ImageIcon("C:\\Users\\LENOVO\\Pictures\\Camera Roll\\images (66).png");
+        ImageIcon addStoryIcon = new ImageIcon("src/AddStory.jpeg");
         addstoryButton.setContentAreaFilled(false);
         addstoryButton.setFont(new Font("Arial", Font.BOLD, 16));
         addstoryButton.setPreferredSize(new Dimension(50, 50));
