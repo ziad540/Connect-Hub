@@ -3,6 +3,9 @@ public class ProfileInformation {
     private String CoverPicPath;
     private String bioData;
 
+    private ProfileInformation() {
+    }
+
     public ProfileInformation(String profilePicPath, String coverPicPath, String bioData) {
         this.ProfilePicPath = profilePicPath;
         this.CoverPicPath = coverPicPath;
@@ -22,11 +25,11 @@ public class ProfileInformation {
     }
 
     public void setProfilePicPath(String profilePicPath) {
-        ProfilePicPath = profilePicPath;
+        this.ProfilePicPath = profilePicPath;
     }
 
     public void setCoverPicPath(String coverPicPath) {
-        CoverPicPath = coverPicPath;
+        this.CoverPicPath = coverPicPath;
     }
 
     public void setBioData(String bioData) {

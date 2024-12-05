@@ -14,9 +14,9 @@ public class Profile extends JFrame{
     private JLabel bioLabel;
     private JButton viewProfileButton;
     private JLabel profilePhotoLabel;
-    private JLabel bioDetails;
     private JButton backButton;
     private JPanel posts;
+    private JLabel bioDetails;
 
     public Profile(JFrame frame,User user) {
         setTitle("Profile");
@@ -26,7 +26,7 @@ public class Profile extends JFrame{
         setLocationRelativeTo(null);
         BufferedImage profile = null;
         try {
-            profile = ImageIO.read(new File("src/wallpaper1.png"));
+            profile = ImageIO.read(new File(user.getProfileInformation().getProfilePicPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,15 +42,16 @@ public class Profile extends JFrame{
         g2d.draw(new java.awt.geom.Ellipse2D.Float(0, 0, 200, 200));
         g2d.dispose();
         profilePhotoLabel.setIcon(new ImageIcon(circularImage));
-        ImageIcon cover = new ImageIcon("src/wallpaper2.png");
+        ImageIcon cover = new ImageIcon(user.getProfileInformation().getCoverPicPath());
         Image coverImage = cover.getImage().getScaledInstance(600,200,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
+        bioDetails.setText(user.getProfileInformation().getBioData());
         setVisible(true);
         viewProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProfileDetails profileDetails = new ProfileDetails(Profile.this,user);
-                setVisible(false);
+                ProfileDetails profileDetails = new ProfileDetails(frame,user);
+                dispose();
             }
         });
         backButton.addActionListener(new ActionListener() {

@@ -3,7 +3,7 @@
     "contentId": "1",
     "autherId": "1002",
     "content": "This is my first post!",
-    "imagePath": "src/new-post.png",
+    "imagePath": null,
     "timestamp": "2024-12-03T10:15:30"
   },
   {
