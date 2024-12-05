@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Addpostgui {
 
-    Addpostgui() {
+    Addpostgui(User user) {
         JFrame frame = new JFrame("NewsFeed");
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,8 +101,8 @@ public class Addpostgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-//                NewsFeedgui newsFeedGui = new NewsFeedgui();
-//                newsFeedGui.getFrame().setVisible(true);
+          NewsFeedgui newsFeedGui = new NewsFeedgui(user);
+            newsFeedGui.getFrame().setVisible(true);
 
 
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
