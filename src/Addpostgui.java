@@ -10,6 +10,9 @@ public class Addpostgui {
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+
 
         // Top Panel
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -35,10 +38,10 @@ public class Addpostgui {
 
 
         JButton uploadButton = new JButton();
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
+        ImageIcon imageIcon = new ImageIcon("src/AddPhoto.png");
         uploadButton.setContentAreaFilled(false);
         uploadButton.setFont(new Font("Arial", Font.BOLD, 16));
-        uploadButton.setPreferredSize(new Dimension(50, 50));
+        uploadButton.setPreferredSize(new Dimension(300, 50));
         uploadButton.setIcon(imageIcon);
         uploadButton.setBorderPainted(false);
 
@@ -69,31 +72,61 @@ public class Addpostgui {
         });
 
 
-        uploadPanel.add(uploadButton, BorderLayout.SOUTH);
         uploadPanel.add(photoLabel, BorderLayout.CENTER);
-
-
         contentPanel.add(uploadPanel, BorderLayout.CENTER);
-
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
 
-        JButton addPostButton = new JButton();
-        ImageIcon image = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
-        addPostButton.setContentAreaFilled(false);
-        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
-        addPostButton.setPreferredSize(new Dimension(50, 50));
-        addPostButton.setIcon(image);
-        addPostButton.setBorderPainted(false);
-        addPostButton.addActionListener(new ActionListener() {
+        JPanel bottomPanel = new JPanel(new GridLayout(1, 3, 10, 10)); // Adjusted GridLayout for better button placement
+        bottomPanel.setPreferredSize(new Dimension(400, 80)); // Ensure bottom panel has enough space for buttons
+
+        JButton addstoryButton = new JButton();
+        ImageIcon addStoryIcon = new ImageIcon("src/UploadPhoto.jpeg");
+        addstoryButton.setContentAreaFilled(false);
+        addstoryButton.setFont(new Font("Arial", Font.BOLD, 16));
+        addstoryButton.setPreferredSize(new Dimension(50, 50));
+        addstoryButton.setIcon(addStoryIcon);
+        addstoryButton.setBorderPainted(false);
+        addstoryButton.addActionListener(e -> System.out.println("Add Story"));
+
+        JButton backButton = new JButton();
+        ImageIcon image3 = new ImageIcon("src/BackPhoto.png");
+        backButton.setContentAreaFilled(false);
+        backButton.setPreferredSize(new Dimension(50, 50));
+        backButton.setIcon(image3);
+        backButton.setBorderPainted(false);
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("new post");
+//                NewsFeedgui newsFeedGui = new NewsFeedgui();
+//                newsFeedGui.getFrame().setVisible(true);
 
-
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
+                if (currentFrame != null) {
+                    currentFrame.setVisible(false);
+                }
             }
         });
+
+// Add buttons to Bottom Panel
+        bottomPanel.add(uploadButton);
+        bottomPanel.add(addstoryButton);
+        bottomPanel.add(backButton);
+
+// Add Bottom Panel to Frame
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+
+        // Add Bottom Panel to Frame
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+
+
+
+
+
+        frame.setVisible(true);
     }
 }
