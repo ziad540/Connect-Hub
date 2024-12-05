@@ -4,19 +4,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class loadPosts {
-    private ArrayList<Post> posts;
-    private ArrayList<User> users;
-    private postdatabase postDatebase = new postdatabase();
-    private usersdatabase userDatabase = new usersdatabase();
-    public void showPosts(JPanel contentPanel, NewsFeedgui newsFeedgui) {
-        posts = postDatebase.load();
-        users = userDatabase.load();
-        System.out.println(posts.size());
+    public static void showPosts(JPanel contentPanel, NewsFeedgui newsFeedgui,UserDatabaseManagement userDatabaseManagement,PostDatabaseManagement postDatabaseManagement) {
         String userName ="";
         LocalDate date;
         String content;
         String image;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        ArrayList<User> users = userDatabaseManagement.getUsers();
+        ArrayList<Post> posts = postDatabaseManagement.getPosts();
 
         for (int i = 0; i < posts.size(); i++) {
             String userId = posts.get(i).getAutherId();

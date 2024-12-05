@@ -19,5 +19,11 @@
     "content": "Check out this amazing recipe!",
     "imagePath": "src/new-post.png",
     "timestamp": "2024-12-01T18:30:00"
-  }
+  },{
+  "contentId": "4",
+  "autherId": "1002",
+  "content": "ya msa2o!",
+  "imagePath": "src/new-post.png",
+  "timestamp": "2024-12-03T10:15:30"
+}
 ]

@@ -35,9 +35,10 @@ public class UserDatabaseManagement {
              users = objectMapper.readValue(new File("src/users.json"), new TypeReference<ArrayList<User>>() {});
 
 
-            for (User user : users) {
-                System.out.println(user.getUserId() + " - " + user.getUserName() + " " + user.getEmail() + " " + user.getDateOfBirth());
-            }
+//            for (User user : users) {
+//                System.out.println("12");
+//               // System.out.println(user.getUserId() + " - " + user.getUserName() + " " + user.getEmail() + " " + user.getDateOfBirth());
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
