@@ -102,7 +102,6 @@ public class SignUpWindow extends JFrame {
                     setVisible(false);
                     new LoginWindow(sw);
                 }
-
             }
         });
         backButton.addActionListener(new ActionListener() {
