@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-       new  NewsFeedgui();
+    //   new  NewsFeedgui();
 
 
  //new StartWindow();
 //
-    new NewsFeedgui();
+   // new NewsFeedgui();
 
-////        new FreindGui();
+     new FreindGui();
 ////        new Addpost();
 
       //  Profile profile =new Profile();
@@ -22,8 +22,8 @@ public class Main {
         postdatabase post= new postdatabase();
         post.load();
 
-        STORIESDATABASE ST=new STORIESDATABASE();
-        ST.load();
+//        STORIESDATABASE ST=new STORIESDATABASE();
+//        ST.load();
 
 
 
