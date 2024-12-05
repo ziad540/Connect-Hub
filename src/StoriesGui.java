@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 public class StoriesGui {
 
-    public StoriesGui(User user,JFrame frame) {
-         JFrame frame2=new JFrame();
+    public StoriesGui(User user, JFrame frame) {
+        JFrame frame2 = new JFrame();
         frame2.setSize(400, 800);
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.setLayout(new BorderLayout());
@@ -17,19 +17,16 @@ public class StoriesGui {
         mainPanel.setLayout(new BorderLayout());
 
 
-
-
         JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(new Color(102, 205, 170));
+        topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
-        JLabel titleLabel = new JLabel("Friends", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Story", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
 
-
         JButton addStoryButton = new JButton();
-        ImageIcon image = new ImageIcon("src/AddStory.jpeg");
+        ImageIcon image = new ImageIcon("src/story (1).png");
         addStoryButton.setContentAreaFilled(false);
         addStoryButton.setFont(new Font("Arial", Font.BOLD, 16));
         addStoryButton.setPreferredSize(new Dimension(50, 50));
@@ -38,16 +35,15 @@ public class StoriesGui {
         addStoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddStoryGui();
-
-
+                new AddStoryGui(user,frame2);
+                frame2.dispose();
             }
         });
         topPanel.add(addStoryButton, BorderLayout.EAST);
 
 
         JButton refreshButton = new JButton();
-        ImageIcon image2 = new ImageIcon("src/RefreshPhoto.png");
+        ImageIcon image2 = new ImageIcon("src/refresh.png");
         refreshButton.setContentAreaFilled(false);
         refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
         refreshButton.setPreferredSize(new Dimension(30, 30));
@@ -57,8 +53,6 @@ public class StoriesGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("refresh");
-
-
             }
         });
         topPanel.add(refreshButton, BorderLayout.WEST);
@@ -85,7 +79,6 @@ public class StoriesGui {
                 {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
                 {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
 
-
         };
 
 
@@ -95,11 +88,12 @@ public class StoriesGui {
 
         //Bottom panel
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
+        bottomPanel.setBackground(new Color(240, 255, 255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         // backButton
         JButton backButton = new JButton();
-        ImageIcon image3 = new ImageIcon("src/BackPhoto.png");
+        ImageIcon image3 = new ImageIcon("src/return.png");
         backButton.setContentAreaFilled(false);
         backButton.setPreferredSize(new Dimension(50, 50));
         backButton.setIcon(image3);
@@ -116,22 +110,13 @@ public class StoriesGui {
             }
         });
         bottomPanel.add(backButton);
-
-
-        // Placeholder Buttons
-        bottomPanel.add(new JButton());
-        bottomPanel.add(new JButton());
-
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
 
-
-                    frame2.getContentPane().removeAll(); // Remove current content
-                    frame2.getContentPane().add(mainPanel); // Add the new panel
-                    frame2.revalidate();
-                    frame2.repaint();
-
-
+        frame2.getContentPane().removeAll(); // Remove current content
+        frame2.getContentPane().add(mainPanel); // Add the new panel
+        frame2.revalidate();
+        frame2.repaint();
 
 
     }
@@ -169,10 +154,7 @@ public class StoriesGui {
     }
 
 
-
-
-
-    }
+}
 
 
 

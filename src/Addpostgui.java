@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Addpostgui {
 
-    Addpostgui(User user) {
+    Addpostgui(User user, JFrame frame2) {
         JFrame frame = new JFrame("NewsFeed");
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +38,7 @@ public class Addpostgui {
 
 
         JButton uploadButton = new JButton();
-        ImageIcon imageIcon = new ImageIcon("src/AddPhoto.png");
+        ImageIcon imageIcon = new ImageIcon("src/upload.png");
         uploadButton.setContentAreaFilled(false);
         uploadButton.setFont(new Font("Arial", Font.BOLD, 16));
         uploadButton.setPreferredSize(new Dimension(300, 50));
@@ -83,7 +83,7 @@ public class Addpostgui {
         bottomPanel.setPreferredSize(new Dimension(400, 80)); // Ensure bottom panel has enough space for buttons
 
         JButton addstoryButton = new JButton();
-        ImageIcon addStoryIcon = new ImageIcon("src/UploadPhoto.jpeg");
+        ImageIcon addStoryIcon = new ImageIcon("src/story (1).png");
         addstoryButton.setContentAreaFilled(false);
         addstoryButton.setFont(new Font("Arial", Font.BOLD, 16));
         addstoryButton.setPreferredSize(new Dimension(50, 50));
@@ -92,7 +92,7 @@ public class Addpostgui {
         addstoryButton.addActionListener(e -> System.out.println("Add Story"));
 
         JButton backButton = new JButton();
-        ImageIcon image3 = new ImageIcon("src/BackPhoto.png");
+        ImageIcon image3 = new ImageIcon("src/return.png");
         backButton.setContentAreaFilled(false);
         backButton.setPreferredSize(new Dimension(50, 50));
         backButton.setIcon(image3);
@@ -100,9 +100,8 @@ public class Addpostgui {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-          NewsFeedgui newsFeedGui = new NewsFeedgui(user);
-            newsFeedGui.getFrame().setVisible(true);
+                frame2.setVisible(true);
+                frame.setVisible(false);
 
 
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
@@ -123,10 +122,6 @@ public class Addpostgui {
 
         // Add Bottom Panel to Frame
         frame.add(bottomPanel, BorderLayout.SOUTH);
-
-
-
-
 
 
         frame.setVisible(true);

@@ -14,13 +14,13 @@ public class FreindGui {
         frame.setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(new Color(102, 205, 170));
+        topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
         JLabel titleLabel = new JLabel("Freinds", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
         JButton addPostButton = new JButton();
-        ImageIcon image = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\avbfe351f753bcaa24ae2.png");
+        ImageIcon image = new ImageIcon("src/search-interface-symbol.png");
         addPostButton.setContentAreaFilled(false);
         addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
         addPostButton.setPreferredSize(new Dimension(50, 50));
@@ -30,7 +30,6 @@ public class FreindGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("new post");
-
 
             }
         });
@@ -53,7 +52,7 @@ public class FreindGui {
 
 
         JButton refresh = new JButton();
-        ImageIcon image2 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\refresh.png");
+        ImageIcon image2 = new ImageIcon("src/refresh.png");
         refresh.setContentAreaFilled(false);
         refresh.setFont(new Font("Arial", Font.BOLD, 16));
         refresh.setPreferredSize(new Dimension(50, 50));
@@ -63,7 +62,6 @@ public class FreindGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("refresh");
-
 
             }
         });
@@ -104,7 +102,7 @@ public class FreindGui {
 
 
         JButton profile = new JButton();
-        ImageIcon image3 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
+        ImageIcon image3 = new ImageIcon("src/delete.png");
         profile.setContentAreaFilled(false);
 
         profile.setPreferredSize(new Dimension(50, 50));
@@ -124,7 +122,7 @@ public class FreindGui {
 
 
         JButton stories = new JButton();
-        ImageIcon image4 = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\stories.png");
+        ImageIcon image4 = new ImageIcon("src/block-user.png");
         stories.setContentAreaFilled(false);
 
         stories.setPreferredSize(new Dimension(50, 50));
@@ -134,11 +132,8 @@ public class FreindGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("stories");
-
-
             }
         });
-
 
         bottomPanel.add(profile);
         bottomPanel.add(stories);
@@ -244,8 +239,8 @@ public class FreindGui {
         postPanel.add(space);
 
 
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+        ImageIcon originalIcon = new ImageIcon("src/delete.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
         JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
         postPanel.add(space);
@@ -272,12 +267,12 @@ public class FreindGui {
         postPanel.add(remove);
 
         JButton block = new JButton();
-        // ImageIcon image3=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
+         ImageIcon image3=new ImageIcon("src/block-user.png");
         // accept.setContentAreaFilled(false);
 
-        block.setPreferredSize(new Dimension(50, 50));
+        block.setPreferredSize(new Dimension(20, 20));
         //accept.setIcon(image3);
-        //  accept.setBorderPainted(false);
+        block.setBorderPainted(false);
         postPanel.add(space);
         postPanel.add(block);
 
