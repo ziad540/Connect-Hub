@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
+       new  NewsFeedgui();
+
 
  //new StartWindow();
 //
@@ -22,6 +24,7 @@ public class Main {
 
         STORIESDATABASE ST=new STORIESDATABASE();
         ST.load();
+
 
 
 }}
