@@ -5,15 +5,18 @@ import java.awt.event.ActionListener;
 
 public class NewsFeedgui {
 
+
     JPanel contentPanel;
     JPanel right;
+    private JFrame frame;
+    NewsFeedgui() {
 
     JFrame frame;
     PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
    public NewsFeedgui(User user) {//right version
-        frame = new JFrame("NewsFeed");
-
+       
+         frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -31,22 +34,31 @@ public class NewsFeedgui {
         JButton addPostButton = new JButton();
         ImageIcon image = new ImageIcon("src/new-post (2).png");
         addPostButton.setContentAreaFilled(false);
+
+        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
+
         addPostButton.setPreferredSize(new Dimension(50, 50));
         addPostButton.setIcon(image);
         addPostButton.setBorderPainted(false);
         addPostButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //postDatabaseManagement.addPost();
-                System.out.println("new post");
+
+                new Addpostgui();
+                frame.setVisible(false);
+
+
             }
         });
+
+
         topPanel.add(addPostButton, BorderLayout.EAST);
 
-        // Refresh Button
+
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/refresh.png");
         refresh.setContentAreaFilled(false);
+        refresh.setFont(new Font("Arial", Font.BOLD, 16));
         refresh.setPreferredSize(new Dimension(50, 50));
         refresh.setIcon(image2);
         refresh.setBorderPainted(false);
@@ -112,6 +124,7 @@ public class NewsFeedgui {
                         {"Another User", "21/12", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "hello world"}
                 };
 
+
                 // Clear and repopulate posts
                 contentPanel.removeAll();
                 loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
@@ -126,12 +139,15 @@ public class NewsFeedgui {
 
             }
         });
-        topPanel.add(refresh, BorderLayout.WEST);
+
+     topPanel.add(refresh, BorderLayout.WEST);
 
         frame.add(topPanel, BorderLayout.NORTH);
 
 
+
         // Bottom Panel
+
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setBackground(new Color(240, 255, 255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
@@ -139,44 +155,94 @@ public class NewsFeedgui {
         JButton profile = createIconButton("src/user.png");
         loadPosts.showPosts(contentPanel, NewsFeedgui.this,userDatabaseManagement,postDatabaseManagement);
 
+        JButton profile = new JButton();
+        ImageIcon image3 = new ImageIcon("src/user.png");
+        profile.setContentAreaFilled(false);
+
+        profile.setPreferredSize(new Dimension(50, 50));
+        profile.setIcon(image3);
+        profile.setBorderPainted(false);
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(frame,user);
+                new Profile(frame);
+
                 frame.setVisible(false);
             }
         });
 
-        JButton stories = createIconButton("src/story.png");
+
+
+        JButton stories = new JButton();
+        ImageIcon image4 = new ImageIcon("src/story.png");
+        stories.setContentAreaFilled(false);
+
+        stories.setPreferredSize(new Dimension(50, 50));
+        stories.setIcon(image4);
+        stories.setBorderPainted(false);
         stories.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("stories");
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(stories); // Get the parent frame
+                if (frame != null) {
+                    frame.getContentPane().removeAll(); // Remove current content
+                    frame.getContentPane().add(new StoriesGui().createFriendPanel()); // Add the new panel
+                    frame.revalidate();
+                    frame.repaint();
+                } else {
+                    System.err.println("Frame is null");
+                }
             }
         });
 
-        JButton back = createIconButton("src/logout.png");
+
+        JButton back = new JButton();
+        ImageIcon image5 = new ImageIcon("src/logout.png");
+        back.setContentAreaFilled(false);
+        back.setFont(new Font("Arial", Font.BOLD, 16));
+        back.setPreferredSize(new Dimension(50, 50));
+        back.setIcon(image5);
+        back.setBorderPainted(false);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("back post");
+
+
+
             }
         });
 
-        JButton friends = createIconButton("src/team.png");
-        friends.addActionListener(new ActionListener() {
+
+        JButton freinds = new JButton();
+        ImageIcon image6 = new ImageIcon("src/team.png");
+        freinds.setContentAreaFilled(false);
+        freinds.setFont(new Font("Arial", Font.BOLD, 16));
+        freinds.setPreferredSize(new Dimension(50, 50));
+        freinds.setIcon(image6);
+        freinds.setBorderPainted(false);
+        freinds.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("friends");
+                System.out.println("Friends");
+
+
+
             }
         });
 
 
         bottomPanel.add(profile);
         bottomPanel.add(stories);
-        bottomPanel.add(friends);
+
+        bottomPanel.add(freinds);
         bottomPanel.add(back);
+
+
         frame.add(bottomPanel, BorderLayout.SOUTH);
+
+
+
 
         frame.setVisible(true);
     }
@@ -255,4 +321,14 @@ public class NewsFeedgui {
     }
 
 
+        JPanel actionPanel = new JPanel();
+        actionPanel.setPreferredSize(new Dimension(30, 20));
+
+        postPanel.add(actionPanel);
+
+        return postPanel;
+    }
+    public JFrame getFrame() {
+        return frame;
+    }
 }

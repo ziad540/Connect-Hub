@@ -2,15 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+        public class StoriesGui {
 
-
-
-
-public class StoriesGui {
-
-    public JPanel createFriendPanel() {
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+            public JPanel createFriendPanel() {
+                JPanel mainPanel = new JPanel();
+                mainPanel.setLayout(new BorderLayout());
 
 
 
@@ -30,12 +26,12 @@ public class StoriesGui {
 
         JButton addStoryButton = new JButton();
         ImageIcon image = new ImageIcon("src/AddStory.jpeg");
-        addStoryButton.setContentAreaFilled(false);
-        addStoryButton.setFont(new Font("Arial", Font.BOLD, 16));
-        addStoryButton.setPreferredSize(new Dimension(50, 50));
-        addStoryButton.setIcon(image);
-        addStoryButton.setBorderPainted(false);
-        addStoryButton.addActionListener(new ActionListener() {
+                addStoryButton.setContentAreaFilled(false);
+                addStoryButton.setFont(new Font("Arial", Font.BOLD, 16));
+                addStoryButton.setPreferredSize(new Dimension(50, 50));
+                addStoryButton.setIcon(image);
+                addStoryButton.setBorderPainted(false);
+                addStoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddStoryGui();
@@ -53,8 +49,8 @@ public class StoriesGui {
         refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
         refreshButton.setPreferredSize(new Dimension(30, 30));
         refreshButton.setIcon(image2);
-        refreshButton.setBorderPainted(false);
-        refreshButton.addActionListener(new ActionListener() {
+       refreshButton.setBorderPainted(false);
+       refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("refresh");
@@ -165,4 +161,4 @@ public class StoriesGui {
 
 
 
-}
+

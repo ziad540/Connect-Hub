@@ -100,8 +100,10 @@ public class Addpostgui {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
 //                NewsFeedgui newsFeedGui = new NewsFeedgui();
 //                newsFeedGui.getFrame().setVisible(true);
+
 
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(backButton);
                 if (currentFrame != null) {
