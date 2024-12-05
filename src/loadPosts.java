@@ -32,8 +32,8 @@ public class loadPosts {
                 contentPanel.add(newsFeedgui.createPostPanel(userName, formattedDate, content, image));
             }
         }
-        contentPanel.revalidate();
-        contentPanel.repaint();
+        //contentPanel.revalidate();
+        //contentPanel.repaint();
     }
 
 }
