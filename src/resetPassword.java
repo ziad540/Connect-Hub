@@ -16,7 +16,7 @@ public class resetPassword extends JFrame {
 
     private JPasswordField passwordField1;
 
-    public resetPassword(User u) {
+    public resetPassword(User user) {
 
         setTitle("Reset Password");
         setSize(new Dimension(400, 400));
