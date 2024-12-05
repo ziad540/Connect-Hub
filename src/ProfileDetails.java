@@ -16,10 +16,12 @@ public class ProfileDetails extends JFrame{
     private JButton editPasswordButton;
     private JLabel bioDetails;
     private JLabel usernameDetails;
+
     private JButton deleteCoverButton;
     private JButton deleteProfileButton;
     private JButton deleteBioButton;
     UserDatabaseManagement userDatabaseManagement =UserDatabaseManagement.getInstance();
+
 
     public ProfileDetails(JFrame frame,User user) {
         ProfileInformation tempProfile = user.getProfileInformation();
@@ -102,6 +104,7 @@ public class ProfileDetails extends JFrame{
                 // save updated user to file
                 user.setUserName(usernameDetails.getText());
                 user.setProfileInformation(tempProfile);
+
                 userDatabaseManagement.saveToFile();
             }
         });
@@ -128,6 +131,7 @@ public class ProfileDetails extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 bioDetails.setText("");
                 tempProfile.setBioData("");
+
             }
         });
     }

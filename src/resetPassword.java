@@ -12,11 +12,14 @@ public class resetPassword extends JFrame {
     private JLabel newPassword;
     private JLabel confirmPassword;
     private JButton Confirmbutton;
+    private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+
     private JPasswordField passwordField1;
 
     public resetPassword(User u) {
+
         setTitle("Reset Password");
-        setSize(new Dimension(400,400));
+        setSize(new Dimension(400, 400));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panel1);
         setLocationRelativeTo(null);
@@ -28,10 +31,16 @@ public class resetPassword extends JFrame {
                 String oldPassword = textField1.getText();
                 String newPassword = textField2.getText();
                 String confirmPassword = textField3.getText();
-                if(oldPassword.isEmpty()||newPassword.isEmpty()||confirmPassword.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "All fields are required","Error",JOptionPane.ERROR_MESSAGE);
+                if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (!(newPassword.equals(confirmPassword))) {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    user.setPassword(newPassword);
+                    JOptionPane.showMessageDialog(null, "Password has been reset", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    userDatabaseManagement.saveToFile();
+                    setVisible(false);
                 }
-
             }
         });
     }

@@ -2,17 +2,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User {
-    private  String userId;
+    private String userId;
     private String email;
     private String userName;
     private String status;
     private LocalDate dateOfBirth;
     private String hashingPassword;
     private ProfileInformation profileInformation;
-    //private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
-   // private usersdatabase userDatabase=new usersdatabase("src/users.json");
-    private ArrayList<String>firndesId=new ArrayList<>();
-    private ArrayList<String>postId=new ArrayList<>();
+ 
+   private ArrayList<String> firndesId = new ArrayList<>();
+    private ArrayList<String> postId = new ArrayList<>();
+
     public User() {
     }
 
@@ -31,30 +31,39 @@ public class User {
     private void setPostId(ArrayList<String> postId) {
         this.postId = postId;
     }
+
     public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId =String.valueOf(1000/*+loadCounterId()*/);
+        this.userId = String.valueOf(1000/*+loadCounterId()*/);
         this.email = email;
         this.userName = userName;
         this.status = status;
         this.dateOfBirth = dateOfBirth;
+
         profileInformation = new ProfileInformation("src/unknown user.png","src/unknown cover.png","");
         hashingPassword=passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
+
     }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
     public String getUserId() {
         return userId;
     }
+
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
     public void setPassword(String password) {
-        hashingPassword=passwordHashing.hashpassword(password);
+        hashingPassword = passwordHashing.hashpassword(password);
     }
+
     public void setStatus(String status) {
         this.status = status;
     }

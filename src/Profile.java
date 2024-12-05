@@ -59,7 +59,6 @@ public class Profile extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 frame.setVisible(true);
-
             }
         });
     }
