@@ -22,7 +22,7 @@ public class StoriesGui {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(102, 205, 170));
         topPanel.setPreferredSize(new Dimension(400, 60));
-        JLabel titleLabel = new JLabel("Friends", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Story", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
@@ -99,7 +99,7 @@ public class StoriesGui {
 
         // backButton
         JButton backButton = new JButton();
-        ImageIcon image3 = new ImageIcon("src/BackPhoto.png");
+        ImageIcon image3 = new ImageIcon("src/return.png");
         backButton.setContentAreaFilled(false);
         backButton.setPreferredSize(new Dimension(50, 50));
         backButton.setIcon(image3);
