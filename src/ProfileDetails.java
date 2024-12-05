@@ -16,6 +16,8 @@ public class ProfileDetails extends JFrame{
     private JButton editPasswordButton;
     private JLabel bioDetails;
     private JLabel usernameDetails;
+    UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+
 
     public ProfileDetails(Profile p,User user) {
         ProfileInformation tempProfile = user.getProfileInformation();
@@ -96,6 +98,7 @@ public class ProfileDetails extends JFrame{
                 // save updated user to file
                 user.setUserName(usernameDetails.getText());
                 user.setProfileInformation(tempProfile);
+                userDatabaseManagement.saveToFile();;
 
 
             }
