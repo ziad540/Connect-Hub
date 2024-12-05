@@ -10,11 +10,12 @@ public class GetFreinds {
     }
 
 
-    public ArrayList<User> get(User u) {
+    public ArrayList<User> get() {
         ArrayList<User> freinds=new ArrayList<>();
 
         UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
         ArrayList<User> users=UserDatabaseManagement.getInstance().getUsers();
+
 
 
         for(int i=0;i<freinds2.size();i++)

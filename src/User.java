@@ -67,6 +67,30 @@ public class User {
         return users.size()+1;
     }*/
 
+    public ArrayList<String> getStoriesId() {
+        return storiesId;
+    }
+
+    public void setStoriesId(ArrayList<String> storiesId) {
+        this.storiesId = storiesId;
+    }
+
+    public ArrayList<String> getFreindrequestId() {
+        return freindrequestId;
+    }
+
+    public void setFreindrequestId(ArrayList<String> freindrequestId) {
+        this.freindrequestId = freindrequestId;
+    }
+
+    public ArrayList<String> getBlockedID() {
+        return blockedID;
+    }
+
+    public void setBlockedID(ArrayList<String> blockedID) {
+        this.blockedID = blockedID;
+    }
+
     public String getEmail() {
         return email;
     }
