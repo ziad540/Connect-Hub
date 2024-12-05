@@ -9,6 +9,7 @@ public class NewsFeedgui {
     JPanel contentPanel;
     JPanel right;
     JFrame frame;
+    PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
 
    public NewsFeedgui(User user) {//right version
         frame = new JFrame("NewsFeed");
@@ -35,6 +36,7 @@ public class NewsFeedgui {
         addPostButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //postDatabaseManagement.addPost();
                 System.out.println("new post");
             }
         });

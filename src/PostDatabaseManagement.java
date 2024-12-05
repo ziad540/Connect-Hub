@@ -5,22 +5,22 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.util.ArrayList;
 
-public class UserDatabaseManagement {
+public class PostDatabaseManagement {
 
-    private static volatile UserDatabaseManagement instance;//Singleton design pattern
-    private ArrayList<User> users;
+    private static volatile PostDatabaseManagement instance;//Singleton design pattern
+    private ArrayList<Post> posts;
 
-    private UserDatabaseManagement(){
-       users = new ArrayList<>();
-       loadUsersFromFile();
+    private PostDatabaseManagement(){
+        posts = new ArrayList<>();
+        loadUsersFromFile();
 
     }
 
-    public static UserDatabaseManagement getInstance() {
+    public static PostDatabaseManagement getInstance() {
         if(instance==null){
-            synchronized (UserDatabaseManagement.class){
+            synchronized (PostDatabaseManagement.class){
                 if(instance == null){
-                    instance = new UserDatabaseManagement();
+                    instance = new PostDatabaseManagement();
                 }
             }
         }
@@ -32,12 +32,7 @@ public class UserDatabaseManagement {
         objectMapper.registerModule(new JavaTimeModule());
 
         try {
-             users = objectMapper.readValue(new File("src/users.json"), new TypeReference<ArrayList<User>>() {});
-
-
-            for (User user : users) {
-                System.out.println(user.getUserId() + " - " + user.getUserName() + " " + user.getEmail() + " " + user.getDateOfBirth());
-            }
+            posts = objectMapper.readValue(new File("src/posts.json"), new TypeReference<ArrayList<Post>>() {});
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +43,7 @@ public class UserDatabaseManagement {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         try {
-            objectMapper.writeValue(new File("src/users.json"), users);
+            objectMapper.writeValue(new File("src/posts.json"), posts);
             System.out.println("JSON file saved successfully!");
         } catch (Exception e) {
             System.err.println("Error writing in JSON file: " + e.getMessage());
@@ -56,12 +51,12 @@ public class UserDatabaseManagement {
         }
     }
 
-    public ArrayList<User> getUsers(){
-        return users;
+    public ArrayList<Post> getPosts(){
+        return posts;
     }
 
-    public void addUser(User user){
-        users.add(user);
+    public void addPost(Post post){
+        posts.add(post);
     }
 
 

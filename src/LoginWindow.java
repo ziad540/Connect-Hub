@@ -13,7 +13,7 @@ public class LoginWindow extends JFrame {
     private JPanel loginWindow;
     private JButton backButton;
     private checkValid checkValid;
-    UserDatabaseManagement u = new UserDatabaseManagement();
+    UserDatabaseManagement u = UserDatabaseManagement.getInstance();
 
     public LoginWindow(StartWindow sw) {
         setTitle("Login");
