@@ -24,7 +24,7 @@ public class ProfileDetails extends JFrame{
 
 
     public ProfileDetails(JFrame frame,User user) {
-        ProfileInformation tempProfile = user.getProfileInformation();
+        ProfileInformation tempProfile = new ProfileInformation(user.getProfileInformation().getProfilePicPath(),user.getProfileInformation().getCoverPicPath(),user.getProfileInformation().getBioData());
         setTitle("Profile Details");
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);

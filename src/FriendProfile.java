@@ -17,7 +17,7 @@ public class FriendProfile extends JFrame{
     private JPanel posts;
 
 
-    public FriendProfile(JFrame frame) {
+    public FriendProfile(JFrame frame,User user) {
         JDialog dialog = new JDialog(frame, "Friend Profile", true);//to make window always on top
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setSize(600, 800);
@@ -30,7 +30,7 @@ public class FriendProfile extends JFrame{
         setLocationRelativeTo(null);
         BufferedImage profile = null;
         try {
-            profile = ImageIO.read(new File("src/wallpaper1.png"));
+            profile = ImageIO.read(new File(user.getProfileInformation().getProfilePicPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,9 +46,10 @@ public class FriendProfile extends JFrame{
         g2d.draw(new java.awt.geom.Ellipse2D.Float(0, 0, 200, 200));
         g2d.dispose();
         profilePhotoLabel.setIcon(new ImageIcon(circularImage));
-        ImageIcon cover = new ImageIcon("src/wallpaper2.png");
+        ImageIcon cover = new ImageIcon(user.getProfileInformation().getCoverPicPath());
         Image coverImage = cover.getImage().getScaledInstance(600,200,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
+        bioDetails.setText(user.getProfileInformation().getBioData());
         //setVisible(true);
         dialog.add(friendProfile);
         dialog.setVisible(true);
