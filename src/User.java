@@ -33,12 +33,11 @@ public class User {
     }
 
     public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId = String.valueOf(1000/*+loadCounterId()*/);
+        this.userId = String.valueOf(1000+uniqueId.loadCounterId());
         this.email = email;
         this.userName = userName;
         this.status = status;
         this.dateOfBirth = dateOfBirth;
-
         profileInformation = new ProfileInformation("src/unknown user.png","src/unknown cover.png","");
         hashingPassword=passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
 
@@ -67,11 +66,7 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-    // to give unique id to new user
-    /*private int loadCounterId() {
-        ArrayList<User>users=userDatabaseManagement.getUsers();
-        return users.size()+1;
-    }*/
+
 
     public String getEmail() {
         return email;
