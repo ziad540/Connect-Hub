@@ -7,7 +7,8 @@ public class NewsFeedgui {
 
     JPanel contentPanel;
     JPanel right;
-  private loadPosts loadPosts=new loadPosts();
+    private loadPosts loadPosts = new loadPosts();
+
     NewsFeedgui() {
 
         JFrame frame = new JFrame("NewsFeed");
@@ -15,7 +16,6 @@ public class NewsFeedgui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
-
 
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -61,7 +61,7 @@ public class NewsFeedgui {
                 {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "goallll oba"}
         };
 
-        populatePosts(contentPanel, posts); // Populate posts initially
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this); // Populate posts initially
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -72,9 +72,7 @@ public class NewsFeedgui {
 //        frame.add(right,BorderLayout.EAST);
 
 
-
-
-        right=new JPanel();
+        right = new JPanel();
         right.setLayout(new BorderLayout());
 
         JPanel contentPanel2 = new JPanel();
@@ -98,15 +96,9 @@ public class NewsFeedgui {
 
 
         };
-        populatefreinds(contentPanel2,freinds);
+        populatefreinds(contentPanel2, freinds);
 
-
-
-
-        frame.add(right,BorderLayout.EAST);
-
-
-
+        frame.add(right, BorderLayout.EAST);
 
 
         // Refresh Button Logic
@@ -128,13 +120,13 @@ public class NewsFeedgui {
 
                 // Clear and repopulate posts
                 contentPanel.removeAll();
-                populatePosts(contentPanel, newPosts);
+                loadPosts.showPosts(contentPanel, NewsFeedgui.this);
 
                 contentPanel.revalidate(); // Recalculate layout
                 contentPanel.repaint();// Repaint the panel
 
                 contentPanel2.removeAll();
-                populatefreinds(contentPanel2,freinds);
+                populatefreinds(contentPanel2, freinds);
                 contentPanel2.revalidate();
                 contentPanel2.repaint();
 
@@ -145,17 +137,13 @@ public class NewsFeedgui {
         frame.add(topPanel, BorderLayout.NORTH);
 
 
-
-
-
-
         // Bottom Panel
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setBackground(new Color(240, 255, 255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
         JButton profile = createIconButton("src/user.png");
-      loadPosts.showPosts(contentPanel,NewsFeedgui.this);
+        loadPosts.showPosts(contentPanel, NewsFeedgui.this);
 
         profile.addActionListener(new ActionListener() {
             @Override
@@ -190,9 +178,6 @@ public class NewsFeedgui {
         });
 
 
-
-
-
         bottomPanel.add(profile);
         bottomPanel.add(stories);
         bottomPanel.add(friends);
@@ -203,14 +188,13 @@ public class NewsFeedgui {
     }
 
 
-
     private void populatefreinds(JPanel panel, Object[][] posts) {
         for (Object[] post : posts) {
             panel.add(createfreindspanel((String) post[0], (String) post[1], (String) post[2], (String) post[4]));
         }
     }
 
-       public JPanel createPostPanel(String name, String date, String caption, String imagePath) {
+    public JPanel createPostPanel(String name, String date, String caption, String imagePath) {
 
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
@@ -268,7 +252,6 @@ public class NewsFeedgui {
         postPanel.add(SPACE);
 
 
-
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
@@ -276,11 +259,6 @@ public class NewsFeedgui {
 
         return postPanel;
     }
-
-
-
-
-
 
 
 }
