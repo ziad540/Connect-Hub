@@ -375,33 +375,25 @@ public class FreindGui {
         postPanel.add(Box.createRigidArea(new Dimension(6, 0)));
 
 
-        ImageIcon originalIcon = new ImageIcon("src/delete.png");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        if  (user.getStatus().equals("online"))
+        {ImageIcon originalIcon = new ImageIcon("src/button (1).png");
+            Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+            JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
+            postPanel.add(statusLabel);}
 
-        JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+        else
+        {
+            ImageIcon originalIcon = new ImageIcon("src/offlinebutton.png");
+            Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+            JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
+            postPanel.add(statusLabel);
+        }
 
-        postPanel.add(imageLabel);
 
-        JButton remove = new JButton();
-        // ImageIcon image3=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
-        // accept.setContentAreaFilled(false);
 
-        remove.setPreferredSize(new Dimension(50, 50));
-        //accept.setIcon(image3);
-        //  accept.setBorderPainted(false);
-        postPanel.add(Box.createRigidArea(new Dimension(6, 0)));
-        postPanel.add(remove);
-        postPanel.add(Box.createRigidArea(new Dimension(6, 0)));
-        JButton block = new JButton();
-        ImageIcon image3 = new ImageIcon("src/block-user.png");
-        // accept.setContentAreaFilled(false);
 
-        block.setPreferredSize(new Dimension(20, 20));
-        //accept.setIcon(image3);
-        block.setBorderPainted(false);
-        postPanel.add(Box.createRigidArea(new Dimension(6, 0)));
 
-        postPanel.add(block);
+
 
 
         return postPanel;

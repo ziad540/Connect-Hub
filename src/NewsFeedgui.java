@@ -299,10 +299,22 @@ public class NewsFeedgui {
         postPanel.add(SPACE);
 
 
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
+
+
+if (friend.getStatus().equals("online"))
+{ImageIcon originalIcon = new ImageIcon("src/button (1).png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
         JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
-        postPanel.add(statusLabel);
+        postPanel.add(statusLabel);}
+
+else
+{
+    ImageIcon originalIcon = new ImageIcon("src/offlinebutton.png");
+    Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+    JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
+    postPanel.add(statusLabel);
+}
+
 
         return postPanel;
     }
