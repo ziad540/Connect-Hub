@@ -20,7 +20,7 @@ public class Profile extends JFrame{
     private JLabel bioDetails;
 
     public Profile(JFrame frame,User user) {
-        setTitle("Profile");
+        setTitle("My Profile");
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(profileWindow);
@@ -44,7 +44,7 @@ public class Profile extends JFrame{
         g2d.dispose();
         profilePhotoLabel.setIcon(new ImageIcon(circularImage));
         ImageIcon cover = new ImageIcon(user.getProfileInformation().getCoverPicPath());
-        Image coverImage = cover.getImage().getScaledInstance(600,200,Image.SCALE_SMOOTH);
+        Image coverImage = cover.getImage().getScaledInstance(600,150,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
         bioDetails.setText(user.getProfileInformation().getBioData());
         setVisible(true);
@@ -63,16 +63,14 @@ public class Profile extends JFrame{
             }
         });
 
+        posts = new JPanel();
+        posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
+                GetuserPosts get=new GetuserPosts();
+        ArrayList<Post> myposts= get.getuserposts(user);
 
-//        posts = new JPanel();
-//        posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
-//
-//                GetuserPosts get=new GetuserPosts();
-//        ArrayList<Post> myposts= get.getuserposts(user);
-//
-//        loadPosts.showPosts(posts, UserDatabaseManagement.getInstance(), myposts); // el moshkela hena han5od el code we 5alas
-//
-//        JScrollPane scrollPane = new JScrollPane(posts);
-//        frame.add(scrollPane, BorderLayout.SOUTH);
+        loadPosts.showMyPosts(posts, UserDatabaseManagement.getInstance(), myposts); // el moshkela hena han5od el code we 5alas
+
+        JScrollPane scrollPane = new JScrollPane(posts);
+        profileWindow.add(scrollPane, BorderLayout.CENTER);
     }
 }

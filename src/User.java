@@ -9,19 +9,17 @@ public class User {
     private LocalDate dateOfBirth;
     private String hashingPassword;
     private ProfileInformation profileInformation;
-
-    //private UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
-   // private usersdatabase userDatabase=new usersdatabase("src/users.json");
-    private ArrayList<String>firndesId=new ArrayList<>();
-    private ArrayList<String>postId=new ArrayList<>();
-    private ArrayList<String>storiesId=new ArrayList<>();
-
-    private ArrayList<String> freindrequestId=new ArrayList<>(); //ely gayin leya
-    private ArrayList<String> sentfreindrequestId=new ArrayList<>(); //ely ana ba3thom
-    private ArrayList<String> blockedID=new ArrayList<>(); //ely ana 3amlehom
+    private ArrayList<String> firndesId = new ArrayList<>();
+    private ArrayList<String> postId = new ArrayList<>();
+    private ArrayList<String> storiesId = new ArrayList<>();
+    private ArrayList<String> freindrequestId = new ArrayList<>(); //ely gayin leya
+    private ArrayList<String> sentfreindrequestId = new ArrayList<>(); //ely ana ba3thom
+    private ArrayList<String> blockedID = new ArrayList<>(); //ely ana 3amlehom
+    private ArrayList<String> blockedfromID = new ArrayList<>();// elyma3molymenhom
+    private UserRelationsManager relationsManage = new UserRelationsManager();
 
     public ArrayList<String> getSentfreindrequestId() {
-        return sentfreindrequestId;
+        return relationsManage.getSentfreindrequestId();
     }
 
     public void setSentfreindrequestId(ArrayList<String> sentfreindrequestId) {
@@ -29,14 +27,12 @@ public class User {
     }
 
     public ArrayList<String> getBlockedfromID() {
-        return blockedfromID;
+        return relationsManage.getBlockedID();
     }
 
     public void setBlockedfromID(ArrayList<String> blockedfromID) {
-        this.blockedfromID = blockedfromID;
+        relationsManage.setBlockedID(blockedfromID);
     }
-
-    private ArrayList<String> blockedfromID=new ArrayList<>();// elyma3molymenhom
 
     public User() {
     }
@@ -58,13 +54,13 @@ public class User {
     }
 
     public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId = String.valueOf(1000+uniqueId.loadCounterId());
+        this.userId = String.valueOf(1000 + uniqueId.loadCounterId());
         this.email = email;
         this.userName = userName;
         this.status = status;
         this.dateOfBirth = dateOfBirth;
-        profileInformation = new ProfileInformation("src/unknown user.png","src/unknown cover.png","");
-        hashingPassword=passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
+        profileInformation = new ProfileInformation("src/unknown user.png", "src/unknown cover.png", "");
+        hashingPassword = passwordHashing.hashpassword(password);// hashing Password by class passwordHashing
 
     }
 
@@ -92,7 +88,6 @@ public class User {
         this.status = status;
     }
 
-
     public ArrayList<String> getStoriesId() {
         return storiesId;
     }
@@ -102,19 +97,19 @@ public class User {
     }
 
     public ArrayList<String> getFreindrequestId() {
-        return freindrequestId;
+        return relationsManage.getFreindrequestId();
     }
 
     public void setFreindrequestId(ArrayList<String> freindrequestId) {
-        this.freindrequestId = freindrequestId;
+        relationsManage.setFreindrequestId(freindrequestId);
     }
 
     public ArrayList<String> getBlockedID() {
-        return blockedID;
+        return relationsManage.getBlockedID();
     }
 
     public void setBlockedID(ArrayList<String> blockedID) {
-        this.blockedID = blockedID;
+        relationsManage.setBlockedID(blockedID);
     }
 
     public String getEmail() {

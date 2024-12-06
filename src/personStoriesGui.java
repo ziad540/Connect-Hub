@@ -27,7 +27,7 @@ recentframe=recentf;
         Getuserstories getstories=new Getuserstories();
        stories= getstories.getuserstories(user);
 
-        frame = new JFrame("NewsFeed");
+        frame = new JFrame(user.getUserName()+"'s stories");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -37,7 +37,7 @@ recentframe=recentf;
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
-        JLabel titleLabel = new JLabel("Posts", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel(user.getUserName()+"'s stories", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
@@ -170,7 +170,7 @@ recentframe=recentf;
 
 
         JButton back = new JButton();
-        ImageIcon image5 = new ImageIcon("src/logout.png");
+        ImageIcon image5 = new ImageIcon("src/return.png");
         back.setContentAreaFilled(false);
         back.setFont(new Font("Arial", Font.BOLD, 16));
         back.setPreferredSize(new Dimension(50, 50));

@@ -17,14 +17,16 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
-    User currentus=null;
+    User currentus = null;
+
 
 
     NewsFeedgui(User user) {
         currentus=user;
+
         GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
         friends = getFreinds.get();
-        System.out.println(friends.size()+"size     ");
+        System.out.println(friends.size() + "size     ");
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
 
@@ -61,7 +63,7 @@ public class NewsFeedgui {
 
             }
         });
-        System.out.println(posts.size());
+
         topPanel.add(addPostButton, BorderLayout.EAST);
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/refresh.png");
@@ -85,7 +87,7 @@ public class NewsFeedgui {
         right = new JPanel();
         right.setLayout(new BorderLayout());
 
-         contentPanel2 = new JPanel();
+        contentPanel2 = new JPanel();
         contentPanel2.setLayout(new GridLayout(0, 1));
         JScrollPane scrollPane2 = new JScrollPane(contentPanel2);
         right.add(scrollPane2, BorderLayout.CENTER);
@@ -99,7 +101,7 @@ public class NewsFeedgui {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               Refresh();
+                Refresh();
 
             }
         });
@@ -107,7 +109,6 @@ public class NewsFeedgui {
         topPanel.add(refresh, BorderLayout.WEST);
 
         frame.add(topPanel, BorderLayout.NORTH);
-
 
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
@@ -127,7 +128,6 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Profile(frame, user);
-
                 frame.setVisible(false);
             }
         });
@@ -151,22 +151,21 @@ public class NewsFeedgui {
         });
 
 
-        JButton back = new JButton();
+        JButton logoutButton = new JButton();
         ImageIcon image5 = new ImageIcon("src/logout.png");
-        back.setContentAreaFilled(false);
-        back.setFont(new Font("Arial", Font.BOLD, 16));
-        back.setPreferredSize(new Dimension(50, 50));
-        back.setIcon(image5);
-        back.setBorderPainted(false);
-        back.addActionListener(new ActionListener() {
+        logoutButton.setContentAreaFilled(false);
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 16));
+        logoutButton.setPreferredSize(new Dimension(50, 50));
+        logoutButton.setIcon(image5);
+        logoutButton.setBorderPainted(false);
+        logoutButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
 
-            {
-
-
-                System.out.println("back post");
-
+            public void actionPerformed(ActionEvent e) {
+                user.setStatus("offline");
+                userDatabaseManagement.saveToFile();
+                new StartWindow();
+                frame.dispose();
 
             }
         });
@@ -193,7 +192,7 @@ public class NewsFeedgui {
         bottomPanel.add(stories);
 
         bottomPanel.add(freind);
-        bottomPanel.add(back);
+        bottomPanel.add(logoutButton);
 
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
@@ -206,11 +205,11 @@ public class NewsFeedgui {
     private void populatefreinds(JPanel panel, ArrayList<User> users) {
         for (User user : users) {
             System.out.println(user.getUserName());
-           panel.add( createfreindspanel(user));
+            panel.add(createfreindspanel(user));
         }
     }
 
-    public static JPanel createPostPanel(String name, String date, String caption, String imagePath,String profileimage) {
+    public static JPanel createPostPanel(String name, String date, String caption, String imagePath, String profileimage) {
 
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
@@ -271,17 +270,15 @@ public class NewsFeedgui {
                 switch (choice) {
                     case 0:
                         FriendProfile friendProfile = new FriendProfile(frame, friend);
-
                         break;
                     case 1:
-                        Remove_freind.remove_freind(currentus,friend);
+                       UserRelationsManager.remove_freind(currentus, friend);
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
-
                         break;
                     case 2:
-                        Block_freind.block_freind(currentus,friend);
+                      UserRelationsManager.block_freind(currentus, friend);
                         JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -294,14 +291,12 @@ public class NewsFeedgui {
         Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
 
-        /// ///////
+
         userInfo.setIcon(new ImageIcon(scaledImage2));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         postPanel.add(userInfo);
         JLabel SPACE = new JLabel("  ");
         postPanel.add(SPACE);
-
-
 
 
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
@@ -312,13 +307,12 @@ public class NewsFeedgui {
         return postPanel;
     }
 
-    public void Refresh()
-    {
+    public void Refresh() {
         System.out.println("refresh");
 
         GetFreinds getFreinds2 = new GetFreinds(currentus.getFirndesId());
         friends = getFreinds2.get();
-        System.out.println(friends.size()+"size     ");
+        System.out.println(friends.size() + "size     ");
         GetPosts getPosts2 = new GetPosts();
         posts = getPosts2.data(friends);
 

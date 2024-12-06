@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FriendProfile extends JFrame{
     private JPanel friendProfile;
@@ -14,20 +15,16 @@ public class FriendProfile extends JFrame{
     private JLabel profilePhotoLabel;
     private JLabel bioDetails;
     private JButton backButton;
+    private JLabel postsLabel;
     private JPanel posts;
 
 
     public FriendProfile(JFrame frame,User user) {
-        JDialog dialog = new JDialog(frame, "Friend Profile", true);//to make window always on top
+        JDialog dialog = new JDialog(frame, user.getUserName()+"'s Profile", true);//to make window always on top
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setSize(600, 800);
         dialog.setLocationRelativeTo(frame);
         dialog.setAlwaysOnTop(true);
-
-        setSize(new Dimension(600,800));
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setContentPane(friendProfile);
-        setLocationRelativeTo(null);
         BufferedImage profile = null;
         try {
             profile = ImageIO.read(new File(user.getProfileInformation().getProfilePicPath()));
@@ -47,17 +44,28 @@ public class FriendProfile extends JFrame{
         g2d.dispose();
         profilePhotoLabel.setIcon(new ImageIcon(circularImage));
         ImageIcon cover = new ImageIcon(user.getProfileInformation().getCoverPicPath());
-        Image coverImage = cover.getImage().getScaledInstance(600,200,Image.SCALE_SMOOTH);
+        Image coverImage = cover.getImage().getScaledInstance(600,150,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
         bioDetails.setText(user.getProfileInformation().getBioData());
-        //setVisible(true);
-        dialog.add(friendProfile);
-        dialog.setVisible(true);
+
+        postsLabel.setText(user.getUserName()+"'s Posts");
+        posts = new JPanel();
+        posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
+        GetuserPosts get=new GetuserPosts();
+        ArrayList<Post> myposts= get.getuserposts(user);
+        loadPosts.showMyPosts(posts, UserDatabaseManagement.getInstance(), myposts);
+        JScrollPane scrollPane = new JScrollPane(posts);
+        friendProfile.add(scrollPane, BorderLayout.CENTER);
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
             }
         });
+
+        dialog.add(friendProfile);
+
+        dialog.setVisible(true);
     }
 }
