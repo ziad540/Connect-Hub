@@ -85,7 +85,7 @@ public class FreindListaftersearchGUI {
 
 
         JPanel panel = new JPanel();
-        panel.setLayout(null); // Use absolute positioning
+        panel.setLayout(null);
 
         JLabel sep = new JLabel("Freinds");
 
@@ -267,19 +267,10 @@ public class FreindListaftersearchGUI {
         Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
 
         JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
+        postPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         postPanel.add(imageLabel);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
-        postPanel.add(space);
+        postPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+
         JButton remove = new JButton();
         // ImageIcon image3=new ImageIcon("C:\\Users\\Abdallah\\Desktop\\profile.png");
         // accept.setContentAreaFilled(false);
