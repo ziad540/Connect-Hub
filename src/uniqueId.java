@@ -12,6 +12,6 @@ public class uniqueId {
 
     public static int loadcounterstroiesID ()
     {
-        return StoryDatabaseManagement.getInstance().getUsers().size()+1;
+        return StoryDatabaseManagement.getInstance().getStories().size()+1;
     }
 }

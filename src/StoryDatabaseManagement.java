@@ -34,10 +34,12 @@ public class StoryDatabaseManagement {
         try {
             stories = objectMapper.readValue(new File("src/stories.json"), new TypeReference<ArrayList<Story>>() {});
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setStoryStatus();
+        saveToFile();
+
     }
 
     public void saveToFile() {
@@ -52,15 +54,18 @@ public class StoryDatabaseManagement {
         }
     }
 
-    public ArrayList<Story> getUsers(){
+    public ArrayList<Story> getStories(){
         return stories;
     }
 
-    public void addUser(Story story){
+    public void addStory(Story story){
         stories.add(story);
     }
 
-
-
+    private void setStoryStatus(){
+        for(Story story:stories){
+            story.setExpired(story.isExpired());
+        }
+    }
 }
 

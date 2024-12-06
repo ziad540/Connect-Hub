@@ -75,7 +75,7 @@ recentframe=recentf;
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-        loadStories.showPosts(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
+        loadStories.showStories(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -103,7 +103,7 @@ recentframe=recentf;
 
                 contentPanel.removeAll();
 
-                loadStories.showPosts(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
+                loadStories.showStories(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
 
                 contentPanel.revalidate();
                 contentPanel.repaint();

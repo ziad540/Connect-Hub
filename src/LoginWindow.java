@@ -16,10 +16,14 @@ public class LoginWindow extends JFrame {
     private checkValid checkValid;
 
     UserDatabaseManagement u = UserDatabaseManagement.getInstance();
+    PostDatabaseManagement p = PostDatabaseManagement.getInstance();
+    StoryDatabaseManagement s = StoryDatabaseManagement.getInstance();
+    StoryHandler storyHandler = new StoryHandler();
 
    
 
     public LoginWindow(StartWindow sw) {
+        storyHandler.deleteExpiredStories();
         setTitle("Login");
         setSize(new Dimension(500, 400));
         setContentPane(loginWindow);

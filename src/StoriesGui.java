@@ -115,6 +115,7 @@ public class StoriesGui {
      for (int i=0;i<freindsstories.size();i++)
 
      {
+
          contentPanel.add(createStoryPanel(freindsstories.get(i)));
      }
 

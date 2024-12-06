@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class loadStories {
-    public static void showPosts(JPanel contentPanel, personStoriesGui newsFeedgui,UserDatabaseManagement userDatabaseManagement,ArrayList<Story> posts) {
+    public static void showStories(JPanel contentPanel, personStoriesGui newsFeedgui,UserDatabaseManagement userDatabaseManagement,ArrayList<Story> stories) {
         String userName ="";
         LocalDate date;
         String content;
@@ -14,8 +14,8 @@ public class loadStories {
         String profileimage=null;
 
 
-        for (int i = 0; i < posts.size(); i++) {
-            String userId = posts.get(i).getAutherId();
+        for (int i = 0; i < stories.size(); i++) {
+            String userId = stories.get(i).getAutherId();
 
             for (int j = 0; j < users.size(); j++) {
                 if (userId.equals(users.get(j).getUserId())) {
@@ -25,10 +25,10 @@ public class loadStories {
                 }
             }
             if (!userName.isEmpty()) {
-                image = posts.get(i).getImagePath();
-                date = LocalDate.from(posts.get(i).getTimestamp());
+                image = stories.get(i).getImagePath();
+                date = LocalDate.from(stories.get(i).getTimestamp());
                 String formattedDate = date.format(formatter);
-                content = posts.get(i).getContent();
+                content = stories.get(i).getContent();
 
 
 
