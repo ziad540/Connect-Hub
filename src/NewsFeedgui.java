@@ -165,19 +165,19 @@ public class NewsFeedgui {
         });
 
 
-        JButton back = new JButton();
+        JButton logoutButton = new JButton();
         ImageIcon image5 = new ImageIcon("src/logout.png");
-        back.setContentAreaFilled(false);
-        back.setFont(new Font("Arial", Font.BOLD, 16));
-        back.setPreferredSize(new Dimension(50, 50));
-        back.setIcon(image5);
-        back.setBorderPainted(false);
-        back.addActionListener(new ActionListener() {
+        logoutButton.setContentAreaFilled(false);
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 16));
+        logoutButton.setPreferredSize(new Dimension(50, 50));
+        logoutButton.setIcon(image5);
+        logoutButton.setBorderPainted(false);
+        logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("back post");
-
-
+                user.setStatus("offline");
+                new StartWindow();
+                frame.dispose();
             }
         });
 
@@ -203,7 +203,7 @@ public class NewsFeedgui {
         bottomPanel.add(stories);
 
         bottomPanel.add(freind);
-        bottomPanel.add(back);
+        bottomPanel.add(logoutButton);
 
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
