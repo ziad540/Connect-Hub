@@ -47,6 +47,7 @@ public class FriendProfile extends JFrame{
         Image coverImage = cover.getImage().getScaledInstance(600,150,Image.SCALE_SMOOTH);
         coverPhotoLabel.setIcon(new ImageIcon(coverImage));
         bioDetails.setText(user.getProfileInformation().getBioData());
+
         postsLabel.setText(user.getUserName()+"'s Posts");
         posts = new JPanel();
         posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
@@ -55,13 +56,16 @@ public class FriendProfile extends JFrame{
         loadPosts.showMyPosts(posts, UserDatabaseManagement.getInstance(), myposts);
         JScrollPane scrollPane = new JScrollPane(posts);
         friendProfile.add(scrollPane, BorderLayout.CENTER);
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
             }
         });
+
         dialog.add(friendProfile);
+
         dialog.setVisible(true);
     }
 }

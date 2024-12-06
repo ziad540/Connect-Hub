@@ -17,14 +17,14 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
-    User currentus=null;
+    User currentus = null;
 
 
     NewsFeedgui(User user) {//right version
-        currentus=user;
+        currentus = user;
         GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
         friends = getFreinds.get();
-        System.out.println(friends.size()+"size     ");
+        System.out.println(friends.size() + "size     ");
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
 
@@ -62,7 +62,7 @@ public class NewsFeedgui {
 
             }
         });
-        System.out.println(posts.size());
+
         topPanel.add(addPostButton, BorderLayout.EAST);
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/refresh.png");
@@ -81,16 +81,13 @@ public class NewsFeedgui {
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-//         right=new JPanel();
-//        FreindGui freind =new FreindGui();
-//        right=freind.createFriendPanel();
-//        frame.add(right,BorderLayout.EAST);
+
 
 
         right = new JPanel();
         right.setLayout(new BorderLayout());
 
-         contentPanel2 = new JPanel();
+        contentPanel2 = new JPanel();
         contentPanel2.setLayout(new GridLayout(0, 1));
         JScrollPane scrollPane2 = new JScrollPane(contentPanel2);
         right.add(scrollPane2, BorderLayout.CENTER);
@@ -105,7 +102,7 @@ public class NewsFeedgui {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               Refresh();
+                Refresh();
 
             }
         });
@@ -113,7 +110,6 @@ public class NewsFeedgui {
         topPanel.add(refresh, BorderLayout.WEST);
 
         frame.add(topPanel, BorderLayout.NORTH);
-
 
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
@@ -133,7 +129,6 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Profile(frame, user);
-
                 frame.setVisible(false);
             }
         });
@@ -217,11 +212,11 @@ public class NewsFeedgui {
     private void populatefreinds(JPanel panel, ArrayList<User> users) {
         for (User user : users) {
             System.out.println(user.getUserName());
-           panel.add( createfreindspanel(user));
+            panel.add(createfreindspanel(user));
         }
     }
 
-    public static JPanel createPostPanel(String name, String date, String caption, String imagePath,String profileimage) {
+    public static JPanel createPostPanel(String name, String date, String caption, String imagePath, String profileimage) {
 
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
@@ -305,17 +300,15 @@ public class NewsFeedgui {
                 switch (choice) {
                     case 0:
                         FriendProfile friendProfile = new FriendProfile(frame, friend);
-
                         break;
                     case 1:
-                        Remove_freind.remove_freind(currentus,friend);
+                       UserRelationsManager.remove_freind(currentus, friend);
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
-
                         break;
                     case 2:
-                        Block_freind.block_freind(currentus,friend);
+                      UserRelationsManager.block_freind(currentus, friend);
                         JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -328,14 +321,12 @@ public class NewsFeedgui {
         Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
 
-        /// ///////
+
         userInfo.setIcon(new ImageIcon(scaledImage2));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         postPanel.add(userInfo);
         JLabel SPACE = new JLabel("  ");
         postPanel.add(SPACE);
-
-
 
 
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
@@ -346,16 +337,14 @@ public class NewsFeedgui {
         return postPanel;
     }
 
-    public void Refresh()
-    {
+    public void Refresh() {
         System.out.println("refresh");
 
         GetFreinds getFreinds2 = new GetFreinds(currentus.getFirndesId());
         friends = getFreinds2.get();
-        System.out.println(friends.size()+"size     ");
+        System.out.println(friends.size() + "size     ");
         GetPosts getPosts2 = new GetPosts();
         posts = getPosts2.data(friends);
-
 
 
         // Clear and repopulate posts
