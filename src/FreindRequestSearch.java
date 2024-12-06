@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class FreindRequestSearch implements SearchStrategy
-{
+{   //beydawar felfreind requests
     @Override
     public ArrayList<User> searchforusers(String name,User U)
 

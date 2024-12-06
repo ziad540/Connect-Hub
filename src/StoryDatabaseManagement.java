@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 public class StoryDatabaseManagement {
 
-    private static volatile StoryDatabaseManagement instance;//Singleton design pattern
+    private static volatile StoryDatabaseManagement instance;
+    //Singleton design pattern
     private ArrayList<Story> stories;
 
     private StoryDatabaseManagement(){

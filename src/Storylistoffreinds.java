@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Storylistoffreinds {
+public class Storylistoffreinds
+{
 
     ArrayList<User> getlist (ArrayList<User> users)  //array of freinds bto3o
     {
