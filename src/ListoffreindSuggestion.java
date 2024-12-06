@@ -14,10 +14,13 @@ public class ListoffreindSuggestion {
             ArrayList<String> freindsid=freinds.get(i).getFirndesId();
             for(int j=0;j<freindsid.size();j++)
             {
-                if (!(Is_Blocked.is_blocked(U,freindsid.get(j))&& !(Is_Freind.is_freind(U,freindsid.get(j)) &&!(Is_Requested.is_requested(U,freindsid.get(j))))))
+                if ((!Is_Blocked.is_blocked(U,freindsid.get(j))&& (!Is_Freind.is_freind(U,freindsid.get(j)) &&(!Is_Requested.is_requested(U,freindsid.get(j)))))
+                )
+
+                { if ((!blocked_from.blocked_From(U,freindsid.get(j))) && !is_sent.is_Sent(U,freindsid.get(j)) && (!freindsid.get(j).equals(U.getUserId()) ))
                 {
                     hashSet.add(freindsid.get(j));
-                }
+                }}
 
             }
         }
@@ -28,7 +31,7 @@ public class ListoffreindSuggestion {
         Collections.shuffle(torandomize);
         if (torandomize.size()==0)
         {
-            return null;
+            return new ArrayList<>();
         } else if (torandomize.size()<=3) {
             GetFreinds getFreinds=new GetFreinds(torandomize);
             ArrayList<User> finallist=getFreinds.get();

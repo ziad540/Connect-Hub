@@ -190,21 +190,7 @@ recentframe=recentf;
         });
 
 
-        JButton freind = new JButton();
-        ImageIcon image6 = new ImageIcon("src/team.png");
-        freind.setContentAreaFilled(false);
-        freind.setFont(new Font("Arial", Font.BOLD, 16));
-        freind.setPreferredSize(new Dimension(50, 50));
-        freind.setIcon(image6);
-        freind.setBorderPainted(false);
-        freind.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FreindGui();
-                frame.setVisible(false);
 
-            }
-        });
 
 
 //        bottomPanel.add(profile);
