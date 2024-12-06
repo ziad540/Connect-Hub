@@ -21,6 +21,7 @@ public class StoriesGui {
         freindsstories= st.getlist(freinds);
 
          frame2 = new JFrame();
+         frame2.setTitle("Stories");
         frame2.setSize(400, 800);
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.setLayout(new BorderLayout());

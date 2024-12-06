@@ -52,12 +52,12 @@ public class FriendProfile extends JFrame{
         bioDetails.setText(user.getProfileInformation().getBioData());
         //setVisible(true);
         dialog.add(friendProfile);
-        dialog.setVisible(true);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
             }
         });
+        dialog.setVisible(true);
     }
 }
