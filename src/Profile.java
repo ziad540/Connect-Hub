@@ -63,16 +63,14 @@ public class Profile extends JFrame{
             }
         });
 
+        posts = new JPanel();
+        posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
+                GetuserPosts get=new GetuserPosts();
+        ArrayList<Post> myposts= get.getuserposts(user);
 
-//        posts = new JPanel();
-//        posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
-//
-//                GetuserPosts get=new GetuserPosts();
-//        ArrayList<Post> myposts= get.getuserposts(user);
-//
-//        loadPosts.showPosts(posts, UserDatabaseManagement.getInstance(), myposts); // el moshkela hena han5od el code we 5alas
-//
-//        JScrollPane scrollPane = new JScrollPane(posts);
-//        frame.add(scrollPane, BorderLayout.SOUTH);
+        loadPosts.showMyPosts(posts, UserDatabaseManagement.getInstance(), myposts); // el moshkela hena han5od el code we 5alas
+
+        JScrollPane scrollPane = new JScrollPane(posts);
+        profileWindow.add(scrollPane, BorderLayout.WEST);
     }
 }
