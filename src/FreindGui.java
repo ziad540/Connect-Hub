@@ -8,32 +8,30 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
-
-
 public class FreindGui {
 
-    ArrayList<User> friends=null;
-    ArrayList<User> freindrequests=null;
-    ArrayList<User> friendssugg=null;
-    User currnetus=null;
+    ArrayList<User> friends = null;
+    ArrayList<User> freindrequests = null;
+    ArrayList<User> friendssugg = null;
+    User currnetus = null;
     JPanel contentPanel;
     JPanel contentPanel2;
     JFrame frame;
 
-    FreindGui(User user,JFrame recentFrame) {
-        currnetus=user;
+    FreindGui(User user, JFrame recentFrame) {
+        currnetus = user;
 
         GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
         friends = getFreinds.get();
 
-        GetFreinds getFreinds2=new GetFreinds(user.getFreindrequestId());
-        freindrequests=getFreinds2.get();
+        GetFreinds getFreinds2 = new GetFreinds(user.getFreindrequestId());
+        freindrequests = getFreinds2.get();
 
-        ListoffreindSuggestion getymysugg=new ListoffreindSuggestion();
-        friendssugg=  getymysugg.getfreindssugg(user,friends);
+        ListoffreindSuggestion getymysugg = new ListoffreindSuggestion();
+        friendssugg = getymysugg.getfreindssugg(user, friends);
 
-        System.out.println(friends.size()+"size     ");
-         frame = new JFrame("Freind list");
+        System.out.println(friends.size() + "size     ");
+        frame = new JFrame("Freind list");
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -53,7 +51,6 @@ public class FreindGui {
         search.setBorderPainted(false);
 
 
-
         JPanel eastPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         eastPanel.setOpaque(false);
 
@@ -66,7 +63,6 @@ public class FreindGui {
         eastPanel.add(search);
 
 
-
         topPanel.add(eastPanel, BorderLayout.EAST);
 
         search.addActionListener(new ActionListener() {
@@ -77,35 +73,34 @@ public class FreindGui {
 
             {
 
-                String name=searchField.getText();
-                if (name.equals(""))
-                { JOptionPane.showMessageDialog(frame, "enter a name please");
-                return;}
-
-                searchProcessor search=new searchProcessor(new Allsearch());
-                ArrayList<User> allusers=search.searchforusers(name,user);
-                System.out.println(allusers.size());
-
-                search=new searchProcessor(new FreindsSearch());
-                ArrayList<User> myfreindssearch=search.searchforusers(name,user);
-                System.out.println(myfreindssearch.size());
-
-                search=new searchProcessor(new FreindRequestSearch());
-                ArrayList<User> allrequests=search.searchforusers(name,user);
-                System.out.println(allrequests.size());
-
-                search=new searchProcessor(new sentFreindRequestssearch());
-                ArrayList<User> allsent =search.searchforusers(name,user);
-                System.out.println(allsent.size());
-
-                if (allusers.isEmpty()&& myfreindssearch.isEmpty()&&allrequests.isEmpty()&&allsent.isEmpty())
-                {
-                    JOptionPane.showMessageDialog(frame, "no user found");
+                String name = searchField.getText();
+                if (name.equals("")) {
+                    JOptionPane.showMessageDialog(frame, "enter a name please");
                     return;
                 }
-                else
-                { frame.setVisible(false);
-                   new  FreindListaftersearchGUI(frame,user,name);
+
+                searchProcessor search = new searchProcessor(new Allsearch());
+                ArrayList<User> allusers = search.searchforusers(name, user);
+                System.out.println(allusers.size());
+
+                search = new searchProcessor(new FreindsSearch());
+                ArrayList<User> myfreindssearch = search.searchforusers(name, user);
+                System.out.println(myfreindssearch.size());
+
+                search = new searchProcessor(new FreindRequestSearch());
+                ArrayList<User> allrequests = search.searchforusers(name, user);
+                System.out.println(allrequests.size());
+
+                search = new searchProcessor(new sentFreindRequestssearch());
+                ArrayList<User> allsent = search.searchforusers(name, user);
+                System.out.println(allsent.size());
+
+                if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "no user found");
+                    return;
+                } else {
+                    frame.setVisible(false);
+                    new FreindListaftersearchGUI(frame, user, name);
 
                 }
 
@@ -121,10 +116,7 @@ public class FreindGui {
         refresh.setBorderPainted(false);
         refresh.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-
-
-            {
+            public void actionPerformed(ActionEvent e) {
 
                 Refresh();
 
@@ -136,7 +128,7 @@ public class FreindGui {
 
 
         frame.add(topPanel, BorderLayout.NORTH);
-         contentPanel = new JPanel();
+        contentPanel = new JPanel();
         contentPanel.setLayout(new GridLayout(0, 1));
 
 
@@ -144,14 +136,8 @@ public class FreindGui {
         frame.add(scrollPane, BorderLayout.CENTER);
 
 
-
-
-
-
-        for (User freind  :friends)
-        {
+        for (User freind : friends) {
             contentPanel.add(createPostPanel(freind));
-
 
 
         }
@@ -161,7 +147,7 @@ public class FreindGui {
 
 
         JButton back = new JButton();
-        ImageIcon image3 = new ImageIcon("src/delete.png");
+        ImageIcon image3 = new ImageIcon("src/return.png");
         back.setContentAreaFilled(false);
 
         back.setPreferredSize(new Dimension(50, 50));
@@ -170,31 +156,23 @@ public class FreindGui {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("back");
                 frame.dispose();
                 recentFrame.setVisible(true);
-
-
             }
         });
-
-
-        // "C:\Users\Abdallah\Desktop\stories.png"
-
-
-        JButton stories = new JButton();
-        ImageIcon image4 = new ImageIcon("src/block-user.png");
-        stories.setContentAreaFilled(false);
-
-        stories.setPreferredSize(new Dimension(50, 50));
-        stories.setIcon(image4);
-        stories.setBorderPainted(false);
-        stories.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("stories");
-            }
-        });
+//        JButton stories = new JButton();
+//        ImageIcon image4 = new ImageIcon("src/block-user.png");
+//        stories.setContentAreaFilled(false);
+//
+//        stories.setPreferredSize(new Dimension(50, 50));
+//        stories.setIcon(image4);
+//        stories.setBorderPainted(false);
+//        stories.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("stories");
+//            }
+//        });
 
         bottomPanel.add(back);
 
@@ -204,21 +182,21 @@ public class FreindGui {
         JPanel right = new JPanel();
         right.setLayout(new BorderLayout());
 
-         contentPanel2 = new JPanel();
+        contentPanel2 = new JPanel();
         contentPanel2.setLayout(new GridLayout(0, 1));
         JScrollPane scrollPane2 = new JScrollPane(contentPanel2);
         right.add(scrollPane2, BorderLayout.CENTER);
 
 
         JLabel label = new JLabel("  Freinds requests");
-        if (freindrequests.size()>0)
-        contentPanel2.add(label);
+        if (freindrequests.size() > 0)
+            contentPanel2.add(label);
         populatefreinds(contentPanel2);
 
         JLabel label2 = new JLabel("  Freinds sugg");
 
-        if (friendssugg!= null &&friendssugg.size()>0)
-        contentPanel2.add(label2);
+        if (friendssugg != null && friendssugg.size() > 0)
+            contentPanel2.add(label2);
         populatefreindsSugg(contentPanel2);
         frame.add(right, BorderLayout.EAST);
 
@@ -242,25 +220,23 @@ public class FreindGui {
     }
 
     private void populatefreinds(JPanel panel) {
-            for (  User request : freindrequests) {
+        for (User request : freindrequests) {
             panel.add(createfreindrequestsspanel(request));
         }
     }
 
     private void populatefreindsSugg(JPanel panel) {
-        if (friendssugg==null)
+        if (friendssugg == null)
             return;
 
-        for(int i=0;i<friendssugg.size();i++)
-        {
+        for (int i = 0; i < friendssugg.size(); i++) {
             panel.add(createfreindsuggpanel(friendssugg.get(i)));
         }
 
     }
 
 
-
-    private  JPanel createfreindrequestsspanel(User user) {  // accept or decline or block
+    private JPanel createfreindrequestsspanel(User user) {  // accept or decline or block
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -278,14 +254,14 @@ public class FreindGui {
 
                         break;
                     case 1:
-                        AcceptFreindRequest.accept_freind_req(currnetus,user);
+                        AcceptFreindRequest.accept_freind_req(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Accepted");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
 
                         break;
                     case 2:
-                        decline_freind_request.decline_freind_req(currnetus,user);
+                        decline_freind_request.decline_freind_req(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "decline");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -303,13 +279,11 @@ public class FreindGui {
         postPanel.add(SPACE);
 
 
-
-
         return postPanel;
     }
 
 
-    private  JPanel createfreindsuggpanel(User user) { // add we block
+    private JPanel createfreindsuggpanel(User user) { // add we block
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -327,14 +301,14 @@ public class FreindGui {
 
                         break;
                     case 1:
-                        AddFreind.add_freind(currnetus,user);
+                        AddFreind.add_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
 
                         break;
                     case 2:
-                        Block_freind.block_freind(currnetus,user);
+                        Block_freind.block_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Blocked user");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -352,13 +326,11 @@ public class FreindGui {
         postPanel.add(SPACE);
 
 
-
-
         return postPanel;
     }
 
 
-    private  JPanel createPostPanel(User user ) { //sohaby  remove block
+    private JPanel createPostPanel(User user) { //sohaby  remove block
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -378,14 +350,14 @@ public class FreindGui {
 
                         break;
                     case 1:
-                        Remove_freind.remove_freind(currnetus,user);
+                        Remove_freind.remove_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
 
                         break;
                     case 2:
-                        Block_freind.block_freind(currnetus,user);
+                        Block_freind.block_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -401,8 +373,6 @@ public class FreindGui {
 
 
         postPanel.add(Box.createRigidArea(new Dimension(6, 0)));
-
-
 
 
         ImageIcon originalIcon = new ImageIcon("src/delete.png");
@@ -423,7 +393,7 @@ public class FreindGui {
         postPanel.add(remove);
         postPanel.add(Box.createRigidArea(new Dimension(6, 0)));
         JButton block = new JButton();
-         ImageIcon image3=new ImageIcon("src/block-user.png");
+        ImageIcon image3 = new ImageIcon("src/block-user.png");
         // accept.setContentAreaFilled(false);
 
         block.setPreferredSize(new Dimension(20, 20));
@@ -437,15 +407,13 @@ public class FreindGui {
         return postPanel;
     }
 
-    public void Refresh()
-    {
+    public void Refresh() {
         System.out.println("refresh");
 
         GetFreinds getFreinds = new GetFreinds(currnetus.getFirndesId());
         friends = getFreinds.get();
         contentPanel.removeAll();
-        for (User freind  :friends)
-        {
+        for (User freind : friends) {
             contentPanel.add(createPostPanel(freind));
 
         }
@@ -456,19 +424,20 @@ public class FreindGui {
 
         contentPanel2.removeAll();
 
-        GetFreinds getFreinds2=new GetFreinds(currnetus.getFreindrequestId());
-        freindrequests=getFreinds2.get();
+        GetFreinds getFreinds2 = new GetFreinds(currnetus.getFreindrequestId());
+        freindrequests = getFreinds2.get();
 
-        ListoffreindSuggestion getymysugg=new ListoffreindSuggestion();
-        friendssugg=  getymysugg.getfreindssugg(currnetus,friends);
+        ListoffreindSuggestion getymysugg = new ListoffreindSuggestion();
+        friendssugg = getymysugg.getfreindssugg(currnetus, friends);
         JLabel label = new JLabel("  Freinds requests");
-        if (freindrequests.size()>0)
+        if (freindrequests.size() > 0)
             contentPanel2.add(label);
 
         populatefreinds(contentPanel2);
 
-        JLabel label2 = new JLabel("  Freinds sugg");if (friendssugg!= null &&friendssugg.size()>0)
-        contentPanel2.add(label2);
+        JLabel label2 = new JLabel("  Freinds sugg");
+        if (friendssugg != null && friendssugg.size() > 0)
+            contentPanel2.add(label2);
         populatefreindsSugg(contentPanel2);
         contentPanel2.revalidate();
         contentPanel2.repaint();
