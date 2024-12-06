@@ -186,10 +186,19 @@ public class StoriesGui {
 
 
 
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-        JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
-        storyPanel.add(statusLabel);
+        if  (user.getStatus().equals("online"))
+        {ImageIcon originalIcon = new ImageIcon("src/button (1).png");
+            Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+            JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
+            storyPanel.add(statusLabel);}
+
+        else
+        {
+            ImageIcon originalIcon = new ImageIcon("src/offlinebutton.png");
+            Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+            JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
+            storyPanel.add(statusLabel);
+        }
 
         return storyPanel;
 
