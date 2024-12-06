@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 
 public interface RemoveExpiredStory {
-    void removeExpiredStories(ArrayList<Story> stories);
+    public ArrayList<Story> removeExpiredStories(ArrayList<Story> stories);
 }

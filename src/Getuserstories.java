@@ -8,7 +8,7 @@ public class Getuserstories {
 
         ArrayList<Story> data=new ArrayList<>();
 
-        ArrayList <Story> all=   StoryDatabaseManagement.getInstance().getUsers();
+        ArrayList <Story> all=   StoryDatabaseManagement.getInstance().getStories();
 
         for(int i=0;i<stories.size();i++)
         {

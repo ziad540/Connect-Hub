@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AddStoryGui {
     String pathimage=null;
@@ -85,7 +86,7 @@ public class AddStoryGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame1.setVisible(true);
-                frame.setVisible(false);
+                frame.dispose();
             }
         });
 
@@ -105,12 +106,9 @@ public class AddStoryGui {
         addstoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Story> allstory = StoryDatabaseManagement.getInstance().getUsers();
-
                 String id=String.valueOf(uniqueId.loadcounterstroiesID());
                 Story story=new Story(id, user.getUserId(), textArea.getText(),pathimage);
-
-                allstory.add(story);
+                StoryDatabaseManagement.getInstance().addStory(story);
                StoryDatabaseManagement.getInstance().saveToFile();
                 ArrayList<String> stories= user.getStoriesId();
                 stories.add(id);
