@@ -17,6 +17,7 @@ public class UserDatabaseManagement {
     }
 
     public static UserDatabaseManagement getInstance() {
+
         if(instance==null){
             synchronized (UserDatabaseManagement.class){
                 if(instance == null){

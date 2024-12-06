@@ -1,23 +1,93 @@
 [
   {
     "contentId": "1",
-    "autherId": "123",
+    "autherId": "1001",
     "content": "This is my first post!",
     "imagePath": "images/post1.jpg",
-    "timestamp": "2024-12-03T10:15:30"
+    "timestamp": [
+      2024,
+      12,
+      3,
+      10,
+      15,
+      30
+    ],
+    "expired": true
   },
   {
     "contentId": "2",
-    "autherId": "456",
+    "autherId": "1002",
     "content": "Excited to share my journey.",
     "imagePath": "images/post2.jpg",
-    "timestamp": "2024-12-02T09:00:00"
+    "timestamp": [
+      2024,
+      12,
+      2,
+      9,
+      0
+    ],
+    "expired": true
   },
   {
     "contentId": "3",
-    "autherId": "789",
+    "autherId": "1001",
     "content": "Check out this amazing recipe!",
     "imagePath": "images/post3.jpg",
-    "timestamp": "2024-12-01T18:30:00"
+    "timestamp": [
+      2024,
+      12,
+      1,
+      18,
+      30
+    ],
+    "expired": true
+  },
+  {
+    "contentId": "4",
+    "autherId": "1002",
+    "content": "lololo",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\stories.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      3,
+      38,
+      3,
+      343791900
+    ],
+    "expired": false
+  },
+  {
+    "contentId": "5",
+    "autherId": "1002",
+    "content": "Add Story...lopl",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\stories.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      4,
+      19,
+      19,
+      771957400
+    ],
+    "expired": false
+  },
+  {
+    "contentId": "6",
+    "autherId": "1004",
+    "content": "",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\stories.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      5,
+      34,
+      32,
+      820040200
+    ],
+    "expired": false
   }
 ]

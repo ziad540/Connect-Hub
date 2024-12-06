@@ -1,29 +1,191 @@
 [
   {
     "contentId": "1",
-    "autherId": "1002",
+    "autherId": "1001",
     "content": "This is my first post!",
     "imagePath": null,
-    "timestamp": "2024-12-03T10:15:30"
+    "timestamp": [
+      2024,
+      12,
+      3,
+      10,
+      15,
+      30
+    ]
   },
   {
     "contentId": "2",
     "autherId": "1001",
     "content": "Excited to share my journey.",
     "imagePath": "src/new-post.png",
-    "timestamp": "2024-12-02T09:00:00"
+    "timestamp": [
+      2024,
+      12,
+      2,
+      9,
+      0
+    ]
   },
   {
     "contentId": "3",
-    "autherId": "1007",
+    "autherId": "1001",
     "content": "Check out this amazing recipe!",
     "imagePath": "src/new-post.png",
-    "timestamp": "2024-12-01T18:30:00"
-  },{
-  "contentId": "4",
-  "autherId": "1002",
-  "content": "ya msa2o!",
-  "imagePath": "src/new-post.png",
-  "timestamp": "2024-12-03T10:15:30"
-}
+    "timestamp": [
+      2024,
+      12,
+      1,
+      18,
+      30
+    ]
+  },
+  {
+    "contentId": "4",
+    "autherId": "1002",
+    "content": "ya msa2o!",
+    "imagePath": "src/new-post.png",
+    "timestamp": [
+      2024,
+      12,
+      3,
+      10,
+      15,
+      30
+    ]
+  },
+  {
+    "contentId": "5",
+    "autherId": "1002",
+    "content": "zamalek",
+    "imagePath": null,
+    "timestamp": [
+      2024,
+      12,
+      6,
+      1,
+      46,
+      16,
+      905067500
+    ]
+  },
+  {
+    "contentId": "6",
+    "autherId": "1003",
+    "content": "lool",
+    "imagePath": null,
+    "timestamp": [
+      2024,
+      12,
+      6,
+      1,
+      48,
+      38,
+      915264000
+    ]
+  },
+  {
+    "contentId": "7",
+    "autherId": "1003",
+    "content": "lolololl",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\refresh.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      1,
+      51,
+      29,
+      805910500
+    ]
+  },
+  {
+    "contentId": "8",
+    "autherId": "1002",
+    "content": "lolololl",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\stories.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      1,
+      52,
+      0,
+      364267000
+    ]
+  },
+  {
+    "contentId": "9",
+    "autherId": "1001",
+    "content": "loklolodfk",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\stories.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      1,
+      59,
+      37,
+      251246400
+    ]
+  },
+  {
+    "contentId": "10",
+    "autherId": "1003",
+    "content": "Add post...hhhhh",
+    "imagePath": "C:\\Users\\Abdallah\\Desktop\\stories.png",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      2,
+      1,
+      10,
+      205879600
+    ]
+  },
+  {
+    "contentId": "11",
+    "autherId": "1004",
+    "content": "lololo",
+    "imagePath": null,
+    "timestamp": [
+      2024,
+      12,
+      6,
+      5,
+      34,
+      5,
+      626220700
+    ]
+  },
+  {
+    "contentId": "12",
+    "autherId": "1003",
+    "content": "lololol",
+    "imagePath": null,
+    "timestamp": [
+      2024,
+      12,
+      6,
+      5,
+      52,
+      33,
+      752051500
+    ]
+  },
+  {
+    "contentId": "13",
+    "autherId": "1001",
+    "content": "lolo",
+    "imagePath": "C:\\Users\\Abdallah\\Documents\\assignment.docx",
+    "timestamp": [
+      2024,
+      12,
+      6,
+      6,
+      7,
+      22,
+      218062000
+    ]
+  }
 ]

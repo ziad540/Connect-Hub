@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AddStoryGui {
+    String pathimage=null;
 
     AddStoryGui(User user, JFrame frame1) {
         JFrame frame = new JFrame("Story");
@@ -58,7 +60,8 @@ public class AddStoryGui {
                 JFileChooser fileChooser = new JFileChooser();
                 int result = fileChooser.showOpenDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    ImageIcon uploadedImage = new ImageIcon(fileChooser.getSelectedFile().getPath());
+                    pathimage=fileChooser.getSelectedFile().getPath();
+                    ImageIcon uploadedImage = new ImageIcon(pathimage);
 
                     ImageIcon originalIcon = new ImageIcon(uploadedImage.getImage());
                     Image scaledImage = originalIcon.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
@@ -99,7 +102,23 @@ public class AddStoryGui {
         addstoryButton.setPreferredSize(new Dimension(50, 50));
         addstoryButton.setIcon(addStoryIcon);
         addstoryButton.setBorderPainted(false);
-        addstoryButton.addActionListener(e -> System.out.println("Add Story"));
+        addstoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Story> allstory = StoryDatabaseManagement.getInstance().getUsers();
+
+                String id=String.valueOf(uniqueId.loadcounterstroiesID());
+                Story story=new Story(id, user.getUserId(), textArea.getText(),pathimage);
+
+                allstory.add(story);
+               StoryDatabaseManagement.getInstance().saveToFile();
+                ArrayList<String> stories= user.getStoriesId();
+                stories.add(id);
+                JOptionPane.showMessageDialog(null, "Added STORY", "added", JOptionPane.INFORMATION_MESSAGE);
+                UserDatabaseManagement.getInstance().saveToFile();
+            }
+        });
+
 
         // Add buttons to Bottom Panel
         bottomPanel.add(backButton);

@@ -6,27 +6,26 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class NewsFeedgui {
+public class personStoriesGui {
 
 
     JPanel contentPanel;
-    JPanel contentPanel2;
     JPanel right;
     private JFrame frame;
     PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
-    ArrayList<User> friends;
-    ArrayList<Post> posts;
-    User currentus=null;
+    ArrayList<Story> stories;
+    User current=null;
+    JFrame recentframe=null;
 
 
-    NewsFeedgui(User user) {//right version
-        currentus=user;
-        GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
-        friends = getFreinds.get();
-        System.out.println(friends.size()+"size     ");
-        GetPosts getPosts = new GetPosts();
-        posts = getPosts.data(friends);
+/////////////storihat sahbak
+///
+///  EL USER ELY HENA D2A SHABAK
+    personStoriesGui(User user,JFrame recentf) {
+recentframe=recentf;
+        Getuserstories getstories=new Getuserstories();
+       stories= getstories.getuserstories(user);
 
         frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
@@ -42,7 +41,7 @@ public class NewsFeedgui {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
-        // Add Post Button
+
         JButton addPostButton = new JButton();
         ImageIcon image = new ImageIcon("src/new-post (2).png");
         addPostButton.setContentAreaFilled(false);
@@ -62,8 +61,8 @@ public class NewsFeedgui {
 
             }
         });
-        System.out.println(posts.size());
-        topPanel.add(addPostButton, BorderLayout.EAST);
+        System.out.println(stories.size());
+        //topPanel.add(addPostButton, BorderLayout.EAST);
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/refresh.png");
         refresh.setContentAreaFilled(false);
@@ -72,11 +71,11 @@ public class NewsFeedgui {
         refresh.setIcon(image2);
         refresh.setBorderPainted(false);
 
-        // Content Panel
+
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, posts); // Populate posts initially
+        loadStories.showPosts(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -87,25 +86,29 @@ public class NewsFeedgui {
 //        frame.add(right,BorderLayout.EAST);
 
 
-        right = new JPanel();
-        right.setLayout(new BorderLayout());
-
-         contentPanel2 = new JPanel();
-        contentPanel2.setLayout(new GridLayout(0, 1));
-        JScrollPane scrollPane2 = new JScrollPane(contentPanel2);
-        right.add(scrollPane2, BorderLayout.CENTER);
 
 
-        populatefreinds(contentPanel2, friends);
-
-        frame.add(right, BorderLayout.EAST);
 
 
-        // Refresh Button Logic
+
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               Refresh();
+                System.out.println("refresh");
+
+                Getuserstories getstories2=new Getuserstories();
+                stories= getstories2.getuserstories(user);
+
+
+
+                contentPanel.removeAll();
+
+                loadStories.showPosts(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
+
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+
 
             }
         });
@@ -113,6 +116,7 @@ public class NewsFeedgui {
         topPanel.add(refresh, BorderLayout.WEST);
 
         frame.add(topPanel, BorderLayout.NORTH);
+
 
 
 
@@ -174,8 +178,12 @@ public class NewsFeedgui {
         back.setBorderPainted(false);
         back.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("back post");
+            public void actionPerformed(ActionEvent e)
+
+            {
+                frame.dispose();
+
+                recentf.setVisible(true);
 
 
             }
@@ -199,10 +207,10 @@ public class NewsFeedgui {
         });
 
 
-        bottomPanel.add(profile);
-        bottomPanel.add(stories);
-
-        bottomPanel.add(freind);
+//        bottomPanel.add(profile);
+//        bottomPanel.add(stories);
+//
+//        bottomPanel.add(freind);
         bottomPanel.add(back);
 
 
@@ -213,14 +221,14 @@ public class NewsFeedgui {
     }
 
 
-    private void populatefreinds(JPanel panel, ArrayList<User> users) {
-        for (User user : users) {
-            System.out.println(user.getUserName());
-           panel.add( createfreindspanel(user));
-        }
-    }
+//    private void populatefreinds(JPanel panel, ArrayList<User> users) {
+//        for (User user : users) {
+//            System.out.println(user.getUserName());
+//            panel.add( createfreindspanel(user));
+//        }
+//    }
 
-    public static JPanel createPostPanel(String name, String date, String caption, String imagePath,String profileimage) {
+    public JPanel createPostPanel(String name, String date, String caption, String imagePath,String profileimage) {
 
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
@@ -290,88 +298,52 @@ public class NewsFeedgui {
 //        return postPanel;
 //    }
 
-    private JPanel createfreindspanel(User friend) {
-        JPanel postPanel = new JPanel();
-        postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
-        postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        postPanel.setBackground(Color.WHITE);
-        JLabel userInfo = new JLabel(friend.getUserName());
-        userInfo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                String[] options = {"View profile", "Remove", "Block"};
-                int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                switch (choice) {
-                    case 0:
-                        FriendProfile friendProfile = new FriendProfile(frame, friend);
-
-                        break;
-                    case 1:
-                        Remove_freind.remove_freind(currentus,friend);
-                        JOptionPane.showMessageDialog(postPanel, "Removed Friend");
-                        UserDatabaseManagement.getInstance().saveToFile();
-                        Refresh();
-
-                        break;
-                    case 2:
-                        Block_freind.block_freind(currentus,friend);
-                        JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
-                        UserDatabaseManagement.getInstance().saveToFile();
-                        Refresh();
-                        break;
-                }
-            }
-        });
-
-        ImageIcon originalIcon2 = new ImageIcon(friend.getProfileInformation().getProfilePicPath());
-        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-
-
-        /// ///////
-        userInfo.setIcon(new ImageIcon(scaledImage2));
-        userInfo.setFont(new Font("Arial", Font.BOLD, 14));
-        postPanel.add(userInfo);
-        JLabel SPACE = new JLabel("  ");
-        postPanel.add(SPACE);
-
-
-
-
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-        JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
-        postPanel.add(statusLabel);
-
-        return postPanel;
-    }
-
-    public void Refresh()
-    {
-        System.out.println("refresh");
-
-        GetFreinds getFreinds2 = new GetFreinds(currentus.getFirndesId());
-        friends = getFreinds2.get();
-        System.out.println(friends.size()+"size     ");
-        GetPosts getPosts2 = new GetPosts();
-        posts = getPosts2.data(friends);
-
-
-
-        // Clear and repopulate posts
-        contentPanel.removeAll();
-
-        loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, posts);
-
-        contentPanel.revalidate();
-        contentPanel.repaint();
-
-        contentPanel2.removeAll();
-        populatefreinds(contentPanel2, friends);
-        contentPanel2.revalidate();
-        contentPanel2.repaint();
-
-
-    }
+//    private JPanel createfreindspanel(User friend) {
+//        JPanel postPanel = new JPanel();
+//        postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
+//        postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+//        postPanel.setBackground(Color.WHITE);
+//        JLabel userInfo = new JLabel(friend.getUserName());
+//        userInfo.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                String[] options = {"View profile", "Remove", "Block"};
+//                int choice = JOptionPane.showOptionDialog(postPanel, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+//                switch (choice) {
+//                    case 0:
+//                        FriendProfile friendProfile = new FriendProfile(frame, friend);
+//                        break;
+//                    case 1:
+//                        JOptionPane.showMessageDialog(postPanel, "Removed Friend");
+//                        break;
+//                    case 2:
+//                        JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
+//                        break;
+//                }
+//            }
+//        });
+//
+//        ImageIcon originalIcon2 = new ImageIcon(friend.getProfileInformation().getProfilePicPath());
+//        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+//
+//
+//        /// ///////
+//        userInfo.setIcon(new ImageIcon(scaledImage2));
+//        userInfo.setFont(new Font("Arial", Font.BOLD, 14));
+//        postPanel.add(userInfo);
+//        JLabel SPACE = new JLabel("  ");
+//        postPanel.add(SPACE);
+//
+//
+//
+//
+//        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
+//        Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+//        JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));
+//        postPanel.add(statusLabel);
+//
+//        return postPanel;
+//    }
 
     public JFrame getFrame() {
 
@@ -379,3 +351,4 @@ public class NewsFeedgui {
         return frame;
     }
 }
+

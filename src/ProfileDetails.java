@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +51,9 @@ public class ProfileDetails extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG,JPG Images", "png","jpg");
+                fileChooser.setFileFilter(filter);
+                fileChooser.setAcceptAllFileFilterUsed(false);
                 fileChooser.setDialogTitle("Load cover photo");
                 int selected = fileChooser.showOpenDialog(profileDetailsWindow);
                 if (selected == JFileChooser.APPROVE_OPTION) {
@@ -66,6 +70,9 @@ public class ProfileDetails extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG,JPG Images", "png","jpg");
+                fileChooser.setFileFilter(filter);
+                fileChooser.setAcceptAllFileFilterUsed(false);
                 fileChooser.setDialogTitle("Load profile photo");
                 int selected = fileChooser.showOpenDialog(profileDetailsWindow);
                 if (selected == JFileChooser.APPROVE_OPTION) {

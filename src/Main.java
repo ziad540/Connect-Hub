@@ -6,9 +6,10 @@ public class Main {
 
     public static void main(String[] args)  {
 
-        new StartWindow();
+      //  new StartWindow();
 //        new FreindGui();
         //new AddStoryGui();
+        new FreindListaftersearchGUI();
 
 
 }

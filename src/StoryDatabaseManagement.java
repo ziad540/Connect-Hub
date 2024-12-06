@@ -44,7 +44,7 @@ public class StoryDatabaseManagement {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         try {
-            objectMapper.writeValue(new File("src/users.json"), stories);
+            objectMapper.writeValue(new File("src/stories.json"), stories);
             System.out.println("JSON file saved successfully!");
         } catch (Exception e) {
             System.err.println("Error writing in JSON file: " + e.getMessage());
