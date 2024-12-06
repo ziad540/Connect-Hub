@@ -176,6 +176,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 user.setStatus("offline");
+                userDatabaseManagement.saveToFile();
                 new StartWindow();
                 frame.dispose();
             }
