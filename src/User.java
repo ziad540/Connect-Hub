@@ -16,8 +16,27 @@ public class User {
     private ArrayList<String>postId=new ArrayList<>();
     private ArrayList<String>storiesId=new ArrayList<>();
 
-    private ArrayList<String> freindrequestId=new ArrayList<>();
-    private ArrayList<String> blockedID=new ArrayList<>();
+    private ArrayList<String> freindrequestId=new ArrayList<>(); //ely gayin leya
+    private ArrayList<String> sentfreindrequestId=new ArrayList<>(); //ely ana ba3thom
+    private ArrayList<String> blockedID=new ArrayList<>(); //ely ana 3amlehom
+
+    public ArrayList<String> getSentfreindrequestId() {
+        return sentfreindrequestId;
+    }
+
+    public void setSentfreindrequestId(ArrayList<String> sentfreindrequestId) {
+        this.sentfreindrequestId = sentfreindrequestId;
+    }
+
+    public ArrayList<String> getBlockedfromID() {
+        return blockedfromID;
+    }
+
+    public void setBlockedfromID(ArrayList<String> blockedfromID) {
+        this.blockedfromID = blockedfromID;
+    }
+
+    private ArrayList<String> blockedfromID=new ArrayList<>();// elyma3molymenhom
 
     public User() {
     }

@@ -2,11 +2,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+//listso7abak ely 3andohom stories
 public class StoriesGui {
+    ArrayList<User> freindsstories;
+    ArrayList<User> freinds;
+    JFrame frame2;
+
 
     public StoriesGui(User user, JFrame frame) {
-        JFrame frame2 = new JFrame();
+
+        GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
+        freinds = getFreinds.get();
+
+        Storylistoffreinds st= new Storylistoffreinds();
+        freindsstories= st.getlist(freinds);
+
+         frame2 = new JFrame();
         frame2.setSize(400, 800);
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.setLayout(new BorderLayout());
@@ -49,12 +63,7 @@ public class StoriesGui {
         refreshButton.setPreferredSize(new Dimension(30, 30));
         refreshButton.setIcon(image2);
         refreshButton.setBorderPainted(false);
-        refreshButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("refresh");
-            }
-        });
+
         topPanel.add(refreshButton, BorderLayout.WEST);
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
@@ -65,33 +74,54 @@ public class StoriesGui {
         JScrollPane scrollPane = new JScrollPane(contentPanel);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        Object[][] posts = {
-                {"Dodo Yasser", "20/5", "of", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "zizooo"},
-                {"Abdallah Yasser", "20/6", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "shika3333"},
-                {"Nour Azab", "20/8", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Zamalek"},
-                {"Ziad", "20/3", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Ana Zeh2t"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
-                {"Nour Azab", "20/8", "on", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Zamalek"},
-                {"Ziad", "20/3", "off", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Ana Zeh2t"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
-                {"Jobeef", "20/3", "online", "C:\\Users\\Abdallah\\Desktop\\licensed-image (2).jpeg", "Goallll Oba"},
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GetFreinds getFreinds2 = new GetFreinds(user.getFirndesId());
+                freinds = getFreinds2.get();
 
-        };
+                Storylistoffreinds st2= new Storylistoffreinds();
+                freindsstories= st2.getlist(freinds);
+
+               contentPanel.removeAll();
+                for (int i=0;i<freindsstories.size();i++)
+
+                {
+                    contentPanel.add(createStoryPanel(freindsstories.get(i)));
+                }
+
+                contentPanel.revalidate();
+                contentPanel.repaint();
 
 
-        for (Object[] post : posts) {
-            contentPanel.add(createStoryPanel((String) post[0], (String) post[1], (String) post[2], (String) post[4]));
-        }
 
-        //Bottom panel
+
+
+
+
+
+
+
+
+
+
+
+
+                System.out.println("refresh");
+            }
+        });
+
+     for (int i=0;i<freindsstories.size();i++)
+
+     {
+         contentPanel.add(createStoryPanel(freindsstories.get(i)));
+     }
+
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setBackground(new Color(240, 255, 255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
-        // backButton
+
         JButton backButton = new JButton();
         ImageIcon image3 = new ImageIcon("src/return.png");
         backButton.setContentAreaFilled(false);
@@ -113,26 +143,45 @@ public class StoriesGui {
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
 
-        frame2.getContentPane().removeAll(); // Remove current content
-        frame2.getContentPane().add(mainPanel); // Add the new panel
+        frame2.getContentPane().removeAll();
+        frame2.getContentPane().add(mainPanel);
         frame2.revalidate();
         frame2.repaint();
 
 
     }
 
-    private static JPanel createStoryPanel(String name, String date, String status, String caption) {
+    private  JPanel createStoryPanel(User user) {
         JPanel storyPanel = new JPanel();
         storyPanel.setLayout(new BoxLayout(storyPanel, BoxLayout.X_AXIS));
         storyPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         storyPanel.setBackground(Color.WHITE);
 
-        JLabel userInfo = new JLabel(name);
-        userInfo.setIcon(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\868320_people_512x512.png"));
+        JLabel userInfo = new JLabel(user.getUserName());
+
+        ImageIcon originalIcon2 = new ImageIcon(user.getProfileInformation().getProfilePicPath());
+        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+
+        /// ///////
+        userInfo.setIcon(new ImageIcon(scaledImage2));
         userInfo.setFont(new Font("Arial", Font.BOLD, 14));
         storyPanel.add(userInfo);
         JLabel SPACE = new JLabel("  ");
         storyPanel.add(SPACE);
+
+        userInfo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame2.setVisible(false);
+                personStoriesGui person=new personStoriesGui(user,frame2);
+
+
+
+            }
+        });
+
+
 
 
         ImageIcon originalIcon = new ImageIcon("C:\\Users\\Abdallah\\Desktop\\online.png");
@@ -145,7 +194,7 @@ public class StoriesGui {
 
     }
 
-    private JButton createIconButton(String imagePath) {
+    private JButton createIconButton(String imagePath) {   //fakrna nshil diii
         JButton button = new JButton(new ImageIcon(imagePath));
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);

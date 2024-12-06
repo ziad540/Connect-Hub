@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Profile extends JFrame{
     private JPanel profileWindow;
@@ -61,5 +62,17 @@ public class Profile extends JFrame{
                 frame.setVisible(true);
             }
         });
+
+
+//        posts = new JPanel();
+//        posts.setLayout(new BoxLayout(posts, BoxLayout.Y_AXIS));
+//
+//                GetuserPosts get=new GetuserPosts();
+//        ArrayList<Post> myposts= get.getuserposts(user);
+//
+//        loadPosts.showPosts(posts, UserDatabaseManagement.getInstance(), myposts); // el moshkela hena han5od el code we 5alas
+//
+//        JScrollPane scrollPane = new JScrollPane(posts);
+//        frame.add(scrollPane, BorderLayout.SOUTH);
     }
 }

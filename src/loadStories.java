@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class loadPosts {
-    public static void showPosts(JPanel contentPanel, NewsFeedgui newsFeedgui,UserDatabaseManagement userDatabaseManagement,ArrayList<Post> posts) {
+public class loadStories {
+    public static void showPosts(JPanel contentPanel, personStoriesGui newsFeedgui,UserDatabaseManagement userDatabaseManagement,ArrayList<Story> posts) {
         String userName ="";
         LocalDate date;
         String content;
@@ -20,7 +20,7 @@ public class loadPosts {
             for (int j = 0; j < users.size(); j++) {
                 if (userId.equals(users.get(j).getUserId())) {
                     userName = users.get(j).getUserName();
-                    profileimage=users.get(j).getProfileInformation().getProfilePicPath();
+                    profileimage=users.get(i).getProfileInformation().getProfilePicPath();
                     break;
                 }
             }

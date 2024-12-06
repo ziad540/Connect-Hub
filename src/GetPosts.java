@@ -9,14 +9,15 @@ public class GetPosts {
 
         for (int i=0;i<users.size();i++)
         {
-            ArrayList<String> friendsposts = users.get(i).getPostId();
+            ArrayList<String> friendsposts = users.get(i).getPostId(); // kol wahed men so7aby
 
             for(int j=0;j<friendsposts.size();j++)
             {
                 for(int z=0;z<allposts.size();z++)
                 {
-                    if (friendsposts.get(j).equals(allposts.get(z)))
+                    if (friendsposts.get(j).equals(allposts.get(z).getContentId()))
                     {
+                        System.out.println("ana hena" + friendsposts.get(j));
                         posts.add(allposts.get(z));
                     }
                 }

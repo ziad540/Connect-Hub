@@ -2,8 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Addpostgui {
+   private ImageIcon lastimage=null;
+   private String pathimage=null;
 
     Addpostgui(User user, JFrame frame2) {
         JFrame frame = new JFrame("NewsFeed");
@@ -60,16 +63,21 @@ public class Addpostgui {
                 JFileChooser fileChooser = new JFileChooser();
                 int result = fileChooser.showOpenDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    ImageIcon uploadedImage = new ImageIcon(fileChooser.getSelectedFile().getPath());
+
+                    pathimage=fileChooser.getSelectedFile().getPath();
+                    ImageIcon uploadedImage = new ImageIcon(pathimage);
 
                     ImageIcon originalIcon = new ImageIcon(uploadedImage.getImage());
                     Image scaledImage = originalIcon.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH);
-                    photoLabel.setIcon(new ImageIcon(scaledImage));
+                      lastimage=new ImageIcon(scaledImage);
+                    photoLabel.setIcon(lastimage);
                     photoLabel.setText("");
 
                 }
             }
         });
+
+
 
 
         uploadPanel.add(photoLabel, BorderLayout.CENTER);
@@ -89,7 +97,24 @@ public class Addpostgui {
         addstoryButton.setPreferredSize(new Dimension(50, 50));
         addstoryButton.setIcon(addStoryIcon);
         addstoryButton.setBorderPainted(false);
-        addstoryButton.addActionListener(e -> System.out.println("Add Story"));
+        addstoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ArrayList<Post> allposts = PostDatabaseManagement.getInstance().getPosts();
+              //  System.out.println( lastimage.getDescription()+"           gfhddhfgdfghdhg");
+               String id=String.valueOf(uniqueId.loadCOUNTERPOSTID());
+                Post newpopst=new Post(id,user.getUserId(),textArea.getText(),pathimage);
+                allposts.add(newpopst);
+                PostDatabaseManagement.getInstance().saveToFile();
+                ArrayList<String> posts= user.getPostId();
+                posts.add(id);
+                JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
+                UserDatabaseManagement.getInstance().saveToFile();
+
+            }
+        });
+
 
         JButton backButton = new JButton();
         ImageIcon image3 = new ImageIcon("src/return.png");
