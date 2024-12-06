@@ -248,7 +248,7 @@ public class FreindListaftersearchGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Remove_freind.remove_freind(currnetus, user);
+                UserRelationsManager.remove_freind(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();
@@ -266,7 +266,7 @@ public class FreindListaftersearchGUI {
         block.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Block_freind.block_freind(currnetus, user);
+                UserRelationsManager.block_freind(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();
@@ -326,7 +326,7 @@ public class FreindListaftersearchGUI {
         accept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AcceptFreindRequest.accept_freind_req(currnetus, user);
+                UserRelationsManager.accept_freind_req(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "Accepted");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();
@@ -347,7 +347,7 @@ public class FreindListaftersearchGUI {
         decline.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                decline_freind_request.decline_freind_req(currnetus, user);
+                UserRelationsManager.decline_freind_req(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "declined");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();
@@ -448,7 +448,7 @@ public class FreindListaftersearchGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                AddFreind.add_freind(currnetus, user);
+                UserRelationsManager.add_freind(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();
@@ -470,7 +470,7 @@ public class FreindListaftersearchGUI {
             public void actionPerformed(ActionEvent e) {
 
 
-                Block_freind.block_freind(currnetus, user);
+                UserRelationsManager.block_freind(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "Blocked user");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();

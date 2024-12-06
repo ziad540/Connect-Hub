@@ -254,14 +254,14 @@ public class FreindGui {
 
                         break;
                     case 1:
-                        AcceptFreindRequest.accept_freind_req(currnetus, user);
+                        UserRelationsManager.accept_freind_req(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Accepted");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
 
                         break;
                     case 2:
-                        decline_freind_request.decline_freind_req(currnetus, user);
+                        UserRelationsManager.decline_freind_req(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "decline");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -301,14 +301,14 @@ public class FreindGui {
 
                         break;
                     case 1:
-                        AddFreind.add_freind(currnetus, user);
+                        UserRelationsManager.add_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
 
                         break;
                     case 2:
-                        Block_freind.block_freind(currnetus, user);
+                        UserRelationsManager.block_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Blocked user");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -350,14 +350,14 @@ public class FreindGui {
 
                         break;
                     case 1:
-                        Remove_freind.remove_freind(currnetus, user);
+                        UserRelationsManager.remove_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
 
                         break;
                     case 2:
-                        Block_freind.block_freind(currnetus, user);
+                        UserRelationsManager.block_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
