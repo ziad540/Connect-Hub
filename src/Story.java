@@ -14,7 +14,16 @@ public class Story extends Content implements Expire{
             Duration duration = Duration.between(getTimestamp(), LocalDateTime.now());
             return (duration.toHours() >= 24);
         }
-        public Story()
+
+    public Boolean getExpired() {
+        return expired;
+    }
+
+    public void setExpired(Boolean expired) {
+        this.expired = expired;
+    }
+
+    public Story()
         {}
 
 }
