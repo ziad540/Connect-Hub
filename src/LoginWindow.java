@@ -48,6 +48,8 @@ public class LoginWindow extends JFrame {
                         emailIsExist = true;
                         if (orignalPassword.equals(CheckPasswordHashed)) {
                              User user = u.getUsers().get(i);
+                             user.setStatus("online");
+                             u.saveToFile();
                             new NewsFeedgui(user);
                             dispose();
                             setVisible(false);
