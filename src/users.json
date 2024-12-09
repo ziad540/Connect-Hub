@@ -46,7 +46,6 @@
       "coverPicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [
-      "1003",
       "1001"
     ],
     "postId": [
@@ -64,7 +63,7 @@
     "userId": "1003",
     "email": "j@gmail.com",
     "userName": "aass",
-    "status": "offline",
+    "status": "online",
     "dateOfBirth": [
       2024,
       12,
@@ -76,9 +75,7 @@
       "profilePicPath": "src/Image/unknown cover.png",
       "coverPicPath": "src/Image/unknown cover.png"
     },
-    "firndesId": [
-      "1002"
-    ],
+    "firndesId": [],
     "postId": [
       "10",
       "12",
@@ -87,9 +84,7 @@
       "16",
       "17"
     ],
-    "storiesId": [
-      "9"
-    ],
+    "storiesId": [],
     "freindrequestId": [],
     "sentfreindrequestId": [],
     "blockedID": [],
@@ -115,9 +110,7 @@
     "postId": [
       "11"
     ],
-    "storiesId": [
-      "6"
-    ],
+    "storiesId": [],
     "freindrequestId": [],
     "sentfreindrequestId": [],
     "blockedID": [],
