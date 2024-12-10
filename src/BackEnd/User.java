@@ -51,7 +51,7 @@ public class User {
         return postId;
     }
 
-    private void setPostId(ArrayList<String> postId) {
+    public void setPostId(ArrayList<String> postId) {
         this.postId = postId;
     }
 
@@ -149,4 +149,5 @@ public class User {
     public void setProfileInformation(ProfileInformation profileInformation) {
         this.profileInformation = profileInformation;
     }
+
 }

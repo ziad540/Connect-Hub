@@ -96,7 +96,7 @@ public class FreindGui {
 
 
                 if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "no user found");
+                    JOptionPane.showMessageDialog(frame, "no currentuser found");
                     return;
                 } else {
                     frame.setVisible(false);
@@ -285,7 +285,7 @@ public class FreindGui {
                         break;
                     case 2:
                         UserRelationsManager.block_freind(currnetus, user);
-                        JOptionPane.showMessageDialog(postPanel, "Blocked user");
+                        JOptionPane.showMessageDialog(postPanel, "Blocked currentuser");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
                         break;

@@ -18,6 +18,8 @@ public class StoriesGui {
 
 
     public StoriesGui(User user, JFrame frame) {
+        StoryDatabaseManagement.getInstance().loadStoriesFromFile();
+        UserDatabaseManagement.getInstance().loadUsersFromFile();
 
         GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
         freinds = getFreinds.get();
@@ -40,7 +42,7 @@ public class StoriesGui {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
-        JLabel titleLabel = new JLabel("BackEnd.Story", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Story", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
@@ -56,7 +58,7 @@ public class StoriesGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddStoryGui(user, frame2);
-                frame2.dispose();
+                frame2.setVisible(false);
             }
         });
         topPanel.add(addStoryButton, BorderLayout.EAST);
@@ -96,6 +98,7 @@ public class StoriesGui {
 
                 contentPanel.revalidate();
                 contentPanel.repaint();
+                StoryDatabaseManagement.getInstance().loadStoriesFromFile();
 
             }
         });

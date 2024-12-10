@@ -94,7 +94,7 @@ public class SignUpWindow extends JFrame {
                 } else if (!(ConfirmPassword.equals(Password))) {
                     JOptionPane.showMessageDialog(dateWindow, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    // add new user to arraylist and write it in file
+                    // add new currentuser to arraylist and write it in file
                     localDate = selectedDate.toInstant()
                             .atZone(java.time.ZoneId.systemDefault())
                             .toLocalDate();

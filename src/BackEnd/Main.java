@@ -1,11 +1,11 @@
 package BackEnd;
 
-import FrontEnd.StartWindow;
+import FrontEnd.*;
 
 public class Main {
 
     public static void main(String[] args)  {
-       new StartWindow();
+       StartWindow start = new StartWindow();
       //new FrontEnd.FreindGui(new BackEnd.User(),new JFrame());
         //new FrontEnd.AddStoryGui();
         //new FrontEnd.FreindListaftersearchGUI();

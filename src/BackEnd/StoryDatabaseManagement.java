@@ -30,7 +30,7 @@ public class StoryDatabaseManagement {
         return instance;
     }
 
-    private void loadStoriesFromFile() {
+    public void loadStoriesFromFile() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 
@@ -38,7 +38,6 @@ public class StoryDatabaseManagement {
             stories = objectMapper.readValue(new File("src/stories.json"), new TypeReference<ArrayList<Story>>() {});
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
         setStoryStatus();
         saveToFile();

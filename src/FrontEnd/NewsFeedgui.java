@@ -20,14 +20,15 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
-    User currentus = null;
+    User currentuser = new User();
+    String currentUserId = null;
 
+    Search search = new Search();
 
-
-    NewsFeedgui(User user) {
-        currentus=user;
-
-        GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
+    NewsFeedgui(String userId) {
+        currentuser = search.getUser(userId);
+        currentUserId = userId;
+        GetFreinds getFreinds = new GetFreinds(currentuser.getFirndesId());
         friends = getFreinds.get();
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
@@ -59,7 +60,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new Addpostgui(user, frame);
+                new Addpostgui(currentuser, frame);
                 frame.setVisible(false);
 
 
@@ -129,7 +130,7 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(frame, user);
+                new Profile(frame, currentuser);
                 frame.setVisible(false);
             }
         });
@@ -146,7 +147,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new StoriesGui(user, frame);
+                new StoriesGui(currentuser, frame);
                 frame.setVisible(false);
 
             }
@@ -164,7 +165,7 @@ public class NewsFeedgui {
             @Override
 
             public void actionPerformed(ActionEvent e) {
-                user.setStatus("offline");
+                search.getUser(userId).setStatus("offline");
                 userDatabaseManagement.saveToFile();
                 new StartWindow();
                 frame.dispose();
@@ -183,7 +184,7 @@ public class NewsFeedgui {
         freind.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FreindGui(user,frame);
+                new FreindGui(currentuser,frame);
                 frame.setVisible(false);
 
             }
@@ -274,13 +275,13 @@ public class NewsFeedgui {
                         FriendProfile friendProfile = new FriendProfile(frame, friend);
                         break;
                     case 1:
-                       UserRelationsManager.remove_freind(currentus, friend);
+                       UserRelationsManager.remove_freind(currentuser, friend);
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
                         break;
                     case 2:
-                      UserRelationsManager.block_freind(currentus, friend);
+                      UserRelationsManager.block_freind(currentuser, friend);
                         JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -322,7 +323,10 @@ else
     }
 
     public void Refresh() {
-        GetFreinds getFreinds2 = new GetFreinds(currentus.getFirndesId());
+        postDatabaseManagement.loadPostsFromFile();
+        userDatabaseManagement.loadUsersFromFile();
+        currentuser = search.getUser(currentUserId);
+        GetFreinds getFreinds2 = new GetFreinds(currentuser.getFirndesId());
         friends = getFreinds2.get();
         GetPosts getPosts2 = new GetPosts();
         posts = getPosts2.data(friends);

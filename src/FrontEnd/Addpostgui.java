@@ -101,17 +101,17 @@ public class Addpostgui {
         addstoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                ArrayList<Post> allposts = PostDatabaseManagement.getInstance().getPosts();
                 String id = String.valueOf(uniqueId.loadCOUNTERPOSTID());
                 Post newpopst = new Post(id, user.getUserId(), textArea.getText(), pathimage);
-                allposts.add(newpopst);
+                PostDatabaseManagement.getInstance().addPost(newpopst);
                 PostDatabaseManagement.getInstance().saveToFile();
                 ArrayList<String> posts = user.getPostId();
                 posts.add(id);
-                JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
+                user.setPostId(posts);
                 UserDatabaseManagement.getInstance().saveToFile();
-
+                JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+                frame2.setVisible(true);
             }
         });
 

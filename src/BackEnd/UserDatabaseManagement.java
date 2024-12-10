@@ -30,15 +30,12 @@ public class UserDatabaseManagement {
         return instance;
     }
 
-    private void loadUsersFromFile() {
+    public void loadUsersFromFile() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 
         try {
              users = objectMapper.readValue(new File("src/users.json"), new TypeReference<ArrayList<User>>() {});
-
-
-
 
         } catch (Exception e) {
             e.printStackTrace();

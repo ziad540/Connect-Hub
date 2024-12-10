@@ -14,7 +14,7 @@ public class PostDatabaseManagement {
 
     private PostDatabaseManagement(){
         posts = new ArrayList<>();
-        loadStoriesFromFile();
+        loadPostsFromFile();
 
     }
 
@@ -29,7 +29,7 @@ public class PostDatabaseManagement {
         return instance;
     }
 
-    private void loadStoriesFromFile() {
+    public void loadPostsFromFile() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 

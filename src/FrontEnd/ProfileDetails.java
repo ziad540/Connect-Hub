@@ -111,7 +111,7 @@ public class ProfileDetails extends JFrame{
         saveChangesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // save updated user to file
+                // save updated currentuser to file
                 user.setUserName(usernameDetails.getText());
                 user.setProfileInformation(tempProfile);
 
