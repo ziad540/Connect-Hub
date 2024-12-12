@@ -82,18 +82,18 @@ public class FreindGui {
                 }
 
                 searchProcessor search = new searchProcessor(new Allsearch());
-                ArrayList<User> allusers = search.searchforusers(name, currnetus);
+                ArrayList<User> allusers = search.searchforusers(name, userId);
 
 
                 search = new searchProcessor(new FreindsSearch());
-                ArrayList<User> myfreindssearch = search.searchforusers(name, currnetus);
+                ArrayList<User> myfreindssearch = search.searchforusers(name, userId);
 
 
                 search = new searchProcessor(new FreindRequestSearch());
-                ArrayList<User> allrequests = search.searchforusers(name, currnetus);
+                ArrayList<User> allrequests = search.searchforusers(name, userId);
 
                 search = new searchProcessor(new sentFreindRequestssearch());
-                ArrayList<User> allsent = search.searchforusers(name, currnetus);
+                ArrayList<User> allsent = search.searchforusers(name, userId);
 
 
                 if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {
@@ -102,7 +102,6 @@ public class FreindGui {
                 } else {
                     frame.setVisible(false);
                     new FreindListaftersearchGUI(frame, userId, name);
-
                 }
 
 
@@ -138,7 +137,7 @@ public class FreindGui {
 
 
         for (User freind : friends) {
-            contentPanel.add(createPostPanel(freind));
+            contentPanel.add(createPostPanel(freind.getUserId()));
 
 
         }
@@ -307,7 +306,9 @@ public class FreindGui {
     }
 
 
-    private JPanel createPostPanel(User user) { //sohaby  remove block
+    private JPanel createPostPanel(String userID) { //sohaby  remove block
+        Search search = new Search();
+        User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -382,7 +383,7 @@ public class FreindGui {
         friends = search.getUsers(currnetus.getFirndesId());
         contentPanel.removeAll();
         for (User freind : friends) {
-            contentPanel.add(createPostPanel(freind));
+            contentPanel.add(createPostPanel(freind.getUserId()));
 
         }
 

@@ -6,10 +6,12 @@ public class sentFreindRequestssearch implements SearchStrategy{
     @Override
 
 
-    public ArrayList<User> searchforusers(String name, User U)
+    public ArrayList<User> searchforusers(String name, String ID)
 
 
     {
+        Search search = new Search();
+        User U = search.getUser(ID);
         ArrayList<User> Data=new ArrayList<>();
         GetFreinds getFreinds=new GetFreinds(U.getSentfreindrequestId());
         ArrayList<User> requests =getFreinds.get();

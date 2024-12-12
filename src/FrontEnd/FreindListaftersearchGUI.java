@@ -22,23 +22,24 @@ public class FreindListaftersearchGUI {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
     FreindListaftersearchGUI(JFrame recentframe, String userID, String name) {
+        userDatabaseManagement.loadUsersFromFile();
         this.recentframe = recentframe;
         this.name = name;
         currnetus = search.getUser(userID);
         searchProcessor search = new searchProcessor(new Allsearch());
-        allusers = search.searchforusers(name, currnetus);
+        allusers = search.searchforusers(name, userID);
 
 
         search = new searchProcessor(new FreindsSearch());
-        myfreindssearch = search.searchforusers(name, currnetus);
+        myfreindssearch = search.searchforusers(name, userID);
 
 
         search = new searchProcessor(new FreindRequestSearch());
-        allrequests = search.searchforusers(name, currnetus);
+        allrequests = search.searchforusers(name, userID);
 
 
         search = new searchProcessor(new sentFreindRequestssearch());
-        allsent = search.searchforusers(name, currnetus);
+        allsent = search.searchforusers(name, userID);
 
 
         frame = new JFrame("Freind list");
@@ -166,20 +167,20 @@ public class FreindListaftersearchGUI {
 
     private void populatefreinds(JPanel panel) {
         for (User freind : myfreindssearch) {
-            panel.add(createfreindspanel(freind));
+            panel.add(createfreindspanel(freind.getUserId()));
         }
     }
 
     private void populatefreindrequests(JPanel panel) {
         for (User freind : allrequests) {
-            panel.add(createfreindrequestsspanel(freind));
+            panel.add(createfreindrequestsspanel(freind.getUserId()));
         }
     }
 
 
     private void populatesentfreindrequests(JPanel panel) {
         for (User freind : allsent) {
-            panel.add(createGoingtfreindrequestsoPanel(freind));
+            panel.add(createGoingtfreindrequestsoPanel(freind.getUserId()));
         }
 
 
@@ -188,13 +189,15 @@ public class FreindListaftersearchGUI {
     private void poulateAllusers(JPanel panel) {
 
         for (User freind : allusers) {
-            panel.add(createALLusersPanel(freind));
+            panel.add(createALLusersPanel(freind.getUserId()));
         }
 
     }
 
 
-    private JPanel createfreindspanel(User user) {  //sohaby view remove block
+    private JPanel createfreindspanel(String userID) {  //sohaby view remove block
+        Search search = new Search();
+        User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -285,7 +288,9 @@ else
     }
 
 
-    private JPanel createfreindrequestsspanel(User user) {  // accept or decline or view
+    private JPanel createfreindrequestsspanel(String userID) {  // accept or decline or view
+        Search search = new Search();
+        User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -367,7 +372,9 @@ else
     }
 
 
-    private JPanel createGoingtfreindrequestsoPanel(User user) {  // button 3aleh pendinggg
+    private JPanel createGoingtfreindrequestsoPanel(String userID) {  // button 3aleh pendinggg
+        Search search = new Search();
+        User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -408,7 +415,9 @@ else
     }
 
 
-    private JPanel createALLusersPanel(User user) {  // add block view
+    private JPanel createALLusersPanel(String userID) {  // add block view
+        Search search = new Search();
+        User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.X_AXIS));
         postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -456,8 +465,6 @@ else
                 JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                 UserDatabaseManagement.getInstance().saveToFile();
                 Refresh();
-
-
             }
         });
 
@@ -491,21 +498,22 @@ else
     public void Refresh() {
         userDatabaseManagement.loadUsersFromFile();
         currnetus = search.getUser(currnetus.getUserId());
+        System.out.println(currnetus.getSentfreindrequestId());
         contentPanel.removeAll();
         searchProcessor search = new searchProcessor(new Allsearch());
-        allusers = search.searchforusers(name, currnetus);
+        allusers = search.searchforusers(name, currnetus.getUserId());
 
 
         search = new searchProcessor(new FreindsSearch());
-        myfreindssearch = search.searchforusers(name, currnetus);
+        myfreindssearch = search.searchforusers(name, currnetus.getUserId());
 
 
         search = new searchProcessor(new FreindRequestSearch());
-        allrequests = search.searchforusers(name, currnetus);
+        allrequests = search.searchforusers(name, currnetus.getUserId());
 
 
         search = new searchProcessor(new sentFreindRequestssearch());
-        allsent = search.searchforusers(name, currnetus);
+        allsent = search.searchforusers(name, currnetus.getUserId());
 
 
         if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {

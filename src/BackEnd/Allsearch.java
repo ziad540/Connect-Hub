@@ -5,13 +5,15 @@ import java.util.ArrayList;
 public class Allsearch implements SearchStrategy
 {  //bydawar fe kolo
     @Override
-    public ArrayList<User> searchforusers(String name, User U)
+    public ArrayList<User> searchforusers(String name, String ID)
 
             // el ba2y men sohabak
 
     {
-
-        ArrayList<User> all=UserDatabaseManagement.getInstance().getUsers();
+        UserDatabaseManagement.getInstance().loadUsersFromFile();
+        Search search = new Search();
+        User U = search.getUser(ID);
+        ArrayList<User> all= UserDatabaseManagement.getInstance().getUsers();
         ArrayList<User> Data=new ArrayList<>();
 
 

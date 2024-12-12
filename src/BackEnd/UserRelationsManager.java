@@ -22,7 +22,7 @@ public class UserRelationsManager {
         ArrayList<String> ids = blocker.getBlockedID();
         ids.add(blocked.getUserId());
         ids = blocked.getBlockedfromID();
-        ids.add(blocker.getUserId());
+        ids.add(blocked.getUserId());
     }
 
     /**
