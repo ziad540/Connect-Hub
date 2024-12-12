@@ -1,19 +1,21 @@
 package BackEnd;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Search {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
-    public User getUser(String userId){
-        for (int i=0;i<userDatabaseManagement.getUsers().size();i++)
-        {
-            if (userId.equals(userDatabaseManagement.getUsers().get(i).getUserId()))
-            {
+    MemberShipDataBase memberShipDataBase = MemberShipDataBase.getInstance();
+
+    public User getUser(String userId) {
+        for (int i = 0; i < userDatabaseManagement.getUsers().size(); i++) {
+            if (userId.equals(userDatabaseManagement.getUsers().get(i).getUserId())) {
                 return userDatabaseManagement.getUsers().get(i);
             }
         }
         return null;
     }
+
     public ArrayList<User> getUsers(ArrayList<String> userIds) {
         ArrayList<User> users = new ArrayList<>();
         for (int i = 0; i < userIds.size(); i++) {
@@ -25,4 +27,33 @@ public class Search {
         }
         return users;
     }
+
+    public ArrayList<MemberShip> getMemberShips(String groupId) {
+        ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
+        ArrayList<MemberShip> memberShipList = new ArrayList<>();
+        Groups group = null;
+        for (Groups g : groups) {
+            if (g.getGroupId().equals(groupId)) {
+                group = g;
+                break;
+            }
+        }
+        if (group != null) {
+            ArrayList<String> memberShips = group.getMemberShipId();
+
+            for (int i = 0; i < memberShips.size(); i++) {
+                for (int j = 0; j < memberShipDataBase.getMemberShips().size(); j++) {
+                    if (memberShips.get(i).equals(memberShipDataBase.getMemberShips().get(j))) {
+                        memberShipList.add(memberShipDataBase.getMemberShips().get(j));
+                    }
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No such group", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        return memberShipList;
+    }
+
 }
