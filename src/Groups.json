@@ -7,7 +7,8 @@
     "groupPhoto": "photoUrl1.png",
     "memberShipId": [
       "M2"
-    ]
+    ],
+    "pendingRequestId": []
   },
   {
     "groupName": "Book Club",
@@ -18,7 +19,8 @@
     "memberShipId": [
       "M2",
       "M1"
-    ]
+    ],
+    "pendingRequestId": []
   },
   {
     "groupName": "Fitness Fans",
@@ -28,6 +30,7 @@
     "groupPhoto": "photoUrl3.png",
     "memberShipId": [
       "M3"
-    ]
+    ],
+    "pendingRequestId": []
   }
 ]

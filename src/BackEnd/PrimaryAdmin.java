@@ -3,7 +3,7 @@ package BackEnd;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class PrimaryAdmin extends GroupManagement implements PostManagement, MembershipManagement, AdminManagement {
+public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
 
     @Override
     public void RemoveMember(String memberID, String groupID) {
@@ -141,12 +141,52 @@ public class PrimaryAdmin extends GroupManagement implements PostManagement, Mem
 
     @Override
     public void ApproveMembershipRequests(String groupId, String memberId) {
-
+        ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
+        Groups group = null;
+        for (Groups g : groups) {
+            if (g.getGroupId().equals(groupId)) {
+                group = g;
+                break;
+            }
+        }
+        if (group != null) {
+            ArrayList<String> pendingId = group.getPendingRequestId();
+            if (pendingId.contains(memberId)) {
+                pendingId.remove(memberId);
+                ArrayList<String> memberShipId = group.getMemberShipId();
+                memberShipId.add(memberId);
+                MemberShipDataBase.getInstance().saveToFile();
+                GroupDataBase.getInstance().saveToFile();
+            } else {
+                JOptionPane.showMessageDialog(null, "Member does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
     public void DeclineMembershipRequests(String groupId, String memberId) {
-
+        ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
+        Groups group = null;
+        for (Groups g : groups) {
+            if (g.getGroupId().equals(groupId)) {
+                group = g;
+                break;
+            }
+        }
+        if (group != null) {
+            ArrayList<String> pendingId = group.getPendingRequestId();
+            if (pendingId.contains(memberId)) {
+                pendingId.remove(memberId);
+                MemberShipDataBase.getInstance().saveToFile();
+                GroupDataBase.getInstance().saveToFile();
+            } else {
+                JOptionPane.showMessageDialog(null, "Member does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override

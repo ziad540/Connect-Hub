@@ -3,55 +3,7 @@ package BackEnd;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public abstract class MemberShip implements AddPost {
-    String memberShipID;
-    String userID;
-    String status;
-    ArrayList<String> postId;
-
-    public MemberShip() {
-    }
-
-    public MemberShip(String userID, String status) {
-        this.memberShipID = String.valueOf('M' + uniqueId.loadcounterMemberShipID());
-        this.userID = userID;
-        this.status = status;
-    }
-
-    /**
-     * Getter and setter
-     */
-    public String getMemberShipID() {
-        return memberShipID;
-    }
-
-    public void setMemberShipID(String memberShipID) {
-        this.memberShipID = memberShipID;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public ArrayList<String> getPostId() {
-        return postId;
-    }
-
-    public void setPostId(ArrayList<String> postId) {
-        this.postId = postId;
-    }
+public class Member extends MemberShip implements MemberOperation {
 
     @Override
     public void AddPosts(String groupId, String postId, String memberID) {
@@ -85,6 +37,26 @@ public abstract class MemberShip implements AddPost {
             } else {
                 JOptionPane.showMessageDialog(null, "Member does not exist", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void LeaveGroup(String groupId) {
+        ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
+        Groups group = null;
+        for (Groups g : groups) {
+            if (g.getGroupId().equals(groupId)) {
+                group = g;
+                break;
+            }
+        }
+        if (group != null) {
+            ArrayList<String> memberID = group.getMemberShipId();
+            memberID.remove(this.memberShipID);
+            GroupDataBase.getInstance().saveToFile();
+            MemberShipDataBase.getInstance().saveToFile();
         } else {
             JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
         }

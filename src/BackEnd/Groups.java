@@ -9,6 +9,7 @@ public class Groups {
     private String groupId;
     private String groupPhoto;
     private ArrayList<String> memberShipId;
+    private ArrayList<String> pendingRequestId;
 
     public Groups() {
 
@@ -71,5 +72,13 @@ public class Groups {
 
     public void setMemberShipId(ArrayList<String> memberShipId) {
         this.memberShipId = memberShipId;
+    }
+
+    public ArrayList<String> getPendingRequestId() {
+        return pendingRequestId;
+    }
+
+    public void setPendingRequestId(ArrayList<String> pendingRequestId) {
+        this.pendingRequestId = pendingRequestId;
     }
 }

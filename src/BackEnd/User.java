@@ -18,6 +18,7 @@ public class User {
     private ArrayList<String> sentfreindrequestId = new ArrayList<>(); //ely ana ba3thom
     private ArrayList<String> blockedID = new ArrayList<>(); //ely ana 3amlehom
     private ArrayList<String> blockedfromID = new ArrayList<>();// elyma3molymenhom
+
     private UserRelationsManager relationsManage = new UserRelationsManager();
 
     public ArrayList<String> getSentfreindrequestId() {
