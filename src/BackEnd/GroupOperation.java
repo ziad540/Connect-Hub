@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class GroupOperation {
     Search search = new Search();
+
     public ArrayList<String> getPostId(String groupId) {
         ArrayList<MemberShip> memberShipList = search.getMemberShips(groupId);
         ArrayList<String> postId = new ArrayList<>();
@@ -13,5 +14,9 @@ public class GroupOperation {
             }
         }
         return postId;
+    }
+
+    public ArrayList<Groups> getGroups(ArrayList<String> groupsId) {
+        return search.getGroups(groupsId);
     }
 }

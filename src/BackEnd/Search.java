@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Search {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     MemberShipDataBase memberShipDataBase = MemberShipDataBase.getInstance();
+    GroupDataBase groupDataBase = GroupDataBase.getInstance();
 
     public User getUser(String userId) {
         for (int i = 0; i < userDatabaseManagement.getUsers().size(); i++) {
@@ -56,4 +57,15 @@ public class Search {
         return memberShipList;
     }
 
+    public ArrayList<Groups> getGroups(ArrayList<String> groupIds) {
+        ArrayList<Groups> groups = new ArrayList<>();
+        for (int i = 0; i < groupIds.size(); i++) {
+            for (int j = 0; j < groupDataBase.getGroups().size(); j++) {
+                if (groupIds.get(i).equals(groupDataBase.getGroups().get(j))) {
+                    groups.add(groupDataBase.getGroups().get(j));
+                }
+            }
+        }
+        return groups;
+    }
 }

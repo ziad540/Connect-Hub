@@ -18,7 +18,7 @@ public class User {
     private ArrayList<String> sentfreindrequestId = new ArrayList<>(); //ely ana ba3thom
     private ArrayList<String> blockedID = new ArrayList<>(); //ely ana 3amlehom
     private ArrayList<String> blockedfromID = new ArrayList<>();// elyma3molymenhom
-
+    private ArrayList<String> groupId = new ArrayList<>();
     private UserRelationsManager relationsManage = new UserRelationsManager();
 
     public ArrayList<String> getSentfreindrequestId() {
@@ -141,6 +141,22 @@ public class User {
 
     public void setHashingPassword(String hashingPassword) {
         this.hashingPassword = hashingPassword;
+    }
+
+    public UserRelationsManager getRelationsManage() {
+        return relationsManage;
+    }
+
+    public void setRelationsManage(UserRelationsManager relationsManage) {
+        this.relationsManage = relationsManage;
+    }
+
+    public ArrayList<String> getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(ArrayList<String> groupId) {
+        this.groupId = groupId;
     }
 
     public ProfileInformation getProfileInformation() {

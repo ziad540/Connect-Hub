@@ -33,6 +33,10 @@
     ],
     "blockedfromID": [
       "1002"
+    ],
+    "groupId": [
+      "G1",
+      "G2"
     ]
   },
   {
@@ -67,6 +71,10 @@
     ],
     "blockedfromID": [
       "1001"
+    ],
+    "groupId": [
+      "G1",
+      "G2"
     ]
   },
   {
@@ -101,7 +109,11 @@
     "freindrequestId": [],
     "sentfreindrequestId": [],
     "blockedID": [],
-    "blockedfromID": []
+    "blockedfromID": [],
+    "groupId": [
+      "G1",
+      "G2"
+    ]
   },
   {
     "userId": "1004",
@@ -127,6 +139,9 @@
     "freindrequestId": [],
     "sentfreindrequestId": [],
     "blockedID": [],
-    "blockedfromID": []
+    "blockedfromID": [],
+    "groupId": [
+      "G1"
+    ]
   }
 ]
