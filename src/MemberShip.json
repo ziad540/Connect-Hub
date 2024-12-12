@@ -1,0 +1,13 @@
+[
+  {
+    "memberShipID": "M2",
+    "userID": "1002",
+    "status": "Pending",
+    "postId": [
+      "1",
+      "2",
+      "4",
+      "4"
+    ]
+  }
+]

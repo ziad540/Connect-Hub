@@ -1,0 +1,75 @@
+package BackEnd;
+
+import java.util.ArrayList;
+
+public class Groups {
+    private String groupName;
+    private String groupDescription;
+    private String groupOwnerId;
+    private String groupId;
+    private String groupPhoto;
+    private ArrayList<String> memberShipId;
+
+    public Groups() {
+
+    }
+
+    public Groups(String groupName, String groupDescription, String groupOwnerId, String groupPhoto) {
+        groupId = String.valueOf('G' + uniqueId.loadcounterGroupsID());
+        this.groupName = groupName;
+        this.groupDescription = groupDescription;
+        this.groupOwnerId = groupOwnerId;
+        this.groupPhoto = groupPhoto;
+    }
+
+    /**
+     * Getter and setter
+     */
+    public String getGroupDescription() {
+        return groupDescription;
+    }
+
+    public void setGroupDescription(String groupDescription) {
+        this.groupDescription = groupDescription;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getGroupOwnerId() {
+        return groupOwnerId;
+    }
+
+    public void setGroupOwnerId(String groupOwnerId) {
+        this.groupOwnerId = groupOwnerId;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getGroupPhoto() {
+        return groupPhoto;
+    }
+
+    public void setGroupPhoto(String groupPhoto) {
+        this.groupPhoto = groupPhoto;
+    }
+
+    public ArrayList<String> getMemberShipId() {
+        return memberShipId;
+    }
+
+    public void setMemberShipId(ArrayList<String> memberShipId) {
+        this.memberShipId = memberShipId;
+    }
+}

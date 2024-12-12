@@ -12,22 +12,28 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "i love jobef and dodo and not nour",
-      "profilePicPath": "src/Image/unknown cover.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [
-      "1002"
+      "1003"
     ],
     "postId": [
       "1",
       "2",
       "13"
     ],
-    "storiesId": [],
+    "storiesId": [
+      "7"
+    ],
     "freindrequestId": [],
     "sentfreindrequestId": [],
-    "blockedID": [],
-    "blockedfromID": []
+    "blockedID": [
+      "1002"
+    ],
+    "blockedfromID": [
+      "1002"
+    ]
   },
   {
     "userId": "1002",
@@ -42,12 +48,11 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "profilePicPath": "src/Image/unknown cover.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [
-      "1003",
-      "1001"
+      "1003"
     ],
     "postId": [
       "4",
@@ -57,14 +62,18 @@
     "storiesId": [],
     "freindrequestId": [],
     "sentfreindrequestId": [],
-    "blockedID": [],
-    "blockedfromID": []
+    "blockedID": [
+      "1001"
+    ],
+    "blockedfromID": [
+      "1001"
+    ]
   },
   {
     "userId": "1003",
     "email": "j@gmail.com",
     "userName": "aass",
-    "status": "offline",
+    "status": "online",
     "dateOfBirth": [
       2024,
       12,
@@ -73,11 +82,12 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "profilePicPath": "src/Image/unknown cover.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [
-      "1002"
+      "1002",
+      "1001"
     ],
     "postId": [
       "10",
@@ -87,9 +97,7 @@
       "16",
       "17"
     ],
-    "storiesId": [
-      "9"
-    ],
+    "storiesId": [],
     "freindrequestId": [],
     "sentfreindrequestId": [],
     "blockedID": [],
@@ -108,16 +116,14 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "profilePicPath": "src/Image/unknown cover.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [],
     "postId": [
       "11"
     ],
-    "storiesId": [
-      "6"
-    ],
+    "storiesId": [],
     "freindrequestId": [],
     "sentfreindrequestId": [],
     "blockedID": [],
