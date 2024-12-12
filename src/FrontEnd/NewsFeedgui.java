@@ -327,8 +327,10 @@ else
     }
 
     public void Refresh() {
-        postDatabaseManagement.loadPostsFromFile();
         userDatabaseManagement.loadUsersFromFile();
+        StoryHandler storyHandler = new StoryHandler();
+        storyHandler.deleteExpiredStories();
+        postDatabaseManagement.loadPostsFromFile();
         currentuser = search.getUser(currentUserId);
         friends = search.getUsers(currentuser.getFirndesId());//(1)
         GetPosts getPosts2 = new GetPosts();

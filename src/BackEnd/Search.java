@@ -19,7 +19,7 @@ public class Search {
         ArrayList<User> users = new ArrayList<>();
         for (int i = 0; i < userIds.size(); i++) {
             for (int j = 0; j < userDatabaseManagement.getUsers().size(); j++) {
-                if (userIds.get(i).equals(userDatabaseManagement.getUsers().get(j))) {
+                if (userIds.get(i).equals(userDatabaseManagement.getUsers().get(j).getUserId())) {
                     users.add(userDatabaseManagement.getUsers().get(j));
                 }
             }

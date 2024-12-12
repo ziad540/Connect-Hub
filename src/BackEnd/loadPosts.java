@@ -41,8 +41,8 @@ public class loadPosts {
 
 
         }
-        //contentPanel.revalidate();
-        //contentPanel.repaint();
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
     public static void showMyPosts(JPanel contentPanel,UserDatabaseManagement userDatabaseManagement,ArrayList<Post> posts) {

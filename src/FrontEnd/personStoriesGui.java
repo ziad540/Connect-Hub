@@ -97,22 +97,17 @@ public class personStoriesGui {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
+                StoryDatabaseManagement.getInstance().loadStoriesFromFile();
+                UserDatabaseManagement.getInstance().loadUsersFromFile();
+                StoryHandler storyHandler = new StoryHandler();
+                storyHandler.deleteExpiredStories();
+                user = search.getUser(userID);
                 Getuserstories getstories2=new Getuserstories();
                 stories= getstories2.getuserstories(user);
-
-
-
                 contentPanel.removeAll();
-
                 loadStories.showStories(contentPanel, personStoriesGui.this, userDatabaseManagement, stories);
-
                 contentPanel.revalidate();
                 contentPanel.repaint();
-
-
-
             }
         });
 

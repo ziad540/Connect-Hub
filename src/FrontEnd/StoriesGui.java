@@ -84,6 +84,10 @@ public class StoriesGui {
         refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                StoryDatabaseManagement.getInstance().loadStoriesFromFile();
+                UserDatabaseManagement.getInstance().loadUsersFromFile();
+                StoryHandler storyHandler = new StoryHandler();
+                storyHandler.deleteExpiredStories();
                 GetFreinds getFreinds2 = new GetFreinds(user.getFirndesId());
                 freinds = getFreinds2.get();
 
@@ -97,7 +101,6 @@ public class StoriesGui {
 
                 contentPanel.revalidate();
                 contentPanel.repaint();
-                StoryDatabaseManagement.getInstance().loadStoriesFromFile();
 
             }
         });
