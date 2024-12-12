@@ -19,4 +19,8 @@ public class GroupOperation {
     public ArrayList<Groups> getGroups(ArrayList<String> groupsId) {
         return search.getGroups(groupsId);
     }
+    public ArrayList<Post> getObjPost(ArrayList<String> postId) {
+        return  search.getPosts(postId);
+    }
+
 }

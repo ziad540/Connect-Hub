@@ -7,6 +7,7 @@ public class Search {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     MemberShipDataBase memberShipDataBase = MemberShipDataBase.getInstance();
     GroupDataBase groupDataBase = GroupDataBase.getInstance();
+    PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
 
     public User getUser(String userId) {
         for (int i = 0; i < userDatabaseManagement.getUsers().size(); i++) {
@@ -28,6 +29,19 @@ public class Search {
         }
         return users;
     }
+
+    public ArrayList<Post> getPosts(ArrayList<String> postIds) {
+        ArrayList<Post> posts = new ArrayList<>();
+        for (int i = 0; i < postIds.size(); i++) {
+            for (int j = 0; j < postDatabaseManagement.getPosts().size(); j++) {
+                if (postIds.get(i).equals(postDatabaseManagement.getPosts().get(j).getContentId())) {
+                    posts.add(postDatabaseManagement.getPosts().get(j));
+                }
+            }
+        }
+        return posts;
+    }
+
 
     public ArrayList<MemberShip> getMemberShips(String groupId) {
         ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
