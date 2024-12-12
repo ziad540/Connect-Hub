@@ -20,6 +20,21 @@ public class User {
     private ArrayList<String> blockedfromID = new ArrayList<>();// elyma3molymenhom
     private UserRelationsManager relationsManage = new UserRelationsManager();
 
+
+    public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
+        this.userId = String.valueOf(1000 + uniqueId.loadCounterId());
+        this.email = email;
+        this.userName = userName;
+        this.status = status;
+        this.dateOfBirth = dateOfBirth;
+        profileInformation = new ProfileInformation("src/Image/unknown user.png", "src/Image/unknown cover.png", "");
+        hashingPassword = passwordHashing.hashpassword(password);// hashing Password by class BackEnd.passwordHashing
+
+    }
+
+    public User() {
+    }
+
     public ArrayList<String> getSentfreindrequestId() {
         return relationsManage.getSentfreindrequestId();
     }
@@ -36,9 +51,6 @@ public class User {
         relationsManage.setBlockedID(blockedfromID);
     }
 
-    public User() {
-    }
-
     public ArrayList<String> getFirndesId() {
         return firndesId;
     }
@@ -53,17 +65,6 @@ public class User {
 
     public void setPostId(ArrayList<String> postId) {
         this.postId = postId;
-    }
-
-    public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId = String.valueOf(1000 + uniqueId.loadCounterId());
-        this.email = email;
-        this.userName = userName;
-        this.status = status;
-        this.dateOfBirth = dateOfBirth;
-        profileInformation = new ProfileInformation("Image/unknown user.png", "Image/unknown cover.png", "");
-        hashingPassword = passwordHashing.hashpassword(password);// hashing Password by class BackEnd.passwordHashing
-
     }
 
     public void setUserId(String userId) {

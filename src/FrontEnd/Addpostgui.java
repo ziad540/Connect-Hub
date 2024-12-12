@@ -13,8 +13,10 @@ import java.util.ArrayList;
 public class Addpostgui {
     private ImageIcon lastimage = null;
     private String pathimage = null; // store the path of image
-
-    Addpostgui(User user, JFrame frame2) {
+    Search search = new Search();
+    User user;
+    Addpostgui(String userID, JFrame frame2) {
+        user = search.getUser(userID);
         JFrame frame = new JFrame("NewsFeed"); //new frame to Add post
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,7 +25,7 @@ public class Addpostgui {
         frame.setLocationRelativeTo(null);
 
 
-        // Top Panel Contains the title label "Add BackEnd.Post"
+        // Top Panel Contains the title label "Add Post"
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(102, 205, 170));
         topPanel.setPreferredSize(new Dimension(400, 60));

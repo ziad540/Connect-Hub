@@ -37,7 +37,6 @@ public class PostDatabaseManagement {
             posts = objectMapper.readValue(new File("src/posts.json"), new TypeReference<ArrayList<Post>>() {});
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

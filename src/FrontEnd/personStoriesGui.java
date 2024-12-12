@@ -18,13 +18,16 @@ public class personStoriesGui {
     ArrayList<Story> stories;
     User current=null;
     JFrame recentframe=null;
+    Search search = new Search();
+    User user;
 
 
 /////////////storihat sahbak
 ///
 ///  EL USER ELY HENA D2A SHABAK
-    personStoriesGui(User user, JFrame recentf) {
-recentframe=recentf;
+    personStoriesGui(String userID, JFrame recentf) {
+        user = search.getUser(userID);
+        recentframe=recentf;
         Getuserstories getstories=new Getuserstories();
        stories= getstories.getuserstories(user);
 
@@ -43,25 +46,25 @@ recentframe=recentf;
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
 
-        JButton addPostButton = new JButton();
-        ImageIcon image = new ImageIcon("src/Image/new-post (2).png");
-        addPostButton.setContentAreaFilled(false);
-
-        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
-
-        addPostButton.setPreferredSize(new Dimension(50, 50));
-        addPostButton.setIcon(image);
-        addPostButton.setBorderPainted(false);
-        addPostButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                new Addpostgui(user, frame);
-                frame.setVisible(false);
-
-
-            }
-        });
+//        JButton addPostButton = new JButton();
+//        ImageIcon image = new ImageIcon("src/Image/new-post (2).png");
+//        addPostButton.setContentAreaFilled(false);
+//
+//        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
+//
+//        addPostButton.setPreferredSize(new Dimension(50, 50));
+//        addPostButton.setIcon(image);
+//        addPostButton.setBorderPainted(false);
+//        addPostButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                new Addpostgui(user, frame);
+//                frame.setVisible(false);
+//
+//
+//            }
+//        });
         //topPanel.add(addPostButton, BorderLayout.EAST);
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/Image/refresh.png");
@@ -124,40 +127,40 @@ recentframe=recentf;
         bottomPanel.setBackground(new Color(240, 255, 255));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
 
-        JButton profile = createIconButton("src/Image/user.png");
+//        JButton profile = createIconButton("src/Image/user.png");
+//
+//        ImageIcon image3 = new ImageIcon("src/Image/user.png");
+//        profile.setContentAreaFilled(false);
+//
+//
+//        profile.setPreferredSize(new Dimension(50, 50));
+//        profile.setIcon(image3);
+//        profile.setBorderPainted(false);
+//        profile.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                new Profile(frame, user);
+//
+//                frame.setVisible(false);
+//            }
+//        });
 
-        ImageIcon image3 = new ImageIcon("src/Image/user.png");
-        profile.setContentAreaFilled(false);
 
-
-        profile.setPreferredSize(new Dimension(50, 50));
-        profile.setIcon(image3);
-        profile.setBorderPainted(false);
-        profile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Profile(frame, user);
-
-                frame.setVisible(false);
-            }
-        });
-
-
-        JButton stories = new JButton();
-        ImageIcon image4 = new ImageIcon("src/Image/story.png");
-        stories.setContentAreaFilled(false);
-
-        stories.setPreferredSize(new Dimension(50, 50));
-        stories.setIcon(image4);
-        stories.setBorderPainted(false);
-        stories.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new StoriesGui(user, frame);
-                frame.setVisible(false);
-
-            }
-        });
+//        JButton stories = new JButton();
+//        ImageIcon image4 = new ImageIcon("src/Image/story.png");
+//        stories.setContentAreaFilled(false);
+//
+//        stories.setPreferredSize(new Dimension(50, 50));
+//        stories.setIcon(image4);
+//        stories.setBorderPainted(false);
+//        stories.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                new StoriesGui(user, frame);
+//                frame.setVisible(false);
+//
+//            }
+//        });
 
 
         JButton back = new JButton();

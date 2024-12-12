@@ -38,7 +38,6 @@ public class UserDatabaseManagement {
              users = objectMapper.readValue(new File("src/users.json"), new TypeReference<ArrayList<User>>() {});
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

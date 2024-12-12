@@ -15,15 +15,14 @@ public class StoriesGui {
     ArrayList<User> freindsstories;
     ArrayList<User> freinds;
     JFrame frame2;
+    Search search = new Search();
+    User user;
 
-
-    public StoriesGui(User user, JFrame frame) {
+    public StoriesGui(String userID, JFrame frame) {
         StoryDatabaseManagement.getInstance().loadStoriesFromFile();
         UserDatabaseManagement.getInstance().loadUsersFromFile();
-
-        GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
-        freinds = getFreinds.get();
-
+        user = search.getUser(userID);
+        freinds = search.getUsers(user.getFirndesId());
         Storylistoffreinds st = new Storylistoffreinds();
         freindsstories = st.getlist(freinds);
 
@@ -93,7 +92,7 @@ public class StoriesGui {
 
                 contentPanel.removeAll();
                 for (int i = 0; i < freindsstories.size(); i++) {
-                    contentPanel.add(createStoryPanel(freindsstories.get(i)));
+                    contentPanel.add(createStoryPanel(freindsstories.get(i).getUserId()));
                 }
 
                 contentPanel.revalidate();
@@ -105,7 +104,7 @@ public class StoriesGui {
 
         for (int i = 0; i < freindsstories.size(); i++) {
 
-            contentPanel.add(createStoryPanel(freindsstories.get(i)));
+            contentPanel.add(createStoryPanel(freindsstories.get(i).getUserId()));
         }
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
@@ -142,15 +141,16 @@ public class StoriesGui {
 
     }
 
-    private JPanel createStoryPanel(User user) {
+    private JPanel createStoryPanel(String friendID) {
+        User currentuser = search.getUser(friendID);
         JPanel storyPanel = new JPanel();
         storyPanel.setLayout(new BoxLayout(storyPanel, BoxLayout.X_AXIS));
         storyPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         storyPanel.setBackground(Color.WHITE);
 
-        JLabel userInfo = new JLabel(user.getUserName());
+        JLabel userInfo = new JLabel(currentuser.getUserName());
 
-        ImageIcon originalIcon2 = new ImageIcon(user.getProfileInformation().getProfilePicPath());
+        ImageIcon originalIcon2 = new ImageIcon(currentuser.getProfileInformation().getProfilePicPath());
         Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
 
@@ -165,14 +165,14 @@ public class StoriesGui {
             @Override
             public void mouseClicked(MouseEvent e) {
                 frame2.setVisible(false);
-                personStoriesGui person = new personStoriesGui(user, frame2);
+                personStoriesGui person = new personStoriesGui(friendID, frame2);
 
 
             }
         });
 
 
-        if (user.getStatus().equals("online")) {
+        if (currentuser.getStatus().equals("online")) {
             ImageIcon originalIcon = new ImageIcon("src/Image/button (1).png");
             Image scaledImage = originalIcon.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
             JLabel statusLabel = new JLabel(new ImageIcon(scaledImage));

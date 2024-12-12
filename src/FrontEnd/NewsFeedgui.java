@@ -22,14 +22,12 @@ public class NewsFeedgui {
     ArrayList<Post> posts;
     User currentuser = new User();
     String currentUserId = null;
-
     Search search = new Search();
 
     NewsFeedgui(String userId) {
-        currentuser = search.getUser(userId);
         currentUserId = userId;
-        GetFreinds getFreinds = new GetFreinds(currentuser.getFirndesId());
-        friends = getFreinds.get();
+        currentuser = search.getUser(userId);
+        friends = search.getUsers(currentuser.getFirndesId());//(1)
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
 
@@ -60,7 +58,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new Addpostgui(currentuser, frame);
+                new Addpostgui(currentUserId,frame);//(5)
                 frame.setVisible(false);
 
 
@@ -130,7 +128,7 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(frame, currentuser);
+                new Profile(frame, currentUserId);//(2)
                 frame.setVisible(false);
             }
         });
@@ -147,7 +145,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new StoriesGui(currentuser, frame);
+                new StoriesGui(currentUserId, frame);//(3)
                 frame.setVisible(false);
 
             }
@@ -184,7 +182,7 @@ public class NewsFeedgui {
         freind.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FreindGui(currentuser,frame);
+                new FreindGui(currentUserId,frame);//(4)
                 frame.setVisible(false);
 
             }
@@ -202,6 +200,12 @@ public class NewsFeedgui {
 
 
         frame.setVisible(true);
+
+//        contentPanel.revalidate();
+//        contentPanel.repaint();
+//        contentPanel2.revalidate();
+//        contentPanel2.repaint();
+
     }
 
 
@@ -326,8 +330,7 @@ else
         postDatabaseManagement.loadPostsFromFile();
         userDatabaseManagement.loadUsersFromFile();
         currentuser = search.getUser(currentUserId);
-        GetFreinds getFreinds2 = new GetFreinds(currentuser.getFirndesId());
-        friends = getFreinds2.get();
+        friends = search.getUsers(currentuser.getFirndesId());//(1)
         GetPosts getPosts2 = new GetPosts();
         posts = getPosts2.data(friends);
 

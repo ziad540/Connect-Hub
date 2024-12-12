@@ -101,7 +101,7 @@ public class SignUpWindow extends JFrame {
                     User newUser = new User(Email, Username, Password, "online", localDate);
                     userDatabaseManagement.addUser(newUser);
                     userDatabaseManagement.saveToFile();
-                    JOptionPane.showMessageDialog(signUpWindow, "BackEnd.User successfully registered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(signUpWindow, "User successfully registered!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     setVisible(false);
                     new LoginWindow(sw);
                 }

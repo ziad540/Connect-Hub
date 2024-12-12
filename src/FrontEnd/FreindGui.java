@@ -15,22 +15,23 @@ public class FreindGui {
     ArrayList<User> friends = null;
     ArrayList<User> freindrequests = null;
     ArrayList<User> friendssugg = null;
-    User currnetus = null;
+    User currnetus;
     JPanel contentPanel;
     JPanel contentPanel2;
     JFrame frame;
+    Search search = new Search();
+    UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
-    FreindGui(User user, JFrame recentFrame) {
-        currnetus = user;
+    FreindGui(String  userId, JFrame recentFrame) {
+        currnetus = search.getUser(userId);
 
-        GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
-        friends = getFreinds.get();
 
-        GetFreinds getFreinds2 = new GetFreinds(user.getFreindrequestId());
-        freindrequests = getFreinds2.get();
+        friends = search.getUsers(currnetus.getFirndesId());
+
+        freindrequests = search.getUsers(currnetus.getFreindrequestId());
 
         ListoffreindSuggestion getymysugg = new ListoffreindSuggestion();
-        friendssugg = getymysugg.getfreindssugg(user, friends);
+        friendssugg = getymysugg.getfreindssugg(currnetus, friends);
 
         frame = new JFrame("Freind list");
         frame.setSize(400, 800);
@@ -81,18 +82,18 @@ public class FreindGui {
                 }
 
                 searchProcessor search = new searchProcessor(new Allsearch());
-                ArrayList<User> allusers = search.searchforusers(name, user);
+                ArrayList<User> allusers = search.searchforusers(name, currnetus);
 
 
                 search = new searchProcessor(new FreindsSearch());
-                ArrayList<User> myfreindssearch = search.searchforusers(name, user);
+                ArrayList<User> myfreindssearch = search.searchforusers(name, currnetus);
 
 
                 search = new searchProcessor(new FreindRequestSearch());
-                ArrayList<User> allrequests = search.searchforusers(name, user);
+                ArrayList<User> allrequests = search.searchforusers(name, currnetus);
 
                 search = new searchProcessor(new sentFreindRequestssearch());
-                ArrayList<User> allsent = search.searchforusers(name, user);
+                ArrayList<User> allsent = search.searchforusers(name, currnetus);
 
 
                 if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {
@@ -100,7 +101,7 @@ public class FreindGui {
                     return;
                 } else {
                     frame.setVisible(false);
-                    new FreindListaftersearchGUI(frame, user, name);
+                    new FreindListaftersearchGUI(frame, userId, name);
 
                 }
 
@@ -376,8 +377,9 @@ public class FreindGui {
     }
 
     public void Refresh() {
-        GetFreinds getFreinds = new GetFreinds(currnetus.getFirndesId());
-        friends = getFreinds.get();
+        userDatabaseManagement.loadUsersFromFile();
+        currnetus = search.getUser(currnetus.getUserId());
+        friends = search.getUsers(currnetus.getFirndesId());
         contentPanel.removeAll();
         for (User freind : friends) {
             contentPanel.add(createPostPanel(freind));

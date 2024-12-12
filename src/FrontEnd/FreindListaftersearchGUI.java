@@ -13,31 +13,32 @@ public class FreindListaftersearchGUI {
     ArrayList<User> myfreindssearch;
     ArrayList<User> allrequests;
     ArrayList<User> allsent;
-    User currnetus = null;
+    User currnetus;
     JFrame frame;
     JPanel contentPanel;
     String name;
-
     JFrame recentframe;
+    Search search = new Search();
+    UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
-    FreindListaftersearchGUI(JFrame recentframe, User user, String name) {
+    FreindListaftersearchGUI(JFrame recentframe, String userID, String name) {
         this.recentframe = recentframe;
         this.name = name;
-        currnetus = user;
+        currnetus = search.getUser(userID);
         searchProcessor search = new searchProcessor(new Allsearch());
-        allusers = search.searchforusers(name, user);
+        allusers = search.searchforusers(name, currnetus);
 
 
         search = new searchProcessor(new FreindsSearch());
-        myfreindssearch = search.searchforusers(name, user);
+        myfreindssearch = search.searchforusers(name, currnetus);
 
 
         search = new searchProcessor(new FreindRequestSearch());
-        allrequests = search.searchforusers(name, user);
+        allrequests = search.searchforusers(name, currnetus);
 
 
         search = new searchProcessor(new sentFreindRequestssearch());
-        allsent = search.searchforusers(name, user);
+        allsent = search.searchforusers(name, currnetus);
 
 
         frame = new JFrame("Freind list");
@@ -51,18 +52,18 @@ public class FreindListaftersearchGUI {
         JLabel titleLabel = new JLabel("Freinds", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
-        JButton addPostButton = new JButton();
-        ImageIcon image = new ImageIcon("src/Image/button (1).png");
-        addPostButton.setContentAreaFilled(false);
-        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
-        addPostButton.setPreferredSize(new Dimension(50, 50));
-        addPostButton.setIcon(image);
-        addPostButton.setBorderPainted(false);
-        addPostButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+//        JButton addPostButton = new JButton();
+//        ImageIcon image = new ImageIcon("src/Image/button (1).png");
+//        addPostButton.setContentAreaFilled(false);
+//        addPostButton.setFont(new Font("Arial", Font.BOLD, 16));
+//        addPostButton.setPreferredSize(new Dimension(50, 50));
+//        addPostButton.setIcon(image);
+//        addPostButton.setBorderPainted(false);
+//        addPostButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//            }
+//        });
 
 
         JButton refresh = new JButton();
@@ -137,7 +138,7 @@ public class FreindListaftersearchGUI {
 
 
         JButton back = new JButton();
-        ImageIcon image3 = new ImageIcon("src/Image/return.pngg");
+        ImageIcon image3 = new ImageIcon("src/Image/return.png");
         back.setContentAreaFilled(false);
 
         back.setPreferredSize(new Dimension(50, 50));
@@ -488,8 +489,8 @@ else
 
 
     public void Refresh() {
-
-
+        userDatabaseManagement.loadUsersFromFile();
+        currnetus = search.getUser(currnetus.getUserId());
         contentPanel.removeAll();
         searchProcessor search = new searchProcessor(new Allsearch());
         allusers = search.searchforusers(name, currnetus);
