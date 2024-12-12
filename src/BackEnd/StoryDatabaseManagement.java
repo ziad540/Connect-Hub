@@ -51,7 +51,7 @@ public class StoryDatabaseManagement {
             objectMapper.writeValue(new File("src/stories.json"), stories);
         } catch (Exception e) {
             System.err.println("Error writing in JSON file: " + e.getMessage());
-            e.printStackTrace();
+            stories=new ArrayList<>();
         }
     }
 

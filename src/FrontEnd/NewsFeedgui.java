@@ -353,7 +353,9 @@ else
 
     }
 
-    public JFrame getFrame() {
+    public JFrame getFrame()
+
+    {
 
 
         return frame;

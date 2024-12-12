@@ -130,7 +130,6 @@ public class AddStoryGui {
         bottomPanel.add(addstoryButton);
 
 
-        // Add Bottom Panel to Frame
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
 
