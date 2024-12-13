@@ -14,7 +14,7 @@ public class GroupDetailsGui {
 
     public GroupDetailsGui(String Id, Groups group, JFrame frame) {
         JFrame frame2 = new JFrame("Group Details - " + group.getGroupName());
-        frame2.setSize(800, 400);
+        frame2.setSize(600, 800);
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.setLocationRelativeTo(null);
         System.out.println(group.getGroupName());
@@ -63,6 +63,25 @@ public class GroupDetailsGui {
                 postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
                 postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 postPanel.setBackground(Color.WHITE);
+/// //////////////////////////////////////////////////////////  بضيف ااسم صاحب البوست
+                User postAuthor = search.getUser(Id);
+                JPanel authorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                authorPanel.setBackground(Color.WHITE);
+                try {
+                    ImageIcon userIcon = new ImageIcon();         //عايز اضيف صوره ال user
+                    Image scaledUserImage = userIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+                    JLabel userPhotoLabel = new JLabel(new ImageIcon(scaledUserImage));
+                    authorPanel.add(userPhotoLabel);
+                } catch (Exception e) {
+                }
+
+                JLabel userNameLabel = new JLabel(postAuthor.getUserName());
+                userNameLabel.setFont(new Font("Arial", Font.BOLD, 12));
+                authorPanel.add(userNameLabel);
+
+                postPanel.add(authorPanel);
+
+
 
                 JLabel postContentLabel = new JLabel(post.getContent());
                 postContentLabel.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -224,13 +243,26 @@ public class GroupDetailsGui {
         mainPanel.add(membersScrollPane, BorderLayout.EAST);
 
         JPanel bottomPanel = new JPanel();
-        JButton returnButton = new JButton("Return");
+        JButton returnButton = new JButton();
+        ImageIcon icon = new ImageIcon("src/Image/return.png");
+        Image scaledImage = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        returnButton.setIcon(scaledIcon);
+        returnButton.setPreferredSize(new Dimension(60, 60)); // Adjust button size
+        returnButton.setContentAreaFilled(false); // Makes the button background transparent
+        returnButton.setBorderPainted(false);    // Removes the border around the button
+        returnButton.setFocusPainted(false);     // Removes focus outline
+
         returnButton.addActionListener(e -> {
             frame2.dispose();
             frame.setVisible(true);
         });
         bottomPanel.add(returnButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+
+
+
 
         frame2.add(mainPanel);
         frame2.setVisible(true);

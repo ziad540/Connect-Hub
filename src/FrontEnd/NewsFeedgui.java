@@ -217,7 +217,7 @@ public class NewsFeedgui {
         groupsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               new GroupsGui(user.getUserId());
+               new GroupsGui(user.getUserId(),frame);
                 frame.setVisible(false);
             }
         });

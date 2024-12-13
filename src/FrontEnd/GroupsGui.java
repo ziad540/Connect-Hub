@@ -17,7 +17,7 @@ public class GroupsGui {
     GroupOperation operation = new GroupOperation();
     Search search = new Search();
 
-    public GroupsGui(String Id) {
+    public GroupsGui(String Id,JFrame f) {
         JFrame frame = new JFrame("Groups");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -31,9 +31,13 @@ public class GroupsGui {
         ArrayList<Groups> groups = operation.getGroups(user.getGroupId());
         // ديه ال top panel يا زوز
         JPanel topPanel = new JPanel();
+
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.setBackground(new Color(99, 190, 100));
         topPanel.setPreferredSize(new Dimension(600, 150));
+
+
+
 
         // هنا بقا يا زوز هعرض كل ال جروبات اللي جبتهم فوق
         JPanel groupListPanel = new JPanel();
@@ -72,5 +76,47 @@ public class GroupsGui {
         frame.add(groupScrollPane, BorderLayout.CENTER);
 
         frame.setVisible(true);
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // Optional: Align the button in the center
+        JButton returnButton = new JButton();
+
+
+
+        JButton backButton = new JButton();
+        ImageIcon image3 = new ImageIcon("src/Image/return.png");
+        backButton.setContentAreaFilled(false);
+        backButton.setPreferredSize(new Dimension(50, 50));
+        backButton.setIcon(image3);
+        backButton.setBorderPainted(false);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                frame.dispose();
+                f.setVisible(true);
+
+
+            }
+        });
+        bottomPanel.add(backButton);
+
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+
+        frame.setVisible(true);
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
