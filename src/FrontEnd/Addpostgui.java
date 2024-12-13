@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import BackEnd.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ public class Addpostgui {
     private String pathimage = null; // store the path of image
     Search search = new Search();
     User user;
+
     Addpostgui(String userID, JFrame frame2) {
         user = search.getUser(userID);
         JFrame frame = new JFrame("NewsFeed"); //new frame to Add post
@@ -103,7 +105,16 @@ public class Addpostgui {
         addstoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = String.valueOf(uniqueId.loadCOUNTERPOSTID());
+                int idint = uniqueId.loadCOUNTERPOSTID();
+                String idCheck = String.valueOf(idint);
+
+                for (int i = 0; i < PostDatabaseManagement.getInstance().getPosts().size(); i++) {
+                    if (PostDatabaseManagement.getInstance().getPosts().get(i).getContentId().equals(idCheck)) {
+                        idint++;
+                        idCheck = String.valueOf(idint);
+                    }
+                }
+                String id = String.valueOf(idint);
                 Post newpopst = new Post(id, user.getUserId(), textArea.getText(), pathimage);
                 PostDatabaseManagement.getInstance().addPost(newpopst);
                 PostDatabaseManagement.getInstance().saveToFile();
