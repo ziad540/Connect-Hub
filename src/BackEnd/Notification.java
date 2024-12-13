@@ -15,9 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
 public abstract class Notification {
-
     private String recieverID;
-
     private String message;
     private String timestamp;
 

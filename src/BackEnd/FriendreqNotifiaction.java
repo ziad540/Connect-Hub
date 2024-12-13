@@ -23,7 +23,7 @@ public class FriendreqNotifiaction extends Notification {
 
     @Override
     public void interact() {
-        String[] options = {"accept ", "decline", "view"};
+        String[] options = {"Accept ", "Decline", "View"};
         int choice = JOptionPane.showOptionDialog(null, "new friend request", "Group Post",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 

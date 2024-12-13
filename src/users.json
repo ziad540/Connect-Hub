@@ -12,8 +12,8 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "profilePicPath": "src/Image/unknown user.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown user.png"
     },
     "firndesId": [
       "1003"
@@ -27,10 +27,7 @@
     "blockedID": [],
     "blockedfromID": [],
     "notificationManager": {
-      "notifications": [
-        {
-        }
-      ]
+      "notifications": []
     }
   },
   {
@@ -46,8 +43,8 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "profilePicPath": "src/Image/unknown user.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown user.png"
     },
     "firndesId": [],
     "postId": [
@@ -75,8 +72,8 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "profilePicPath": "src/Image/unknown user.png",
-      "coverPicPath": "src/Image/unknown cover.png"
+      "coverPicPath": "src/Image/unknown cover.png",
+      "profilePicPath": "src/Image/unknown user.png"
     },
     "firndesId": [
       "1001"
@@ -88,10 +85,7 @@
     "blockedID": [],
     "blockedfromID": [],
     "notificationManager": {
-      "notifications": [
-        {
-        }
-      ]
+      "notifications": []
     }
   }
 ]

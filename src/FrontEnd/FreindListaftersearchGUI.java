@@ -510,27 +510,21 @@ else
 
 
     public void Refresh() {
-
+        System.out.println(currnetus+"    2");
         UserDatabaseManagement.getInstance().loadUsersFromFile();
-
-
         currnetus = search.getUser(currnetus.getUserId());
-        System.out.println(currnetus+"     8");
-        System.out.println(currnetus.getSentfreindrequestId());
+        System.out.println(currnetus+"    3");
         contentPanel.removeAll();
-        System.out.println("hhhh1");
+
         searchProcessor search = new searchProcessor(new Allsearch());
         allusers = search.searchforusers(name, currnetus.getUserId());
-        System.out.println(currnetus+"     9");
 
         search = new searchProcessor(new FreindsSearch());
         myfreindssearch = search.searchforusers(name, currnetus.getUserId());
-        System.out.println("hhhh2");
 
         search = new searchProcessor(new FreindRequestSearch());
         allrequests = search.searchforusers(name, currnetus.getUserId());
 
-        System.out.println("hhhh2");
 
 
         search = new searchProcessor(new sentFreindRequestssearch());

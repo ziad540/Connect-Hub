@@ -166,7 +166,10 @@ public class NewsFeedgui {
             @Override
 
             public void actionPerformed(ActionEvent e) {
+                System.out.println(currentuser+"    4");
+                userDatabaseManagement.loadUsersFromFile();
                 search.getUser(userId).setStatus("offline");
+                System.out.println(currentuser+"    5");
                 userDatabaseManagement.saveToFile();
                 new StartWindow();
                 frame.dispose();
@@ -349,11 +352,14 @@ else
     }
 
     public void Refresh() {
+        System.out.println(currentuser+"    3");
         userDatabaseManagement.loadUsersFromFile();
         StoryHandler storyHandler = new StoryHandler();
         storyHandler.deleteExpiredStories();
+        userDatabaseManagement.loadUsersFromFile();
         postDatabaseManagement.loadPostsFromFile();
         currentuser = search.getUser(currentUserId);
+        System.out.println(currentuser+"    4");
         friends = search.getUsers(currentuser.getFirndesId());//(1)
         GetPosts getPosts2 = new GetPosts();
         posts = getPosts2.data(friends);
@@ -364,13 +370,17 @@ else
 
         loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, posts);
 
-        contentPanel.revalidate();
-        contentPanel.repaint();
+
 
         contentPanel2.removeAll();
         populatefreinds(contentPanel2, friends);
+        contentPanel.revalidate();
+        contentPanel.repaint();
         contentPanel2.revalidate();
         contentPanel2.repaint();
+        frame.invalidate();
+        frame.validate();
+        frame.repaint();
 
 
     }
