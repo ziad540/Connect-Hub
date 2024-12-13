@@ -1,0 +1,31 @@
+[
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M1",
+    "userID": "1003",
+    "status": "PrimaryAdmin",
+    "postId": [
+      "3",
+      "18",
+      "19",
+      "20",
+      "21"
+    ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M2",
+    "userID": "1002",
+    "status": "Member",
+    "postId": [
+      "4"
+    ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M3",
+    "userID": "1003",
+    "status": "PrimaryAdmin",
+    "postId": []
+  }
+]

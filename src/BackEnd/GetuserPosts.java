@@ -7,11 +7,8 @@ public class GetuserPosts
     public ArrayList<Post> getuserposts (User user)
     {
         ArrayList <String >posts=user.getPostId();
-
         ArrayList<Post> data=new ArrayList<>();
-
-        ArrayList <Post> all=   PostDatabaseManagement.getInstance().getPosts();
-
+        ArrayList <Post> all=PostDatabaseManagement.getInstance().getPosts();
         for(int i=0;i<posts.size();i++)
         {
             for (int j=0;j<all.size();j++) {

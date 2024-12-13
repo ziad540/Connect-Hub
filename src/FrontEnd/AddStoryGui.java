@@ -78,7 +78,7 @@ public class AddStoryGui {
         JPanel bottomPanel = new JPanel(new GridLayout(1,3));// Center aligned buttons with spacing
         bottomPanel.setPreferredSize(new Dimension(200, 50));
         bottomPanel.setBackground(new Color(240, 255, 255));
-        //backbuttom
+
         JButton backButton = new JButton();
         ImageIcon image3 = new ImageIcon("src/Image/return.png");
         backButton.setContentAreaFilled(false);
@@ -92,6 +92,7 @@ public class AddStoryGui {
                 frame.dispose();
             }
         });
+
 
         uploadPanel.add(photoLabel, BorderLayout.CENTER);
         contentPanel.add(uploadPanel, BorderLayout.CENTER);

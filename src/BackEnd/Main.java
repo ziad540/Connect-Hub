@@ -1,16 +1,19 @@
 package BackEnd;
 
-import FrontEnd.*;
+import FrontEnd.GroupsGui;
+import FrontEnd.StartWindow;
 
 public class Main {
 
-    public static void main(String[] args)  {
-       StartWindow start = new StartWindow();
-      //new FrontEnd.FreindGui(new BackEnd.User(),new JFrame());
+    public static void main(String[] args) {
+//        PrimaryAdmin ziad = new PrimaryAdmin();
+//        ziad.DeclineMembershipRequests("G1", "M1");
+        new StartWindow();
+        //new GroupsGui("1003");
+        //new FrontEnd.FreindGui(new BackEnd.User(),new JFrame());
+
         //new FrontEnd.AddStoryGui();
         //new FrontEnd.FreindListaftersearchGUI();
-
-
-}
+    }
 
 }

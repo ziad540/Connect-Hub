@@ -20,6 +20,7 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
+
     User currentuser = new User();
     String currentUserId = null;
     Search search = new Search();
@@ -28,8 +29,19 @@ public class NewsFeedgui {
         currentUserId = userId;
         currentuser = search.getUser(userId);
         friends = search.getUsers(currentuser.getFirndesId());//(1)
+
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
+
+       GroupOperation groupOperation=new GroupOperation();
+        groups= groupOperation.getGroups(user.getGroupId());
+
+
+
+
+
+
+
 
         frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
@@ -98,6 +110,12 @@ public class NewsFeedgui {
 
 
         populatefreinds(contentPanel2, friends);
+
+//      JPanel  contentPanelGroups = new JPanel();
+//        contentPanelGroups.setLayout(new BoxLayout(contentPanelGroups, BoxLayout.Y_AXIS));
+//        JScrollPane scrollPaneGroups = new JScrollPane(contentPanelGroups);
+//        right.add(scrollPaneGroups, BorderLayout.SOUTH);
+//        populateGroups(contentPanelGroups, groups);
 
         frame.add(right, BorderLayout.EAST);
 
@@ -213,9 +231,25 @@ public class NewsFeedgui {
 
 
 
+        JButton groupsButton = new JButton();
+        ImageIcon imageGroups = new ImageIcon("src/Image/group.png");
+        groupsButton.setContentAreaFilled(false);
+        groupsButton.setPreferredSize(new Dimension(50, 50));
+        groupsButton.setIcon(imageGroups);
+        groupsButton.setBorderPainted(false);
+
+        groupsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new GroupsGui(user.getUserId(),frame);
+                frame.setVisible(false);
+            }
+        });
+
+
         bottomPanel.add(profile);
         bottomPanel.add(stories);
-
+        bottomPanel.add(groupsButton);
         bottomPanel.add(freind);
           bottomPanel.add(notificaions);
 
@@ -240,6 +274,14 @@ public class NewsFeedgui {
             panel.add(createfreindspanel(user));
         }
     }
+
+//    private void populateGroups(JPanel panel, ArrayList<Groups> groups) {
+//        for (Groups group : groups) {
+//
+//            panel.add(createGroupPanel(group));
+//        }
+//    }
+
 
     public static JPanel createPostPanel(String name, String date, String caption, String imagePath, String profileimage) {
 
@@ -384,6 +426,7 @@ else
 
 
     }
+
 
     public JFrame getFrame()
 
