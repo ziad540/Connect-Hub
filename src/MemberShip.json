@@ -1,13 +1,1 @@
-[
-  {
-    "memberShipID": "M2",
-    "userID": "1002",
-    "status": "",
-    "postId": [
-      "1",
-      "2",
-      "4",
-      "4"
-    ]
-  }
-]
+[{"type":"BasicMemberShip","memberShipID":"M1","userID":"1003","status":"PrimaryAdmin","postId":["5","6","7"]},{"type":"BasicMemberShip","memberShipID":"M3","userID":"1004","status":"Member","postId":["5","6","7"]}]

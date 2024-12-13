@@ -1,18 +1,25 @@
-import BackEnd.Groups;
-import BackEnd.Post;
-import BackEnd.User;
+package FrontEnd;
+
+import BackEnd.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class GroupDetailsGui {
+    GroupOperation operation = new GroupOperation();
+    Search search = new Search();
+    MemberFactoryImpl memberFactory = new MemberFactoryImpl();
 
     public GroupDetailsGui(String Id, Groups group, JFrame frame) {
         JFrame frame2 = new JFrame("Group Details - " + group.getGroupName());
         frame2.setSize(800, 400);
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.setLocationRelativeTo(null);
+        MemberShip member = operation.getMemberShip(group.getGroupId(), Id);
+        System.out.println(member.getUserID());
+        MemberShip memberType = memberFactory.createMember(member.getStatus());
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -40,7 +47,8 @@ public class GroupDetailsGui {
         }
 
         // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل بوستات الجروب
-        ArrayList<Post> posts = group.getPosts();
+        ArrayList<String> postId = operation.getPostId(group.getGroupId());
+        ArrayList<Post> posts = operation.getObjPost(group.getGroupId());
         if (posts.size() > 0) {
             JLabel postsTitleLabel = new JLabel("Posts", SwingConstants.CENTER);
             postsTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -73,8 +81,9 @@ public class GroupDetailsGui {
                 postPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
                     public void mouseClicked(java.awt.event.MouseEvent e) {
+
                         // هنا يا زيزي عايز اتأكد هل صاحب ال Id ده صاحب الجروب او ادمن ولا لأ
-                        if (SwingUtilities.isRightMouseButton(e) && (group.isPrimaryAdmin(Id) || group.isOtherAdmin(Id))) {
+                        if (SwingUtilities.isRightMouseButton(e) && (memberType.canEditOrDeletePosts())) {
                             JPopupMenu postMenu = new JPopupMenu();
                             JMenuItem editPost = new JMenuItem("Edit Post");
                             JMenuItem deletePost = new JMenuItem("Delete Post");
@@ -92,7 +101,11 @@ public class GroupDetailsGui {
 
                             deletePost.addActionListener(ae -> {
                                 // هنا يا زيزي عايز امسح البوست
-                                group.removePost(post);
+                                if (memberType.canDeleteGroups()) {
+                                    ((PrimaryAdmin) memberType).RemovePosts(group.getGroupId(), post.getContentId(), member.getMemberShipID());
+                                } else {
+                                    ((NormalAdmin) memberType).RemovePosts(group.getGroupId(), post.getContentId(), member.getMemberShipID());
+                                }
                                 JOptionPane.showMessageDialog(null, "Post deleted successfully!");
                                 frame2.dispose();
                                 new GroupDetailsGui(Id, group, frame);
@@ -117,12 +130,15 @@ public class GroupDetailsGui {
         }
 
         // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل اعضاء الجروب
-        ArrayList<User> members = group.getMembers();
+        ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
+        ArrayList<User> members = search.getUsers(memberShipUserId);
         JPanel membersPanel = new JPanel();
         membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
 
-        for (User member : members) {
-            JLabel memberLabel = new JLabel(member.getUserName());
+        for (User user : members) {
+            MemberShip membership = operation.getMemberShip(group.getGroupId(), user.getUserId());
+            MemberShip memberInGroup = memberFactory.createMember(membership.getStatus());
+            JLabel memberLabel = new JLabel(user.getUserName());
             memberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             memberLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
@@ -130,28 +146,28 @@ public class GroupDetailsGui {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
+                        System.out.println("Mouse clicked!");
                         JPopupMenu memberMenu = new JPopupMenu();
                         // هنا يا زيزي عايز اتأكد هو صاحب الجروب ولا لأ
-                        if (group.isPrimaryAdmin(Id)) {
+                        if (memberType.canDeleteGroups()) {
                             // هنا يا زيزي عايز اتأكد هو عضو عادي ولا لأ  ولا لأ
-                            if (member.isNormalUser()) {
+                            if (!(memberInGroup.canEditOrDeletePosts() || memberInGroup.canDeleteGroups())) {
                                 JMenuItem promoteToAdmin = new JMenuItem("Promote to Admin");
                                 promoteToAdmin.addActionListener(ae -> {
                                     // هنا عايز اخليه ادمن
-                                    member.setOtherAdmin();
-                                    JOptionPane.showMessageDialog(null, member.getUserName() + " promoted to Admin!");
+                                    ((PrimaryAdmin) memberType).PromoteNewAdmin(group.getGroupId(), membership.getMemberShipID());
+                                    JOptionPane.showMessageDialog(null, user.getUserName() + " promoted to Admin!");
                                     frame2.dispose();
                                     new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(promoteToAdmin);
                                 // هنا يا زيزي عايز اتأكد هو ادمن عادي و لا لأ
-
-                            } else if (member.isOtherAdmin()) {
+                            } else if (memberInGroup.canEditOrDeletePosts() && !(memberInGroup.canDeleteGroups())) {
                                 JMenuItem demoteToUser = new JMenuItem("Demote to Normal User");
                                 demoteToUser.addActionListener(ae -> {
                                     // هنا عايز اخلي العضو ده عضو عادي خالص
-                                    member.setNormalUser();
-                                    JOptionPane.showMessageDialog(null, member.getUserName() + " demoted to Normal User!");
+                                    ((PrimaryAdmin) memberType).DemoteGroupAdmin(group.getGroupId(), membership.getMemberShipID());
+                                    JOptionPane.showMessageDialog(null, user.getUserName() + " demoted to Normal User!");
                                     frame2.dispose();
                                     new GroupDetailsGui(Id, group, frame);
                                 });
@@ -160,22 +176,28 @@ public class GroupDetailsGui {
                             JMenuItem removeMember = new JMenuItem("Remove Member");
                             removeMember.addActionListener(ae -> {
                                 // هنا عايز اطرد العضو ده من المجموعه
-                                group.removeMember(member);
-                                JOptionPane.showMessageDialog(null, "Member removed!");
-                                frame2.dispose();
-                                new GroupDetailsGui(Id, group, frame);
+                                if (memberInGroup.canDeleteGroups()) {
+                                    JOptionPane.showMessageDialog(null, "Do not have permission");
+                                } else {
+                                    ((PrimaryAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
+                                    JOptionPane.showMessageDialog(null, "Member removed!");
+                                    frame2.dispose();
+                                    new GroupDetailsGui(Id, group, frame);
+                                }
                             });
                             memberMenu.add(removeMember);
-                            // هنا يا زيزي عايز اتأكد هو ادمن
-                        } else if (group.isOtherAdmin(Id) && !group.isPrimaryAdmin(member.getUserId())) {
+                        }
+                        //هنا يا زيزي عايز اتأكد هو ادمن
+                        else if (memberType.canEditOrDeletePosts() && !(memberType.canDeleteGroups())) {
                             // هنا عايز اتأكد هو عضو عادي ولا لأ
-                            if (member.isNormalUser()) {
+                            if (!(memberInGroup.canEditOrDeletePosts())) {
                                 JMenuItem removeMember = new JMenuItem("Remove Member");
                                 removeMember.addActionListener(ae -> {
                                     // هنا عايز اطرد العضو ده من المجموعه
-                                    group.removeMember(member);
+                                    ((NormalAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
                                     JOptionPane.showMessageDialog(null, "Member removed!");
                                     frame2.dispose();
+                                    //refresh
                                     new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(removeMember);

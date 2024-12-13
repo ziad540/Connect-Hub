@@ -22,7 +22,7 @@ public class Search {
         ArrayList<User> users = new ArrayList<>();
         for (int i = 0; i < userIds.size(); i++) {
             for (int j = 0; j < userDatabaseManagement.getUsers().size(); j++) {
-                if (userIds.get(i).equals(userDatabaseManagement.getUsers().get(j))) {
+                if (userIds.get(i).equals(userDatabaseManagement.getUsers().get(j).getUserId())) {
                     users.add(userDatabaseManagement.getUsers().get(j));
                 }
             }
@@ -58,7 +58,7 @@ public class Search {
 
             for (int i = 0; i < memberShips.size(); i++) {
                 for (int j = 0; j < memberShipDataBase.getMemberShips().size(); j++) {
-                    if (memberShips.get(i).equals(memberShipDataBase.getMemberShips().get(j))) {
+                    if (memberShips.get(i).equals(memberShipDataBase.getMemberShips().get(j).getMemberShipID())) {
                         memberShipList.add(memberShipDataBase.getMemberShips().get(j));
                     }
                 }
@@ -71,11 +71,11 @@ public class Search {
         return memberShipList;
     }
 
-    public ArrayList<Groups> getGroups(ArrayList<String> groupIds) {
+    public ArrayList<Groups> getGroups(ArrayList<String>groupIds) {
         ArrayList<Groups> groups = new ArrayList<>();
         for (int i = 0; i < groupIds.size(); i++) {
             for (int j = 0; j < groupDataBase.getGroups().size(); j++) {
-                if (groupIds.get(i).equals(groupDataBase.getGroups().get(j))) {
+                if (groupIds.get(i).equals(groupDataBase.getGroups().get(j).getGroupId())) {
                     groups.add(groupDataBase.getGroups().get(j));
                 }
             }

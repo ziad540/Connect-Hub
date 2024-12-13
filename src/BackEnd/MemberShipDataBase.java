@@ -32,7 +32,8 @@ public class MemberShipDataBase {
         objectMapper.registerModule(new JavaTimeModule());
 
         try {
-            memberShips = objectMapper.readValue(new File("src/MemberShip.json"), new TypeReference<ArrayList<MemberShip>>() {});
+            memberShips = objectMapper.readValue(new File("src/MemberShip.json"), new TypeReference<ArrayList<MemberShip>>() {
+            });
 
         } catch (Exception e) {
             System.err.println("Error loading : " + e.getMessage());

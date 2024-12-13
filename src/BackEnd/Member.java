@@ -61,4 +61,20 @@ public class Member extends MemberShip implements MemberOperation {
             JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    @Override
+    public boolean canEditOrDeletePosts() {
+        return false;
+    }
+
+    @Override
+    public boolean canDeleteGroups() {
+        return false;
+    }
+
+    @Override
+    public boolean canRemoveMember() {
+        return false;
+    }
 }
+

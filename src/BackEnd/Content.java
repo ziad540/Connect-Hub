@@ -25,7 +25,7 @@ public abstract class Content {
         this.autherId = autherId;
     }
 
-    private void setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

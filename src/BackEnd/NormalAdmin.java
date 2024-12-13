@@ -3,7 +3,7 @@ package BackEnd;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class NormalAdmin extends MemberShip implements NormalAdminOperation,MemberOperation {
+public class NormalAdmin extends MemberShip implements NormalAdminOperation, MemberOperation {
     @Override
     public void RemoveMember(String memberID, String groupID) {
         ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
@@ -192,4 +192,21 @@ public class NormalAdmin extends MemberShip implements NormalAdminOperation,Memb
             JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
+    @Override
+    public boolean canEditOrDeletePosts() {
+        return true;
+    }
+
+    @Override
+    public boolean canDeleteGroups() {
+        return false;
+    }
+
+    @Override
+    public boolean canRemoveMember() {
+        return true;
+    }
 }
+

@@ -1,9 +1,17 @@
 package BackEnd;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
-public abstract class MemberShip implements AddPost {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = BasicMemberShip.class, name = "BasicMemberShip"),
+})
+public abstract class MemberShip {
+    String type = "BasicMemberShip";
     String memberShipID;
     String userID;
     String status;
@@ -53,40 +61,17 @@ public abstract class MemberShip implements AddPost {
         this.postId = postId;
     }
 
-    @Override
-    public void AddPosts(String groupId, String postId, String memberID) {
-        ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
-        Groups group = null;
-        for (Groups g : groups) {
-            if (g.getGroupId().equals(groupId)) {
-                group = g;
-                break;
-            }
-        }
-        if (group != null) {
-            ArrayList<String> memberShips = group.getMemberShipId();
-            if (memberShips.contains(memberID)) {
-                ArrayList<MemberShip> memberShipList = MemberShipDataBase.getInstance().getMemberShips();
-                MemberShip memberToAddPost = null;
-                for (MemberShip member : memberShipList) {
-                    if (member.getMemberShipID().equals(memberID)) {
-                        memberToAddPost = member;
-                        break;
-                    }
-                }
-                if (memberToAddPost != null) {
-                    ArrayList<String> memberPost = memberToAddPost.getPostId();
-                    memberPost.add(postId);
-                    MemberShipDataBase.getInstance().saveToFile();
-                    GroupDataBase.getInstance().saveToFile();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Member not found in database", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Member does not exist", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    public abstract boolean canEditOrDeletePosts();
+
+    public abstract boolean canDeleteGroups();
+
+    public String getType() {
+        return type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public abstract boolean canRemoveMember();
 }

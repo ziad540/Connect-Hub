@@ -1,4 +1,7 @@
 package FrontEnd;
+
+import BackEnd.GroupOperation;
+import BackEnd.Search;
 import FrontEnd.*;
 import BackEnd.Groups;
 import BackEnd.User;
@@ -11,18 +14,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GroupsGui {
+    GroupOperation operation = new GroupOperation();
+    Search search = new Search();
 
-    public GroupsGui(String Id, JFrame parentFrame) {
+    public GroupsGui(String Id) {
         JFrame frame = new JFrame("Groups");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
+        User user = search.getUser(Id);
+        frame.setVisible(true);
 
 
         // هنا يا زيزي انا عايز ال arrayList ديه يكون جواها groups اللي صاحب ال Id ده مشترك فيها
-        ArrayList<Groups> groups = Id.getGroups();
-
+        ArrayList<Groups> groups = operation.getGroups(user.getGroupId());
         // ديه ال top panel يا زوز
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
@@ -53,7 +59,7 @@ public class GroupsGui {
             // هنا بقا لما ادوس على اسم الجروب هفتحله شاشه جديده جواها بقا الجروب زات نفسه ب محتواياته
             groupInfo.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent e) {
-                    new GroupDetailsGui(Id,group,frame);
+                    new GroupDetailsGui(Id, group, frame);
                     frame.setVisible(false);
                 }
             });

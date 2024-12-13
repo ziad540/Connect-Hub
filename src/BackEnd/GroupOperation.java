@@ -19,8 +19,29 @@ public class GroupOperation {
     public ArrayList<Groups> getGroups(ArrayList<String> groupsId) {
         return search.getGroups(groupsId);
     }
+
     public ArrayList<Post> getObjPost(String groupId) {
-        return  search.getPosts(getPostId(groupId));
+        return search.getPosts(getPostId(groupId));
     }
+
+    public MemberShip getMemberShip(String groupId, String userId) {
+        ArrayList<MemberShip> memberShipList = search.getMemberShips(groupId);
+        for (int i = 0; i < memberShipList.size(); i++) {
+            if (memberShipList.get(i).getUserID().equals(userId)) {
+                return memberShipList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> getMemberShipUserIds(String groupId) {
+        ArrayList<MemberShip> memberShipList = search.getMemberShips(groupId);
+        ArrayList<String> memberShipUserIds = new ArrayList<>();
+        for (int i = 0; i < memberShipList.size(); i++) {
+            memberShipUserIds.add(memberShipList.get(i).getUserID());
+        }
+        return memberShipUserIds;
+    }
+
 
 }

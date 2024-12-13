@@ -203,18 +203,19 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
             if (group.getMemberShipId().contains(memberId)) {
                 ArrayList<MemberShip> memberShipList = MemberShipDataBase.getInstance().getMemberShips();
                 MemberShip Member = null;
-                for (MemberShip member : memberShipList) {
-                    if (member.getMemberShipID().equals(memberId)) {
-                        Member = member;
+                for (int i = 0; i < memberShipList.size(); i++) {
+                    if (memberShipList.get(i).getMemberShipID().equals(memberId)) {
+                        Member = memberShipList.get(i);
                         break;
                     }
-                    if (member.getStatus().equals("Admin")) {
-                        JOptionPane.showMessageDialog(null, "member already admin", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        Member.setStatus("Admin");
-                        MemberShipDataBase.getInstance().saveToFile();
-                    }
                 }
+                if (Member.getStatus().equals("NormalAdmin")) {
+                    JOptionPane.showMessageDialog(null, "member already admin", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Member.setStatus("NormalAdmin");
+                    MemberShipDataBase.getInstance().saveToFile();
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Member not found in group", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -242,13 +243,14 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
                         Member = member;
                         break;
                     }
-                    if (member.getStatus().equals("member")) {
-                        JOptionPane.showMessageDialog(null, "member already not admin", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        Member.setStatus("Admin");
-                        MemberShipDataBase.getInstance().saveToFile();
-                    }
                 }
+                if (Member.getStatus().equals("Member")) {
+                    JOptionPane.showMessageDialog(null, "member already not admin", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Member.setStatus("Member");
+                    MemberShipDataBase.getInstance().saveToFile();
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Member not found in group", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -256,4 +258,21 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
             JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
+    @Override
+    public boolean canEditOrDeletePosts() {
+        return true;
+    }
+
+    @Override
+    public boolean canDeleteGroups() {
+        return true;
+    }
+
+    @Override
+    public boolean canRemoveMember() {
+        return true;
+    }
 }
+
