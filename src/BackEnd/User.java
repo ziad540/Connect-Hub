@@ -3,7 +3,7 @@ package BackEnd;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Observer {
     private String userId;
     private String email;
     private String userName;
@@ -164,5 +164,11 @@ public class User {
 
     public void setNotificationManager(NotificationManager notificationManager) {
         this.notificationManager = notificationManager;
+    }
+
+    @Override
+    public void update(String groupID)
+    {
+
     }
 }
