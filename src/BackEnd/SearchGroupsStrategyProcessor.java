@@ -9,9 +9,9 @@ public class SearchGroupsStrategyProcessor {
     public SearchGroupsStrategyProcessor(SearchGroupStrategy searchGroupStrategy) {
         this.searchGroupStrategy = searchGroupStrategy;
     }
-
-    public ArrayList<String> groupsearch(String name, String ID)
-    {
-        return searchGroupStrategy.searchforgroups(name,ID);
-    }
+//
+//    public ArrayList<String> groupsearch(String name, String ID)
+//    {
+//        return searchGroupStrategy.searchforgroups(name,ID);
+//    }
 }
