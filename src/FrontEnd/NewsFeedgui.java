@@ -369,10 +369,10 @@ else
         contentPanel.removeAll();
 
         loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, posts);
-
-
-
         contentPanel2.removeAll();
+
+
+
         populatefreinds(contentPanel2, friends);
         contentPanel.revalidate();
         contentPanel.repaint();
