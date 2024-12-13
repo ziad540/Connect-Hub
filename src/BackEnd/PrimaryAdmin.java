@@ -60,7 +60,13 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
             }
         }
         if (group != null) {
+            GroupDataBase.getInstance().loadGroupsFromFile();
+            UserDatabaseManagement.getInstance().loadUsersFromFile();
             GroupDataBase.getInstance().removeGroup(group);
+            Search search = new Search();
+            User user = search.getUser(userID);
+            user.getGroupId().remove(group.getGroupId());
+            UserDatabaseManagement.getInstance().saveToFile();
             GroupDataBase.getInstance().saveToFile();
         } else {
             JOptionPane.showMessageDialog(null, "Group does not exist", "Error", JOptionPane.ERROR_MESSAGE);

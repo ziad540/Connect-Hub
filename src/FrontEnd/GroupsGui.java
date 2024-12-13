@@ -2,6 +2,7 @@ package FrontEnd;
 
 import BackEnd.*;
 import FrontEnd.*;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
 import javax.swing.*;
@@ -13,15 +14,17 @@ import java.util.ArrayList;
 public class GroupsGui {
     GroupOperation operation = new GroupOperation();
     Search search = new Search();
+    User user;
+    JPanel groupListPanel;
+    JFrame frame;
 
     public GroupsGui(String Id,JFrame f) {
-
-        JFrame frame = new JFrame("Groups");
+         frame = new JFrame("Groups");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
-        User user = search.getUser(Id);
+        user = search.getUser(Id);
         frame.setVisible(true);
 
 
@@ -50,8 +53,24 @@ public class GroupsGui {
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
 
+
+        JButton refresh = new JButton();
+        ImageIcon image2 = new ImageIcon("src/Image/refresh.png");
+        refresh.setContentAreaFilled(false);
+        refresh.setFont(new Font("Arial", Font.BOLD, 16));
+        refresh.setPreferredSize(new Dimension(50, 50));
+        refresh.setIcon(image2);
+        refresh.setBorderPainted(false);
+        searchPanel.add(refresh);
         topPanel.add(searchPanel, BorderLayout.SOUTH);
         frame.add(topPanel, BorderLayout.NORTH);
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Refresh();
+
+            }
+        });
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -59,7 +78,6 @@ public class GroupsGui {
 
 
             {
-
                 String name = searchField.getText();
                 if (name.equals("")) {
                     JOptionPane.showMessageDialog(frame, "enter a name please");
@@ -67,18 +85,18 @@ public class GroupsGui {
                 }
 
                 searchProcessor search = new searchProcessor(new Allsearch());
-                ArrayList<User> allusers = search.searchforusers(name, user);
+                ArrayList<User> allusers = search.searchforusers(name, Id);
 
 
                 search = new searchProcessor(new FreindsSearch());
-                ArrayList<User> myfreindssearch = search.searchforusers(name, user);
+                ArrayList<User> myfreindssearch = search.searchforusers(name, Id);
 
 
                 search = new searchProcessor(new FreindRequestSearch());
-                ArrayList<User> allrequests = search.searchforusers(name, user);
+                ArrayList<User> allrequests = search.searchforusers(name, Id);
 
                 search = new searchProcessor(new sentFreindRequestssearch());
-                ArrayList<User> allsent = search.searchforusers(name, user);
+                ArrayList<User> allsent = search.searchforusers(name, Id);
 
 
                 if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {
@@ -86,7 +104,7 @@ public class GroupsGui {
                     return;
                 } else {
                     frame.setVisible(false);
-                    new FreindListaftersearchGUI(frame, user, name);
+                    new FreindListaftersearchGUI(frame, Id, name);
 
                 }
 
@@ -97,7 +115,7 @@ public class GroupsGui {
 
 
         // هنا بقا يا زوز هعرض كل ال جروبات اللي جبتهم فوق
-        JPanel groupListPanel = new JPanel();
+        groupListPanel = new JPanel();
         groupListPanel.setLayout(new BoxLayout(groupListPanel, BoxLayout.Y_AXIS));
         groupListPanel.setBackground(Color.WHITE);
         for (Groups group : groups) {
@@ -205,6 +223,45 @@ public class GroupsGui {
 
 
 
+
+
+    }
+    public void Refresh() {
+        GroupDataBase.getInstance().loadGroupsFromFile();
+        UserDatabaseManagement.getInstance().loadUsersFromFile();
+        user = search.getUser(user.getUserId());
+        ArrayList<Groups> groups = operation.getGroups(user.getGroupId());
+        groupListPanel.removeAll();
+        for (Groups group : groups) {
+            JPanel groupPanel = new JPanel();
+            groupPanel.setLayout(new BoxLayout(groupPanel, BoxLayout.X_AXIS));
+            groupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            groupPanel.setBackground(Color.WHITE);
+
+            JLabel groupInfo = new JLabel(group.getGroupName());
+            groupInfo.setFont(new Font("Arial", Font.BOLD, 14));
+
+            try {
+                ImageIcon originalIcon = new ImageIcon(group.getGroupPhoto());
+                Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                groupInfo.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                groupInfo.setIcon(null);
+            }
+
+            // هنا بقا لما ادوس على اسم الجروب هفتحله شاشه جديده جواها بقا الجروب زات نفسه ب محتواياته
+            groupInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    new GroupDetailsGui(user.getUserId(), group.getGroupId(), frame);
+                    frame.setVisible(false);
+                }
+            });
+
+            groupPanel.add(groupInfo);
+            groupListPanel.add(groupPanel);
+        }
+        groupListPanel.revalidate();
+        groupListPanel.repaint();
 
 
     }

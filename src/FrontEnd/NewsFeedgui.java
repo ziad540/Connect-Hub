@@ -20,6 +20,7 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
+    ArrayList<Groups> groups;
 
     User currentuser = new User();
     String currentUserId = null;
@@ -34,7 +35,7 @@ public class NewsFeedgui {
         posts = getPosts.data(friends);
 
        GroupOperation groupOperation=new GroupOperation();
-        groups= groupOperation.getGroups(user.getGroupId());
+        groups= groupOperation.getGroups(currentuser.getGroupId());
 
 
 
@@ -241,7 +242,7 @@ public class NewsFeedgui {
         groupsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               new GroupsGui(user.getUserId(),frame);
+               new GroupsGui(currentuser.getUserId(),frame);
                 frame.setVisible(false);
             }
         });

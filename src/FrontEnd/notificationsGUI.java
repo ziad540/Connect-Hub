@@ -46,7 +46,7 @@ public class notificationsGUI {
         refresh.setContentAreaFilled(false);
         refresh.setFont(new Font("Arial", Font.BOLD, 16));
         refresh.setPreferredSize(new Dimension(50, 50));
-        refresh.setBounds(1600, 0, 50, 50);
+        refresh.setBounds(1480, 0, 50, 50);
         refresh.setIcon(image2);
         refresh.setBorderPainted(false);
         refresh.addActionListener(new ActionListener() {
@@ -70,7 +70,7 @@ public class notificationsGUI {
                 recentframe.setVisible(true);
             }
         });
-        back.setBounds(1660, 0, 50, 50);
+        back.setBounds(1430, 0, 50, 50);
 
         JButton markasRead = new JButton();
         ImageIcon image4 = new ImageIcon("src/Image/markasread.png");
@@ -88,7 +88,7 @@ public class notificationsGUI {
                 recentframe.setVisible(true);
             }
         });
-        markasRead.setBounds(1540, 0, 50, 50);
+        markasRead.setBounds(1380, 0, 50, 50);
         panel.add(back);
         panel.add(markasRead);
         displayNotifications();
@@ -159,7 +159,7 @@ public class notificationsGUI {
         refresh.setContentAreaFilled(false);
         refresh.setFont(new Font("Arial", Font.BOLD, 16));
         refresh.setPreferredSize(new Dimension(50, 50));
-        refresh.setBounds(1600, 0, 50, 50);
+        refresh.setBounds(1480, 0, 50, 50);
         refresh.setIcon(image2);
         refresh.setBorderPainted(false);
         refresh.addActionListener(e -> Refresh());
@@ -178,7 +178,7 @@ public class notificationsGUI {
                 recentframe.setVisible(true);
             }
         });
-        back.setBounds(1660, 0, 50, 50);
+        back.setBounds(1430, 0, 50, 50);
 
         JButton markasRead = new JButton();
         ImageIcon image4 = new ImageIcon("src/Image/markasread.png");
@@ -196,7 +196,7 @@ public class notificationsGUI {
                 recentframe.setVisible(true);
             }
         });
-        markasRead.setBounds(1540, 0, 50, 50);
+        markasRead.setBounds(1380, 0, 50, 50);
 
         panel.add(markasRead);
         panel.add(back);

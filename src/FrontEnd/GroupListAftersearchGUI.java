@@ -67,18 +67,18 @@ public class GroupListAftersearchGUI {
                 }
 
                 searchProcessor search = new searchProcessor(new Allsearch());
-                ArrayList<User> allusers = search.searchforusers(name, user);
+                ArrayList<User> allusers = search.searchforusers(name, Id);
 
 
                 search = new searchProcessor(new FreindsSearch());
-                ArrayList<User> myfreindssearch = search.searchforusers(name, user);
+                ArrayList<User> myfreindssearch = search.searchforusers(name, Id);
 
 
                 search = new searchProcessor(new FreindRequestSearch());
-                ArrayList<User> allrequests = search.searchforusers(name, user);
+                ArrayList<User> allrequests = search.searchforusers(name, Id);
 
                 search = new searchProcessor(new sentFreindRequestssearch());
-                ArrayList<User> allsent = search.searchforusers(name, user);
+                ArrayList<User> allsent = search.searchforusers(name, Id);
 
 
                 if (allusers.isEmpty() && myfreindssearch.isEmpty() && allrequests.isEmpty() && allsent.isEmpty()) {
@@ -86,7 +86,7 @@ public class GroupListAftersearchGUI {
                     return;
                 } else {
                     frame.setVisible(false);
-                    new FreindListaftersearchGUI(frame, user, name);
+                    new FreindListaftersearchGUI(frame, Id, name);
 
                 }
 
