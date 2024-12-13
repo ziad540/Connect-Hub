@@ -88,19 +88,7 @@ public class CreateGroupGui {
                 parentFrame.setVisible(true);
             }
         });
-        JButton backButton = new JButton();
-        ImageIcon image3 = new ImageIcon("src/Image/return.png");
-        backButton.setContentAreaFilled(false);
-        backButton.setPreferredSize(new Dimension(50, 50));
-        backButton.setIcon(image3);
-        backButton.setBorderPainted(false);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                parentFrame.setVisible(true);
-            }
-        });
+
 
         mainPanel.add(nameLabel);
         mainPanel.add(nameField);
@@ -114,7 +102,6 @@ public class CreateGroupGui {
         mainPanel.add(choosePhotoButton);
         mainPanel.add(Box.createVerticalStrut(20));
         mainPanel.add(createButton);
-        mainPanel.add(backButton);
 
         frame.add(mainPanel, BorderLayout.CENTER);
         frame.setVisible(true);

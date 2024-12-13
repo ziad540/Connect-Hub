@@ -1,1 +1,72 @@
-[{"groupName":"Tech Enthusiasts","groupDescription":"A group for technology lovers to share and discuss ideas.","groupOwnerId":"1003","groupId":"G1","groupPhoto":"src/Image/team.png","memberShipId":["M1","M2"],"pendingRequestId":[]},{"groupName":"Book Club","groupDescription":"A place to discuss and recommend books.","groupOwnerId":"1002","groupId":"G2","groupPhoto":"photoUrl2.png","memberShipId":["M2","M1","M3","M4"],"pendingRequestId":[]},{"groupName":"Fitness Fans","groupDescription":"A community of fitness enthusiasts.","groupOwnerId":"1003","groupId":"G3","groupPhoto":"photoUrl3.png","memberShipId":["M3"],"pendingRequestId":[]}]
+[
+  {
+    "groupName": "Tech Enthusiasts",
+    "groupDescription": "A group for technology lovers to share and discuss ideas.",
+    "groupOwnerId": "1003",
+    "groupId": "G1",
+    "groupPhoto": "src/Image/team.png",
+    "memberShipId": [
+      "M1",
+      "M2"
+    ],
+    "pendingRequestId": []
+  },
+  {
+    "groupName": "Book Club",
+    "groupDescription": "A place to discuss and recommend books.",
+    "groupOwnerId": "1002",
+    "groupId": "G2",
+    "groupPhoto": "photoUrl2.png",
+    "memberShipId": [
+      "M2",
+      "M1",
+      "M3",
+      "M4"
+    ],
+    "pendingRequestId": []
+  },
+  {
+    "groupName": "Fitness Fans",
+    "groupDescription": "A community of fitness enthusiasts.",
+    "groupOwnerId": "1003",
+    "groupId": "G3",
+    "groupPhoto": "photoUrl3.png",
+    "memberShipId": [
+      "M3"
+    ],
+    "pendingRequestId": []
+  },
+  {
+    "groupName": "el 3 el day3een",
+    "groupDescription": "e7na 3",
+    "groupOwnerId": "1001",
+    "groupId": "G4",
+    "groupPhoto": "",
+    "memberShipId": [
+      "M4"
+    ],
+    "pendingRequestId": []
+  },
+  {
+    "groupName": "test 3",
+    "groupDescription": "",
+    "groupOwnerId": "1001",
+    "groupId": "G5",
+    "groupPhoto": "",
+    "memberShipId": [
+      "M7"
+    ],
+    "pendingRequestId": []
+  },
+  {
+    "groupName": "test 2",
+    "groupDescription": "",
+    "groupOwnerId": "1001",
+    "groupId": "G6",
+    "groupPhoto": "",
+    "memberShipId": [
+      "M8"
+    ],
+    "pendingRequestId": []
+  }
+]

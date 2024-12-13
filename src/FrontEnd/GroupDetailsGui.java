@@ -30,10 +30,10 @@ public class GroupDetailsGui {
 
     Groups group;
 
-    public GroupDetailsGui(String Id, String groupID, JFrame frame)
-    {this.groupID=groupID;
+    public GroupDetailsGui(String Id, String groupID, JFrame frame) {
+        this.groupID = groupID;
         GroupDataBase.getInstance().loadGroupsFromFile();
-      group= search.getgroup(groupID);
+        group = search.getgroup(groupID);
 
 
         userID = Id;
@@ -83,8 +83,8 @@ public class GroupDetailsGui {
         ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
         ArrayList<User> members = search.getUsers(memberShipUserId);
 
-        ArrayList<String> pendingmembersID=group.getPendingRequestId();
-        ArrayList<User> pendingmembers= search.getUsers(pendingmembersID);
+        ArrayList<String> pendingmembersID = group.getPendingRequestId();
+        ArrayList<User> pendingmembers = search.getUsers(pendingmembersID);
 
 
         createMemberPanel(members, memberType, frame2, group, membersPanel);
@@ -105,10 +105,10 @@ public class GroupDetailsGui {
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         if (memberType.canDeleteGroups() || memberType.canEditOrDeletePosts()) //admin aw moderator
         {
-            JLabel title2=new JLabel("Pending requests");
+            JLabel title2 = new JLabel("Pending requests");
             membersPanel.add(title2);
 
-            createMemberPanel2(pendingmembers,frame2,group,membersPanel);
+            createMemberPanel2(pendingmembers, frame2, memberType, group, membersPanel);
 
         }
         frame2.add(mainPanel);
@@ -120,7 +120,7 @@ public class GroupDetailsGui {
 
 
         GroupDataBase.getInstance().loadGroupsFromFile();
-        group= search.getgroup(groupID);
+        group = search.getgroup(groupID);
         MemberShip member = operation.getMemberShip(group.getGroupId(), iD);
         MemberShip memberType = memberFactory.createMember(member.getStatus());
         ArrayList<String> postId = operation.getPostId(group.getGroupId());
@@ -133,14 +133,14 @@ public class GroupDetailsGui {
         createPostPanel(posts, memberType, mainPanel, frame2, group);
         createMemberPanel(members, memberType, frame2, group, membersPanel);
 
-        ArrayList<String> pendingmembersID=group.getPendingRequestId();
-        ArrayList<User> pendingmembers= search.getUsers(pendingmembersID);
+        ArrayList<String> pendingmembersID = group.getPendingRequestId();
+        ArrayList<User> pendingmembers = search.getUsers(pendingmembersID);
         if (memberType.canDeleteGroups() || memberType.canEditOrDeletePosts()) //admin aw moderator
         {
-            JLabel title2=new JLabel("Pending requests");
+            JLabel title2 = new JLabel("Pending requests");
             membersPanel.add(title2);
 
-            createMemberPanel2(pendingmembers,frame2,group,membersPanel);
+            createMemberPanel2(pendingmembers, frame2, memberType, group, membersPanel);
 
         }
         postsScrollPane.revalidate();
@@ -344,10 +344,9 @@ public class GroupDetailsGui {
 
     }
 
-    public void createMemberPanel2(ArrayList<User> members,  JFrame frame2, Groups group, JPanel membersPanel) {
+    public void createMemberPanel2(ArrayList<User> members, JFrame frame2, MemberShip memberType, Groups group, JPanel membersPanel) {
         membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
         for (User user : members) {
-
             JLabel memberLabel = new JLabel(user.getUserName());
             memberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
             memberLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -359,13 +358,21 @@ public class GroupDetailsGui {
                     int choice = JOptionPane.showOptionDialog(null, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                     switch (choice) {
                         case 0:
-                           //accept logic
-                            Refresh(userID,group.getGroupId(),frame2);
+                            if (memberType.canDeleteGroups()) {
+                                ((PrimaryAdmin) memberType).ApproveMembershipRequests(user.getUserId(), group.getGroupId());
+                            } else {
+                                ((NormalAdmin) memberType).ApproveMembershipRequests(user.getUserId(), group.getGroupId());
+                            }
+                            Refresh(userID, group.getGroupId(), frame2);
                             break;
                         case 1:
+                            if (memberType.canDeleteGroups()) {
+                                ((PrimaryAdmin) memberType).DeclineMembershipRequests(user.getUserId(), group.getGroupId());
+                            } else {
+                                ((NormalAdmin) memberType).DeclineMembershipRequests(user.getUserId(), group.getGroupId());
+                            }
                             //decline logic
-                            Refresh(userID,group.getGroupId(),frame2);
-
+                            Refresh(userID, group.getGroupId(), frame2);
                             break;
 
                     }
@@ -408,7 +415,7 @@ public class GroupDetailsGui {
         refresh.setBorderPainted(false);
         refresh.setFocusPainted(false);
         refresh.addActionListener(e -> {
-            Refresh(userID,groupID,frame2);
+            Refresh(userID, groupID, frame2);
         });
 
 
