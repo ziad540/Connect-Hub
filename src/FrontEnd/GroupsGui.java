@@ -102,6 +102,38 @@ public class GroupsGui {
         });
         bottomPanel.add(backButton);
 
+
+
+
+        JButton newGroupButton = new JButton("New Group");
+        newGroupButton.setFont(new Font("Arial", Font.BOLD, 14));
+        newGroupButton.setBackground(new Color(99, 190, 100));
+        newGroupButton.setForeground(Color.WHITE);
+        newGroupButton.setFocusPainted(false);
+        newGroupButton.setPreferredSize(new Dimension(120, 40));
+
+// Action listener for creating a new group
+        newGroupButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open a new window or dialog for creating a new group
+                new CreateGroupGui(Id, frame); // You can implement CreateGroupGui class
+                frame.setVisible(false); // Optional: Hide current frame while creating a new group
+            }
+        });
+
+        bottomPanel.add(newGroupButton); // Add the button to the bottom panel
+
+
+
+
+
+
+
+
+
+
+
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
