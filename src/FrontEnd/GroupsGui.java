@@ -1,0 +1,70 @@
+package FrontEnd;
+import FrontEnd.*;
+import BackEnd.Groups;
+import BackEnd.User;
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+public class GroupsGui {
+
+    public GroupsGui(String Id, JFrame parentFrame) {
+        JFrame frame = new JFrame("Groups");
+        frame.setSize(600, 800);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
+
+
+        // هنا يا زيزي انا عايز ال arrayList ديه يكون جواها groups اللي صاحب ال Id ده مشترك فيها
+        ArrayList<Groups> groups = Id.getGroups();
+
+        // ديه ال top panel يا زوز
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+        topPanel.setBackground(new Color(99, 190, 100));
+        topPanel.setPreferredSize(new Dimension(600, 150));
+
+        // هنا بقا يا زوز هعرض كل ال جروبات اللي جبتهم فوق
+        JPanel groupListPanel = new JPanel();
+        groupListPanel.setLayout(new BoxLayout(groupListPanel, BoxLayout.Y_AXIS));
+        groupListPanel.setBackground(Color.WHITE);
+        for (Groups group : groups) {
+            JPanel groupPanel = new JPanel();
+            groupPanel.setLayout(new BoxLayout(groupPanel, BoxLayout.X_AXIS));
+            groupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            groupPanel.setBackground(Color.WHITE);
+
+            JLabel groupInfo = new JLabel(group.getGroupName());
+            groupInfo.setFont(new Font("Arial", Font.BOLD, 14));
+
+            try {
+                ImageIcon originalIcon = new ImageIcon(group.getGroupPhoto());
+                Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                groupInfo.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                groupInfo.setIcon(null);
+            }
+
+            // هنا بقا لما ادوس على اسم الجروب هفتحله شاشه جديده جواها بقا الجروب زات نفسه ب محتواياته
+            groupInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    new GroupDetailsGui(Id,group,frame);
+                    frame.setVisible(false);
+                }
+            });
+
+            groupPanel.add(groupInfo);
+            groupListPanel.add(groupPanel);
+        }
+
+        JScrollPane groupScrollPane = new JScrollPane(groupListPanel);
+        frame.add(groupScrollPane, BorderLayout.CENTER);
+
+        frame.setVisible(true);
+    }
+}

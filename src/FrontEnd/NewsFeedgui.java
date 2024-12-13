@@ -20,6 +20,7 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
+    ArrayList<Groups> groups;
     User currentus = null;
 
 
@@ -31,6 +32,16 @@ public class NewsFeedgui {
         friends = getFreinds.get();
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
+
+       GroupOperation groupOperation=new GroupOperation();
+        groups= groupOperation.getGroups(user.getGroupId());
+
+
+
+
+
+
+
 
         frame = new JFrame("NewsFeed");
         frame.setSize(600, 800);
@@ -96,6 +107,12 @@ public class NewsFeedgui {
 
 
         populatefreinds(contentPanel2, friends);
+
+//      JPanel  contentPanelGroups = new JPanel();
+//        contentPanelGroups.setLayout(new BoxLayout(contentPanelGroups, BoxLayout.Y_AXIS));
+//        JScrollPane scrollPaneGroups = new JScrollPane(contentPanelGroups);
+//        right.add(scrollPaneGroups, BorderLayout.SOUTH);
+//        populateGroups(contentPanelGroups, groups);
 
         frame.add(right, BorderLayout.EAST);
 
@@ -190,9 +207,25 @@ public class NewsFeedgui {
         });
 
 
+        JButton groupsButton = new JButton();
+        ImageIcon imageGroups = new ImageIcon("src/Image/group.png");
+        groupsButton.setContentAreaFilled(false);
+        groupsButton.setPreferredSize(new Dimension(50, 50));
+        groupsButton.setIcon(imageGroups);
+        groupsButton.setBorderPainted(false);
+
+        groupsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new GroupsGui(user.getUserId(), frame);
+                frame.setVisible(false);
+            }
+        });
+
+
         bottomPanel.add(profile);
         bottomPanel.add(stories);
-
+        bottomPanel.add(groupsButton);
         bottomPanel.add(freind);
         bottomPanel.add(logoutButton);
 
@@ -210,6 +243,14 @@ public class NewsFeedgui {
             panel.add(createfreindspanel(user));
         }
     }
+
+//    private void populateGroups(JPanel panel, ArrayList<Groups> groups) {
+//        for (Groups group : groups) {
+//
+//            panel.add(createGroupPanel(group));
+//        }
+//    }
+
 
     public static JPanel createPostPanel(String name, String date, String caption, String imagePath, String profileimage) {
 
@@ -343,6 +384,47 @@ else
 
 
     }
+
+//
+//    private JPanel createGroupPanel(Groups group) {
+//        JPanel groupPanel = new JPanel();
+//        groupPanel.setLayout(new BoxLayout(groupPanel, BoxLayout.X_AXIS));
+//        groupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+//        groupPanel.setBackground(Color.WHITE);
+//
+//        JLabel groupInfo = new JLabel(group.getGroupName());
+//        groupInfo.setFont(new Font("Arial", Font.BOLD, 14));
+//
+//        try {
+//            ImageIcon originalIcon = new ImageIcon(group.getGroupPhoto());
+//            Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+//            groupInfo.setIcon(new ImageIcon(scaledImage));
+//        } catch (Exception e) {
+//            groupInfo.setIcon(null);
+//        }
+//
+//        groupPanel.add(groupInfo);
+//
+//        groupInfo.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                String[] options = {"Leave Group"};
+//                int choice = JOptionPane.showOptionDialog(groupPanel, "Please choose an option:", "Choose Option",
+//                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+//
+//                switch (choice) {
+//                    case 0: //View Group
+//                        new GroupsGui( currentus,frame, group);
+//                        break;
+//
+//            }
+//
+//        }
+//        });
+//
+//        return groupPanel;
+//    }
+
 
     public JFrame getFrame() {
 
