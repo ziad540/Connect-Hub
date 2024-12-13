@@ -98,17 +98,7 @@ public class AddPostGroupGui {
         addPostButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // هنا عايز اضيف البوست
-
-//                    ArrayList<Post> allposts = PostDatabaseManagement.getInstance().getPosts();
-//                    String id = String.valueOf(uniqueId.loadCOUNTERPOSTID());
-//                    Post newpopst = new Post(id, user.getUserId(), textArea.getText(), pathimage);
-//                    allposts.add(newpopst);
-//                    PostDatabaseManagement.getInstance().saveToFile();
-//                    ArrayList<String> posts = user.getPostId();
-//                    posts.add(id);
-//                    JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
-//                    UserDatabaseManagement.getInstance().saveToFile();
+                Post post = new Post();
 
                 }
             });
