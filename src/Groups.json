@@ -6,7 +6,8 @@
     "groupId": "G1",
     "groupPhoto": "src/Image/team.png",
     "memberShipId": [
-      "M1"
+      "M1",
+      "M2"
     ],
     "pendingRequestId": []
   },

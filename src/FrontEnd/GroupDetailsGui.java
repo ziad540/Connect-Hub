@@ -102,6 +102,7 @@ public class GroupDetailsGui {
         MemberShip memberType = memberFactory.createMember(member.getStatus());
         ArrayList<String> postId = operation.getPostId(group.getGroupId());
         ArrayList<Post> posts = operation.getObjPost(group.getGroupId());
+        System.out.println(postId.size() + "ADASD");
         ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
         ArrayList<User> members = search.getUsers(memberShipUserId);
         System.out.println(members.size() + "              aaaaa");
@@ -307,7 +308,6 @@ public class GroupDetailsGui {
             membersPanel.add(memberLabel);
 
         }
-
     }
 
     public void createBottomPanel(JButton returnButton, JButton refresh, JButton AddPostButton, JFrame frame2, JFrame frame, Groups group, String id) {
@@ -333,6 +333,9 @@ public class GroupDetailsGui {
         refresh.setContentAreaFilled(false);
         refresh.setBorderPainted(false);
         refresh.setFocusPainted(false);
+        refresh.addActionListener(e -> {
+            Refresh(userID, group, frame2);
+        });
 
 
         ImageIcon icon3 = new ImageIcon("src/Image/new-post.png");
@@ -344,7 +347,9 @@ public class GroupDetailsGui {
         AddPostButton.setBorderPainted(false);
         AddPostButton.setFocusPainted(false);
         AddPostButton.addActionListener(e -> {
-            new AddPostGroupGui(group, frame2);
+            frame2.setVisible(false);
+            new AddPostGroupGui(member.getMemberShipID(), frame2);
+            Refresh(userID, group, frame2);
         });
 
 

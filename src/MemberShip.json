@@ -5,8 +5,21 @@
     "userID": "1003",
     "status": "PrimaryAdmin",
     "postId": [
-      "2",
-      "3"
+      "3",
+      "18",
+      "19",
+      "20",
+      "21"
+    ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M2",
+    "userID": "1002",
+    "status": "Member",
+    "postId": [
+      "4"
+
     ]
   }
 ]
