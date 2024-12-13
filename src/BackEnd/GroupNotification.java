@@ -1,5 +1,7 @@
 package BackEnd;
 
+import FrontEnd.GroupDetailsGui;
+
 import javax.swing.*;
 
 public class GroupNotification extends Notification{
@@ -30,6 +32,9 @@ public class GroupNotification extends Notification{
 
         switch (choice) {
             case 0:
+                new GroupDetailsGui(getRecieverID(), groupid, null);
+
+
 
                 break;
             case 1:

@@ -391,6 +391,11 @@ public class GroupDetailsGui {
 
         returnButton.addActionListener(e -> {
             frame2.dispose();
+            if (frame==null)
+            {
+                new GroupsGui(userID,null);
+                return;
+            }
             frame.setVisible(true);
         });
 

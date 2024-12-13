@@ -36,6 +36,13 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
                 }
                 if (memberToRemove != null) {
                     memberShipList.remove(memberToRemove);
+
+                    Search s =new Search();
+
+                    GroupOperation OP=new GroupOperation();
+                    MemberShip m=  OP.getMember(memberID);
+                    User l=   s.getUser(m.getUserID());
+                    group.removeObserver(l);
                     MemberShipDataBase.getInstance().saveToFile();
                     GroupDataBase.getInstance().saveToFile();
                 } else {
@@ -92,6 +99,7 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
                     ArrayList<String> memberPost = memberToAddPost.getPostId();
                     memberPost.add(postId);
                     MemberShipDataBase.getInstance().saveToFile();
+                    group.notifyObservers("New posts aded in "+group.getGroupName());
                     GroupDataBase.getInstance().saveToFile();
                 } else {
                     JOptionPane.showMessageDialog(null, "Member not found in database", "Error", JOptionPane.ERROR_MESSAGE);
@@ -147,7 +155,8 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
     }
 
     @Override
-    public void ApproveMembershipRequests(String groupId, String memberId) {
+    public void ApproveMembershipRequests(String groupId, String memberId)
+    {
         ArrayList<Groups> groups = GroupDataBase.getInstance().getGroups();
         Groups group = null;
         for (Groups g : groups) {
@@ -162,6 +171,15 @@ public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
                 pendingId.remove(memberId);
                 ArrayList<String> memberShipId = group.getMemberShipId();
                 memberShipId.add(memberId);
+                Search s =new Search();
+
+                GroupOperation OP=new GroupOperation();
+                      MemberShip m=  OP.getMember(memberId);
+                     User l=   s.getUser(m.getUserID());
+
+               group.notifyObservers("new member to our group "+l.getUserName());
+
+               group.addObserver(l);
                 MemberShipDataBase.getInstance().saveToFile();
                 GroupDataBase.getInstance().saveToFile();
             } else {
