@@ -118,5 +118,29 @@ public class CreateGroupGui {
 
         frame.add(mainPanel, BorderLayout.CENTER);
         frame.setVisible(true);
+
+
+        JButton returnButton = new JButton("Return");
+        returnButton.setBackground(new Color(190, 99, 100)); // لون مميز للزر
+        returnButton.setForeground(Color.WHITE);
+        returnButton.setFocusPainted(false);
+
+        returnButton.addActionListener(e -> {
+            frame.dispose();
+            parentFrame.setVisible(true);
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.add(returnButton);
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(createButton);
+
+        mainPanel.add(Box.createVerticalStrut(20));
+        mainPanel.add(buttonPanel);
+
+        frame.add(mainPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
+
     }
 }
