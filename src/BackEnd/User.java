@@ -170,5 +170,7 @@ public class User implements Observer {
     public void update(String groupID)
     {
 
+        notificationManager.addNotification(new GroupNotification("NEW POPST IN YOUR GROUP","20/5",this.getUserId(),groupID));
+
     }
 }
