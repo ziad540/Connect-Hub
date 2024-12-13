@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public interface SearchGroupStrategy
 {
-    ArrayList<String> searchforgroups (String name , String ID);
+    ArrayList<Groups> searchforgroups (String name , String ID);
 
 }
