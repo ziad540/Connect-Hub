@@ -240,6 +240,8 @@ public class GroupDetailsGui {
                             viewProfile.addActionListener(ae -> {
                                        //هنا عايزه يفتح بروفايل الشخص اللي اتداس عليه
                                 /// //////////////////////////////////
+
+
                             });
                             memberMenu.add(viewProfile);
                         // هنا يا زيزي عايز اتأكد هو صاحب الجروب ولا لأ
