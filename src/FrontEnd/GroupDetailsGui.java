@@ -64,7 +64,7 @@ public class GroupDetailsGui {
                 postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 postPanel.setBackground(Color.WHITE);
 /// //////////////////////////////////////////////////////////  بضيف ااسم صاحب البوست
-                User postAuthor = search.getUser(Id);
+                User postAuthor = search.getUser(post.getAutherId());
                 JPanel authorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 authorPanel.setBackground(Color.WHITE);
                 try {
@@ -80,7 +80,6 @@ public class GroupDetailsGui {
                 authorPanel.add(userNameLabel);
 
                 postPanel.add(authorPanel);
-
 
 
                 JLabel postContentLabel = new JLabel(post.getContent());
@@ -221,8 +220,7 @@ public class GroupDetailsGui {
                                     new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(removeMember);
-                            }
-                            else{
+                            } else {
                                 JOptionPane.showMessageDialog(null, "Do not have permission");
                             }
                         }
@@ -259,9 +257,6 @@ public class GroupDetailsGui {
         });
         bottomPanel.add(returnButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-
-
 
 
         frame2.add(mainPanel);
