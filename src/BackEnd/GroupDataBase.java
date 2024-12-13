@@ -1,11 +1,10 @@
 package BackEnd;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import java.io.File;
 import java.util.ArrayList;
+
 
 public class GroupDataBase {
     private static volatile GroupDataBase instance;//Singleton design pattern

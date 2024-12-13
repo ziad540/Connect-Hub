@@ -18,6 +18,7 @@ public class GroupDetailsGui {
     JPanel membersPanel = new JPanel();
     JPanel bottomPanel = new JPanel();
     JButton returnButton = new JButton();
+    JButton AddPostButton=new JButton();
     JButton refresh = new JButton();
     JPanel postsPanel = new JPanel();
     JScrollPane postsScrollPane;
@@ -85,9 +86,10 @@ public class GroupDetailsGui {
         mainPanel.add(membersScrollPane, BorderLayout.EAST);
 
 
-        createBottomPanel(returnButton, refresh, frame2, frame, group, Id);
+        createBottomPanel(returnButton, refresh,AddPostButton, frame2, frame, group, Id);
         bottomPanel.add(returnButton);
         bottomPanel.add(refresh);
+        bottomPanel.add(AddPostButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         frame2.add(mainPanel);
@@ -229,9 +231,17 @@ public class GroupDetailsGui {
             memberLabel.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        System.out.println("Mouse clicked!");
-                        JPopupMenu memberMenu = new JPopupMenu();
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            System.out.println("Mouse clicked!");
+                            JPopupMenu memberMenu = new JPopupMenu();
+
+                            // إضافة "View Profile"
+                            JMenuItem viewProfile = new JMenuItem("View Profile");
+                            viewProfile.addActionListener(ae -> {
+                                       //هنا عايزه يفتح بروفايل الشخص اللي اتداس عليه
+                                /// //////////////////////////////////
+                            });
+                            memberMenu.add(viewProfile);
                         // هنا يا زيزي عايز اتأكد هو صاحب الجروب ولا لأ
                         if (memberType.canDeleteGroups()) {
                             // هنا يا زيزي عايز اتأكد هو عضو عادي ولا لأ  ولا لأ
@@ -301,7 +311,7 @@ public class GroupDetailsGui {
 
     }
 
-    public void createBottomPanel(JButton returnButton, JButton refresh, JFrame frame2, JFrame frame, Groups group, String id) {
+    public void createBottomPanel(JButton returnButton, JButton refresh,JButton AddPostButton,JFrame frame2, JFrame frame, Groups group, String id) {
         ImageIcon icon = new ImageIcon("src/Image/return.png");
         Image scaledImage = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -325,9 +335,21 @@ public class GroupDetailsGui {
         refresh.setBorderPainted(false);
         refresh.setFocusPainted(false);
 
-        refresh.addActionListener(e -> {
-            Refresh(id, group, frame2);
+
+
+        ImageIcon icon3 = new ImageIcon("src/Image/new-post.png");
+        Image scaledImage3 = icon3.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
+        ImageIcon scaledIcon3 = new ImageIcon(scaledImage3);
+        AddPostButton.setIcon(scaledIcon3);
+        AddPostButton.setPreferredSize(new Dimension(60, 60));
+        AddPostButton.setContentAreaFilled(false);
+        AddPostButton.setBorderPainted(false);
+        AddPostButton.setFocusPainted(false);
+        AddPostButton.addActionListener(e -> {
+          new  AddPostGroupGui(group,frame2);
         });
+
+
     }
 
 }
