@@ -7,6 +7,8 @@ import java.awt.*;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 public class GroupDetailsGui {
     GroupOperation operation = new GroupOperation();
     Search search = new Search();
@@ -17,13 +19,20 @@ public class GroupDetailsGui {
     JPanel bottomPanel = new JPanel();
     JButton returnButton = new JButton();
     JButton refresh = new JButton();
+    JPanel postsPanel = new JPanel();
+    JScrollPane postsScrollPane;
+    JScrollPane membersScrollPane;
+    String userID;
+
 
 
     public GroupDetailsGui(String Id, Groups group, JFrame frame) {
+        userID = Id;
         JFrame frame2 = new JFrame("Group Details - " + group.getGroupName());
         frame2.setSize(600, 800);
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.setLocationRelativeTo(null);
+        frame2.setDefaultCloseOperation(EXIT_ON_CLOSE);
         System.out.println(group.getGroupName());
         MemberShip member = operation.getMemberShip(group.getGroupId(), Id);
         System.out.println(member.getUserID());
@@ -51,19 +60,24 @@ public class GroupDetailsGui {
             groupDescriptionLabel.setForeground(Color.DARK_GRAY);
             groupDetailsPanel.add(groupDescriptionLabel);
         }
+        JLabel postsTitleLabel = new JLabel("Posts", SwingConstants.CENTER);
+        postsTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        groupDetailsPanel.add(postsTitleLabel);
 
         // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل بوستات الجروب
         ArrayList<String> postId = operation.getPostId(group.getGroupId());
         ArrayList<Post> posts = operation.getObjPost(group.getGroupId());
         createPostPanel(posts, memberType, mainPanel, frame2, group);
+        postsScrollPane = new JScrollPane(postsPanel);
+        mainPanel.add(postsScrollPane, BorderLayout.CENTER);
         // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل اعضاء الجروب
         ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
         ArrayList<User> members = search.getUsers(memberShipUserId);
 
-        membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
+
         createMemberPanel(members, memberType, frame2, group, membersPanel);
 
-        JScrollPane membersScrollPane = new JScrollPane(membersPanel);
+        membersScrollPane = new JScrollPane(membersPanel);
         membersScrollPane.setPreferredSize(new Dimension(200, 0));
         membersScrollPane.setBorder(BorderFactory.createTitledBorder("Group Members"));
 
@@ -81,34 +95,33 @@ public class GroupDetailsGui {
 
     }
 
-    private void Refresh(String iD, Groups group, JFrame frame, JFrame frame2) {
+    private void Refresh(String iD, Groups group, JFrame frame2) {
         MemberShip member = operation.getMemberShip(group.getGroupId(), iD);
         MemberShip memberType = memberFactory.createMember(member.getStatus());
         ArrayList<String> postId = operation.getPostId(group.getGroupId());
         ArrayList<Post> posts = operation.getObjPost(group.getGroupId());
         ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
         ArrayList<User> members = search.getUsers(memberShipUserId);
-        bottomPanel.removeAll();
+        System.out.println(members.size()+"              aaaaa");
+        postsPanel.removeAll();
         membersPanel.removeAll();
         createPostPanel(posts, memberType, mainPanel, frame2, group);
         createMemberPanel(members, memberType, frame2, group, membersPanel);
-        createBottomPanel(returnButton, refresh, frame2, frame, group, iD);
-        bottomPanel.add(returnButton);
-        bottomPanel.add(refresh);
-        bottomPanel.revalidate();
-        bottomPanel.repaint();
-        membersPanel.revalidate();
-        membersPanel.repaint();
+        postsScrollPane.revalidate();
+        postsScrollPane.repaint();
+        mainPanel.add(postsScrollPane, BorderLayout.CENTER);
+        membersScrollPane.revalidate();
+        membersScrollPane.repaint();
+        mainPanel.add(membersScrollPane, BorderLayout.EAST);
+        frame2.invalidate();
+        frame2.validate();
+        frame2.repaint();
     }
 
-    public void createPostPanel(ArrayList<Post> posts, MemberShip memberType, JPanel groupDetailsPanel, JFrame frame2, Groups group) {
+    public void createPostPanel(ArrayList<Post> posts, MemberShip memberType, JPanel mainPanel, JFrame frame2, Groups group) {
 
         if (posts.size() > 0) {
-            JLabel postsTitleLabel = new JLabel("Posts", SwingConstants.CENTER);
-            postsTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-            groupDetailsPanel.add(postsTitleLabel);
 
-            JPanel postsPanel = new JPanel();
             postsPanel.setLayout(new BoxLayout(postsPanel, BoxLayout.Y_AXIS));
 
             for (Post post : posts) {
@@ -166,8 +179,8 @@ public class GroupDetailsGui {
                                     // هنا يا زيزي عايز اعدل البوست  و اغير محتواه
                                     post.setContent(newContent);
                                     JOptionPane.showMessageDialog(null, "Post updated successfully!");
-                                    frame2.dispose();
 //                                    new GroupDetailsGui(Id, group, frame);
+                                    Refresh(userID, group, frame2);
                                 }
                             });
 
@@ -181,8 +194,8 @@ public class GroupDetailsGui {
                                     ((NormalAdmin) memberType).RemovePosts(group.getGroupId(), post.getContentId(), member.getMemberShipID());
                                 }
                                 JOptionPane.showMessageDialog(null, "Post deleted successfully!");
-                                frame2.dispose();
 //                                new GroupDetailsGui(Id, group, frame);
+                                Refresh(userID, group, frame2);
                             });
 
                             postMenu.add(editPost);
@@ -195,17 +208,17 @@ public class GroupDetailsGui {
                 postsPanel.add(postPanel);
                 postsPanel.add(new JSeparator());
             }
-
-            JScrollPane postsScrollPane = new JScrollPane(postsPanel);
-            groupDetailsPanel.add(postsScrollPane, BorderLayout.CENTER);
+//            JScrollPane postsScrollPane = new JScrollPane(postsPanel);
+//            mainPanel.add(postsScrollPane, BorderLayout.CENTER);
         } else {
             JLabel noPostsLabel = new JLabel("No posts in this group.", SwingConstants.CENTER);
-            groupDetailsPanel.add(noPostsLabel);
+            mainPanel.add(noPostsLabel,BorderLayout.CENTER);
         }
     }
 
     public void createMemberPanel(ArrayList<User> members, MemberShip memberType, JFrame frame2, Groups group, JPanel membersPanel) {
         System.out.println("CREATEMEMBER ANA HANA");
+        membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
         for (User user : members) {
             MemberShip membership = operation.getMemberShip(group.getGroupId(), user.getUserId());
             MemberShip memberInGroup = memberFactory.createMember(membership.getStatus());
@@ -228,7 +241,7 @@ public class GroupDetailsGui {
                                     // هنا عايز اخليه ادمن
                                     ((PrimaryAdmin) memberType).PromoteNewAdmin(group.getGroupId(), membership.getMemberShipID());
                                     JOptionPane.showMessageDialog(null, user.getUserName() + " promoted to Admin!");
-                                    frame2.dispose();
+                                    Refresh(userID, group, frame2);
 //                                    new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(promoteToAdmin);
@@ -239,8 +252,8 @@ public class GroupDetailsGui {
                                     // هنا عايز اخلي العضو ده عضو عادي خالص
                                     ((PrimaryAdmin) memberType).DemoteGroupAdmin(group.getGroupId(), membership.getMemberShipID());
                                     JOptionPane.showMessageDialog(null, user.getUserName() + " demoted to Normal User!");
-                                    frame2.dispose();
 //                                    new GroupDetailsGui(Id, group, frame);
+                                    Refresh(userID, group, frame2);
                                 });
                                 memberMenu.add(demoteToUser);
                             }
@@ -252,8 +265,8 @@ public class GroupDetailsGui {
                                 } else {
                                     ((PrimaryAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
                                     JOptionPane.showMessageDialog(null, "Member removed!");
-                                    frame2.dispose();
 //                                    new GroupDetailsGui(Id, group, frame);
+                                    Refresh(userID, group, frame2);
                                 }
                             });
                             memberMenu.add(removeMember);
@@ -267,8 +280,8 @@ public class GroupDetailsGui {
                                     // هنا عايز اطرد العضو ده من المجموعه
                                     ((NormalAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
                                     JOptionPane.showMessageDialog(null, "Member removed!");
-                                    frame2.dispose();
                                     //refresh
+                                    Refresh(userID, group, frame2);
 //                                    new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(removeMember);
@@ -283,7 +296,9 @@ public class GroupDetailsGui {
             });
 
             membersPanel.add(memberLabel);
+
         }
+
     }
 
     public void createBottomPanel(JButton returnButton, JButton refresh, JFrame frame2, JFrame frame, Groups group, String id) {
@@ -311,7 +326,7 @@ public class GroupDetailsGui {
         refresh.setFocusPainted(false);
 
         refresh.addActionListener(e -> {
-            Refresh(id, group, frame, frame2);
+            Refresh(id, group, frame2);
         });
     }
 
