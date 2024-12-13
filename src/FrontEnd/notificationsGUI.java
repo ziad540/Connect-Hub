@@ -15,17 +15,14 @@ import java.util.Map;
 public class notificationsGUI {
     private JFrame frame;
     private JPanel panel;
-    private  ArrayList<Notification>  sampleNotifications;
+    private ArrayList<Notification> sampleNotifications;
     String userid;
     JFrame recentframe;
 
-
-    public notificationsGUI(String userid,JFrame recentframe) {
-        this.userid=userid;
-        this.recentframe=recentframe;
+    public notificationsGUI(String userid, JFrame recentframe) {
+        this.userid = userid;
+        this.recentframe = recentframe;
         this.sampleNotifications = createSampleNotifications();
-
-
         initialize();
     }
 
@@ -39,6 +36,10 @@ public class notificationsGUI {
         panel.setBackground(new Color(227, 242, 253));
         frame.add(panel);
 
+        // Create background label and add it initially
+        JLabel backgroundLabel = new JLabel(new ImageIcon("src/Image/conncect-hub.jpg"));
+        backgroundLabel.setBounds(-200, -200, 2100, 1400);
+        panel.add(backgroundLabel);
 
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/Image/refresh.png");
@@ -55,11 +56,10 @@ public class notificationsGUI {
             }
         });
         panel.add(refresh);
-        //"C:\Users\Abdallah\Desktop\markasread.png"
+
         JButton back = new JButton();
         ImageIcon image3 = new ImageIcon("src/Image/return.png");
         back.setContentAreaFilled(false);
-
         back.setPreferredSize(new Dimension(50, 50));
         back.setIcon(image3);
         back.setBorderPainted(false);
@@ -68,70 +68,51 @@ public class notificationsGUI {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 recentframe.setVisible(true);
-
             }
         });
-        back.setBounds(1660,0,50,50);
-
+        back.setBounds(1660, 0, 50, 50);
 
         JButton markasRead = new JButton();
         ImageIcon image4 = new ImageIcon("src/Image/markasread.png");
         markasRead.setContentAreaFilled(false);
-
         markasRead.setPreferredSize(new Dimension(50, 50));
         markasRead.setIcon(image4);
         markasRead.setBorderPainted(false);
         markasRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search s=new Search();
-                User u =s.getUser(userid);
+                Search s = new Search();
+                User u = s.getUser(userid);
                 u.getNotificationManager().setNotifications(new ArrayList<>());
                 frame.dispose();
                 recentframe.setVisible(true);
-
             }
         });
-        markasRead.setBounds(1540,0,50,50);
-
-        JLabel backgroundLabel = new JLabel(new ImageIcon("conncect-hub.jpg"));
-        backgroundLabel.setBounds(-200, -200, 2100, 1400);
-        panel.add(backgroundLabel);
+        markasRead.setBounds(1540, 0, 50, 50);
         panel.add(back);
         panel.add(markasRead);
-  displayNotifications();
-        panel.setComponentZOrder(backgroundLabel, panel.getComponentCount() - 1); // 3shan ne5aly el background a5er haga
+        displayNotifications();
+        panel.setComponentZOrder(backgroundLabel, panel.getComponentCount() - 1);
         frame.setVisible(true);
     }
 
-    private  ArrayList<Notification>  createSampleNotifications() {
-       ArrayList<Notification> not=new ArrayList<>();
-       Search s=new Search();
-       User u =s.getUser(userid);
-        System.out.println(userid);
-       not=u.getNotificationManager().getNotifications();
-        System.out.println(not.size());
+    private ArrayList<Notification> createSampleNotifications() {
+        ArrayList<Notification> not = new ArrayList<>();
+        Search s = new Search();
+        User u = s.getUser(userid);
+        not = u.getNotificationManager().getNotifications();
         return not;
     }
 
     private void displayNotifications() {
         int height = 15;
 
-        for (Notification n : sampleNotifications)
-        {
+        for (Notification n : sampleNotifications) {
             JPanel notificationPanel = new JPanel();
             notificationPanel.setBounds(15, height, 475, 80);
             notificationPanel.setBackground(Color.WHITE);
             notificationPanel.setLayout(null);
             panel.add(notificationPanel);
-
-//            String imagePath = (String) notification.get("image");
-//            if (!new java.io.File(imagePath).exists()) {
-//                System.out.println("Image not found: " + imagePath);
-//            }
-//            JLabel imageLabel = new JLabel(new ImageIcon(imagePath));
-//            imageLabel.setBounds(10, 10, 60, 60);
-//            notificationPanel.add(imageLabel);
 
             JLabel typeLabel = new JLabel((String) n.getMessage());
             typeLabel.setBounds(80, 10, 200, 20);
@@ -156,11 +137,8 @@ public class notificationsGUI {
                     sampleNotifications.remove(n);
                     UserDatabaseManagement.getInstance().saveToFile();
                     Refresh();
-
-
                 }
             });
-
 
             height += 90;
         }
@@ -170,6 +148,12 @@ public class notificationsGUI {
         UserDatabaseManagement.getInstance().loadUsersFromFile();
         sampleNotifications = createSampleNotifications();
         panel.removeAll();
+
+
+
+        JLabel backgroundLabel = new JLabel(new ImageIcon("src/Image/conncect-hub.jpg"));
+        backgroundLabel.setBounds(-200, -200, 2100, 1400);
+        panel.add(backgroundLabel);
         JButton refresh = new JButton();
         ImageIcon image2 = new ImageIcon("src/Image/refresh.png");
         refresh.setContentAreaFilled(false);
@@ -192,40 +176,33 @@ public class notificationsGUI {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 recentframe.setVisible(true);
-
             }
         });
         back.setBounds(1660, 0, 50, 50);
 
-
         JButton markasRead = new JButton();
         ImageIcon image4 = new ImageIcon("src/Image/markasread.png");
         markasRead.setContentAreaFilled(false);
-
         markasRead.setPreferredSize(new Dimension(50, 50));
         markasRead.setIcon(image4);
         markasRead.setBorderPainted(false);
         markasRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search s=new Search();
-                User u =s.getUser(userid);
+                Search s = new Search();
+                User u = s.getUser(userid);
                 u.getNotificationManager().setNotifications(new ArrayList<>());
                 frame.dispose();
                 recentframe.setVisible(true);
-
             }
         });
-        markasRead.setBounds(1540,0,50,50);
+        markasRead.setBounds(1540, 0, 50, 50);
+
         panel.add(markasRead);
         panel.add(back);
         displayNotifications();
-        JLabel backgroundLabel = new JLabel(new ImageIcon("src/Image/conncect-hub.jpg"));
-        backgroundLabel.setBounds(-200, -200, 2100, 1400);
-        panel.add(backgroundLabel);
         panel.setComponentZOrder(backgroundLabel, panel.getComponentCount() - 1);
         panel.revalidate();
         panel.repaint();
     }
-
 }

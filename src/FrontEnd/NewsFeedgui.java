@@ -195,11 +195,11 @@ public class NewsFeedgui {
         });
 
         JButton notificaions = new JButton();
-       // ImageIcon image6 = new ImageIcon("src/Image/team.png");
+       ImageIcon image7 = new ImageIcon("src/Image/notificationspng.png");
         notificaions.setContentAreaFilled(false);
         notificaions.setFont(new Font("Arial", Font.BOLD, 16));
         notificaions.setPreferredSize(new Dimension(50, 50));
-       // freind.setIcon(image6);
+        notificaions.setIcon(image7);
         notificaions.setBorderPainted(false);
         notificaions.addActionListener(new ActionListener() {
             @Override
@@ -217,9 +217,9 @@ public class NewsFeedgui {
         bottomPanel.add(stories);
 
         bottomPanel.add(freind);
-        bottomPanel.add(logoutButton);
-        bottomPanel.add(notificaions);
+          bottomPanel.add(notificaions);
 
+        bottomPanel.add(logoutButton);
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
