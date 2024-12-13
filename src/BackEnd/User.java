@@ -3,7 +3,7 @@ package BackEnd;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Observer {
     private String userId;
     private String email;
     private String userName;
@@ -18,27 +18,35 @@ public class User {
     private ArrayList<String> sentfreindrequestId = new ArrayList<>(); //ely ana ba3thom
     private ArrayList<String> blockedID = new ArrayList<>(); //ely ana 3amlehom
     private ArrayList<String> blockedfromID = new ArrayList<>();// elyma3molymenhom
-    private ArrayList<String> groupId = new ArrayList<>();
-    private UserRelationsManager relationsManage = new UserRelationsManager();
 
-    public ArrayList<String> getSentfreindrequestId() {
-        return relationsManage.getSentfreindrequestId();
+    private ArrayList<String> groupId = new ArrayList<>();
+  
+
+    private NotificationManager notificationManager =new NotificationManager();
+
+
+
+
+    public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
+        this.userId = String.valueOf(1000 + uniqueId.loadCounterId());
+        this.email = email;
+        this.userName = userName;
+        this.status = status;
+        this.dateOfBirth = dateOfBirth;
+        profileInformation = new ProfileInformation("src/Image/unknown user.png", "src/Image/unknown cover.png", "");
+        hashingPassword = passwordHashing.hashpassword(password);// hashing Password by class BackEnd.passwordHashing
+
     }
+
+    public User() {
+    }
+
+
 
     public void setSentfreindrequestId(ArrayList<String> sentfreindrequestId) {
         this.sentfreindrequestId = sentfreindrequestId;
     }
 
-    public ArrayList<String> getBlockedfromID() {
-        return relationsManage.getBlockedID();
-    }
-
-    public void setBlockedfromID(ArrayList<String> blockedfromID) {
-        relationsManage.setBlockedID(blockedfromID);
-    }
-
-    public User() {
-    }
 
     public ArrayList<String> getFirndesId() {
         return firndesId;
@@ -52,19 +60,8 @@ public class User {
         return postId;
     }
 
-    private void setPostId(ArrayList<String> postId) {
+    public void setPostId(ArrayList<String> postId) {
         this.postId = postId;
-    }
-
-    public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
-        this.userId = String.valueOf(1000 + uniqueId.loadCounterId());
-        this.email = email;
-        this.userName = userName;
-        this.status = status;
-        this.dateOfBirth = dateOfBirth;
-        profileInformation = new ProfileInformation("Image/unknown user.png", "Image/unknown cover.png", "");
-        hashingPassword = passwordHashing.hashpassword(password);// hashing Password by class BackEnd.passwordHashing
-
     }
 
     public void setUserId(String userId) {
@@ -99,21 +96,8 @@ public class User {
         this.storiesId = storiesId;
     }
 
-    public ArrayList<String> getFreindrequestId() {
-        return relationsManage.getFreindrequestId();
-    }
 
-    public void setFreindrequestId(ArrayList<String> freindrequestId) {
-        relationsManage.setFreindrequestId(freindrequestId);
-    }
 
-    public ArrayList<String> getBlockedID() {
-        return relationsManage.getBlockedID();
-    }
-
-    public void setBlockedID(ArrayList<String> blockedID) {
-        relationsManage.setBlockedID(blockedID);
-    }
 
     public String getEmail() {
         return email;
@@ -131,6 +115,34 @@ public class User {
         return dateOfBirth;
     }
 
+    public ArrayList<String> getFreindrequestId() {
+        return freindrequestId;
+    }
+
+    public void setFreindrequestId(ArrayList<String> freindrequestId) {
+        this.freindrequestId = freindrequestId;
+    }
+
+    public ArrayList<String> getSentfreindrequestId() {
+        return sentfreindrequestId;
+    }
+
+    public ArrayList<String> getBlockedID() {
+        return blockedID;
+    }
+
+    public void setBlockedID(ArrayList<String> blockedID) {
+        this.blockedID = blockedID;
+    }
+
+    public ArrayList<String> getBlockedfromID() {
+        return blockedfromID;
+    }
+
+    public void setBlockedfromID(ArrayList<String> blockedfromID) {
+        this.blockedfromID = blockedfromID;
+    }
+
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
@@ -143,13 +155,7 @@ public class User {
         this.hashingPassword = hashingPassword;
     }
 
-    public UserRelationsManager getRelationsManage() {
-        return relationsManage;
-    }
-
-    public void setRelationsManage(UserRelationsManager relationsManage) {
-        this.relationsManage = relationsManage;
-    }
+   
 
     public ArrayList<String> getGroupId() {
         return groupId;
@@ -165,5 +171,21 @@ public class User {
 
     public void setProfileInformation(ProfileInformation profileInformation) {
         this.profileInformation = profileInformation;
+    }
+
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
+    }
+
+    public void setNotificationManager(NotificationManager notificationManager) {
+        this.notificationManager = notificationManager;
+    }
+
+    @Override
+    public void update(String groupID)
+    {
+
+        notificationManager.addNotification(new GroupNotification("NEW POPST IN YOUR GROUP","20/5",this.getUserId(),groupID));
+
     }
 }

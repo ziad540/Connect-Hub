@@ -20,8 +20,11 @@ public class Profile extends JFrame{
     private JButton backButton;
     private JPanel posts;
     private JLabel bioDetails;
+    Search search = new Search();
+    User user;
 
-    public Profile(JFrame frame, User user) {
+    public Profile(JFrame frame, String userID) {
+        user = search.getUser(userID);
         setTitle("My Profile");
         setSize(new Dimension(600,800));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -53,7 +56,7 @@ public class Profile extends JFrame{
         viewProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProfileDetails profileDetails = new ProfileDetails(frame,user);
+                ProfileDetails profileDetails = new ProfileDetails(frame,userID);
                 dispose();
             }
         });

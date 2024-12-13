@@ -11,6 +11,7 @@ public class Main {
         new StartWindow();
         //new GroupsGui("1003");
         //new FrontEnd.FreindGui(new BackEnd.User(),new JFrame());
+
         //new FrontEnd.AddStoryGui();
         //new FrontEnd.FreindListaftersearchGUI();
     }

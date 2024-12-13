@@ -25,9 +25,11 @@ public class ProfileDetails extends JFrame{
     private JButton deleteProfileButton;
     private JButton deleteBioButton;
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+    User user;
+    Search search = new Search();
 
-
-    public ProfileDetails(JFrame frame, User user) {
+    public ProfileDetails(JFrame frame, String userID) {
+        user = search.getUser(userID);
         ProfileInformation tempProfile = new ProfileInformation(user.getProfileInformation().getProfilePicPath(),user.getProfileInformation().getCoverPicPath(),user.getProfileInformation().getBioData());
         setTitle("Profile Details");
         setSize(new Dimension(600,800));
@@ -47,7 +49,7 @@ public class ProfileDetails extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Profile profile = new Profile(frame,user);
+                Profile profile = new Profile(frame,userID);
             }
         });
         editCoverPhotoButton.addActionListener(new ActionListener() {
@@ -111,7 +113,7 @@ public class ProfileDetails extends JFrame{
         saveChangesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // save updated user to file
+                // save updated currentuser to file
                 user.setUserName(usernameDetails.getText());
                 user.setProfileInformation(tempProfile);
 

@@ -54,7 +54,7 @@ public class LoginWindow extends JFrame {
                             User user = u.getUsers().get(i);
                             user.setStatus("online");
                             u.saveToFile();
-                            new NewsFeedgui(user);
+                            new NewsFeedgui(user.getUserId());
                             dispose();
                             setVisible(false);
                         } else
@@ -74,4 +74,6 @@ public class LoginWindow extends JFrame {
             }
         });
     }
+
+
 }

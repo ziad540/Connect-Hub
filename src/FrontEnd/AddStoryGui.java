@@ -12,7 +12,7 @@ public class AddStoryGui {
     String pathimage=null;
 
     AddStoryGui(User user, JFrame frame1) {
-        JFrame frame = new JFrame("BackEnd.Story");
+        JFrame frame = new JFrame("Story");
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -22,14 +22,14 @@ public class AddStoryGui {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(240, 255, 255));
         topPanel.setPreferredSize(new Dimension(400, 60));
-        JLabel titleLabel = new JLabel("Add BackEnd.Story", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Add Story", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         topPanel.add(titleLabel, BorderLayout.CENTER);
         frame.add(topPanel, BorderLayout.NORTH);
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
-        JTextArea textArea = new JTextArea("Add BackEnd.Story...");
+        JTextArea textArea = new JTextArea("Add Story...");
         textArea.setFont(new Font("Arial", Font.PLAIN, 18));
         textArea.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
         textArea.setLineWrap(true);
@@ -116,8 +116,11 @@ public class AddStoryGui {
                StoryDatabaseManagement.getInstance().saveToFile();
                 ArrayList<String> stories= user.getStoriesId();
                 stories.add(id);
-                JOptionPane.showMessageDialog(null, "Added STORY", "added", JOptionPane.INFORMATION_MESSAGE);
+                user.setStoriesId(stories);
                 UserDatabaseManagement.getInstance().saveToFile();
+                JOptionPane.showMessageDialog(null, "Added STORY", "added", JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+                frame1.setVisible(true);
             }
         });
 
@@ -128,7 +131,6 @@ public class AddStoryGui {
         bottomPanel.add(addstoryButton);
 
 
-        // Add Bottom Panel to Frame
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
 

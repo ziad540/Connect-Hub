@@ -20,16 +20,16 @@ public class NewsFeedgui {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
     ArrayList<User> friends;
     ArrayList<Post> posts;
-    ArrayList<Groups> groups;
-    User currentus = null;
 
+    User currentuser = new User();
+    String currentUserId = null;
+    Search search = new Search();
 
+    NewsFeedgui(String userId) {
+        currentUserId = userId;
+        currentuser = search.getUser(userId);
+        friends = search.getUsers(currentuser.getFirndesId());//(1)
 
-    NewsFeedgui(User user) {
-        currentus=user;
-
-        GetFreinds getFreinds = new GetFreinds(user.getFirndesId());
-        friends = getFreinds.get();
         GetPosts getPosts = new GetPosts();
         posts = getPosts.data(friends);
 
@@ -48,6 +48,9 @@ public class NewsFeedgui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
+        JLabel backgroundLabel = new JLabel(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\conncect-hub.jpg"));
+        backgroundLabel.setBounds(-200, -200, 2100, 1400);
+
 
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -70,7 +73,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new Addpostgui(user, frame);
+                new Addpostgui(currentUserId,frame);//(5)
                 frame.setVisible(false);
 
 
@@ -146,7 +149,7 @@ public class NewsFeedgui {
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(frame, user);
+                new Profile(frame, currentUserId);//(2)
                 frame.setVisible(false);
             }
         });
@@ -163,7 +166,7 @@ public class NewsFeedgui {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                new StoriesGui(user, frame);
+                new StoriesGui(currentUserId, frame);//(3)
                 frame.setVisible(false);
 
             }
@@ -181,7 +184,10 @@ public class NewsFeedgui {
             @Override
 
             public void actionPerformed(ActionEvent e) {
-                user.setStatus("offline");
+                System.out.println(currentuser+"    4");
+                userDatabaseManagement.loadUsersFromFile();
+                search.getUser(userId).setStatus("offline");
+                System.out.println(currentuser+"    5");
                 userDatabaseManagement.saveToFile();
                 new StartWindow();
                 frame.dispose();
@@ -200,11 +206,29 @@ public class NewsFeedgui {
         freind.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FreindGui(user,frame);
+                new FreindGui(currentUserId,frame);//(4)
                 frame.setVisible(false);
 
             }
         });
+
+        JButton notificaions = new JButton();
+       ImageIcon image7 = new ImageIcon("src/Image/notificationspng.png");
+        notificaions.setContentAreaFilled(false);
+        notificaions.setFont(new Font("Arial", Font.BOLD, 16));
+        notificaions.setPreferredSize(new Dimension(50, 50));
+        notificaions.setIcon(image7);
+        notificaions.setBorderPainted(false);
+        notificaions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new notificationsGUI(currentUserId,frame);//(4)
+                frame.setVisible(false);
+
+            }
+        });
+
+
 
 
         JButton groupsButton = new JButton();
@@ -227,13 +251,20 @@ public class NewsFeedgui {
         bottomPanel.add(stories);
         bottomPanel.add(groupsButton);
         bottomPanel.add(freind);
-        bottomPanel.add(logoutButton);
+          bottomPanel.add(notificaions);
 
+        bottomPanel.add(logoutButton);
 
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
 
         frame.setVisible(true);
+
+//        contentPanel.revalidate();
+//        contentPanel.repaint();
+//        contentPanel2.revalidate();
+//        contentPanel2.repaint();
+
     }
 
 
@@ -315,13 +346,13 @@ public class NewsFeedgui {
                         FriendProfile friendProfile = new FriendProfile(frame, friend);
                         break;
                     case 1:
-                       UserRelationsManager.remove_freind(currentus, friend);
+                       UserRelationsManager.remove_freind(currentuser, friend);
                         JOptionPane.showMessageDialog(postPanel, "Removed Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
                         break;
                     case 2:
-                      UserRelationsManager.block_freind(currentus, friend);
+                      UserRelationsManager.block_freind(currentuser, friend);
                         JOptionPane.showMessageDialog(postPanel, "Blocked Friend");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
@@ -363,8 +394,15 @@ else
     }
 
     public void Refresh() {
-        GetFreinds getFreinds2 = new GetFreinds(currentus.getFirndesId());
-        friends = getFreinds2.get();
+        System.out.println(currentuser+"    3");
+        userDatabaseManagement.loadUsersFromFile();
+        StoryHandler storyHandler = new StoryHandler();
+        storyHandler.deleteExpiredStories();
+        userDatabaseManagement.loadUsersFromFile();
+        postDatabaseManagement.loadPostsFromFile();
+        currentuser = search.getUser(currentUserId);
+        System.out.println(currentuser+"    4");
+        friends = search.getUsers(currentuser.getFirndesId());//(1)
         GetPosts getPosts2 = new GetPosts();
         posts = getPosts2.data(friends);
 
@@ -373,60 +411,26 @@ else
         contentPanel.removeAll();
 
         loadPosts.showPosts(contentPanel, NewsFeedgui.this, userDatabaseManagement, posts);
+        contentPanel2.removeAll();
 
+
+
+        populatefreinds(contentPanel2, friends);
         contentPanel.revalidate();
         contentPanel.repaint();
-
-        contentPanel2.removeAll();
-        populatefreinds(contentPanel2, friends);
         contentPanel2.revalidate();
         contentPanel2.repaint();
+        frame.invalidate();
+        frame.validate();
+        frame.repaint();
 
 
     }
 
-//
-//    private JPanel createGroupPanel(Groups group) {
-//        JPanel groupPanel = new JPanel();
-//        groupPanel.setLayout(new BoxLayout(groupPanel, BoxLayout.X_AXIS));
-//        groupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-//        groupPanel.setBackground(Color.WHITE);
-//
-//        JLabel groupInfo = new JLabel(group.getGroupName());
-//        groupInfo.setFont(new Font("Arial", Font.BOLD, 14));
-//
-//        try {
-//            ImageIcon originalIcon = new ImageIcon(group.getGroupPhoto());
-//            Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-//            groupInfo.setIcon(new ImageIcon(scaledImage));
-//        } catch (Exception e) {
-//            groupInfo.setIcon(null);
-//        }
-//
-//        groupPanel.add(groupInfo);
-//
-//        groupInfo.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                String[] options = {"Leave Group"};
-//                int choice = JOptionPane.showOptionDialog(groupPanel, "Please choose an option:", "Choose Option",
-//                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-//
-//                switch (choice) {
-//                    case 0: //View Group
-//                        new GroupsGui( currentus,frame, group);
-//                        break;
-//
-//            }
-//
-//        }
-//        });
-//
-//        return groupPanel;
-//    }
 
+    public JFrame getFrame()
 
-    public JFrame getFrame() {
+    {
 
 
         return frame;

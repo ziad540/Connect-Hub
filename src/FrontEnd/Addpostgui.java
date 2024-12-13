@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import BackEnd.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +14,11 @@ import java.util.ArrayList;
 public class Addpostgui {
     private ImageIcon lastimage = null;
     private String pathimage = null; // store the path of image
+    Search search = new Search();
+    User user;
 
-    Addpostgui(User user, JFrame frame2) {
+    Addpostgui(String userID, JFrame frame2) {
+        user = search.getUser(userID);
         JFrame frame = new JFrame("NewsFeed"); //new frame to Add post
         frame.setSize(400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,7 +27,7 @@ public class Addpostgui {
         frame.setLocationRelativeTo(null);
 
 
-        // Top Panel Contains the title label "Add BackEnd.Post"
+        // Top Panel Contains the title label "Add Post"
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(102, 205, 170));
         topPanel.setPreferredSize(new Dimension(400, 60));
@@ -101,17 +105,26 @@ public class Addpostgui {
         addstoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int idint = uniqueId.loadCOUNTERPOSTID();
+                String idCheck = String.valueOf(idint);
 
-                ArrayList<Post> allposts = PostDatabaseManagement.getInstance().getPosts();
-                String id = String.valueOf(uniqueId.loadCOUNTERPOSTID());
+                for (int i = 0; i < PostDatabaseManagement.getInstance().getPosts().size(); i++) {
+                    if (PostDatabaseManagement.getInstance().getPosts().get(i).getContentId().equals(idCheck)) {
+                        idint++;
+                        idCheck = String.valueOf(idint);
+                    }
+                }
+                String id = String.valueOf(idint);
                 Post newpopst = new Post(id, user.getUserId(), textArea.getText(), pathimage);
-                allposts.add(newpopst);
+                PostDatabaseManagement.getInstance().addPost(newpopst);
                 PostDatabaseManagement.getInstance().saveToFile();
                 ArrayList<String> posts = user.getPostId();
                 posts.add(id);
-                JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
+                user.setPostId(posts);
                 UserDatabaseManagement.getInstance().saveToFile();
-
+                JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+                frame2.setVisible(true);
             }
         });
 

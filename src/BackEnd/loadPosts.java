@@ -41,8 +41,8 @@ public class loadPosts {
 
 
         }
-        //contentPanel.revalidate();
-        //contentPanel.repaint();
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
 
@@ -119,8 +119,8 @@ public class loadPosts {
 
 
         }
-        //contentPanel.revalidate();
-        //contentPanel.repaint();
+       // contentPanel.revalidate();
+       // contentPanel.repaint();
     }
 }
 

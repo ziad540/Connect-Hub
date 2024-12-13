@@ -30,7 +30,7 @@ public class StoryDatabaseManagement {
         return instance;
     }
 
-    private void loadStoriesFromFile() {
+    public void loadStoriesFromFile() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 
@@ -38,7 +38,6 @@ public class StoryDatabaseManagement {
             stories = objectMapper.readValue(new File("src/stories.json"), new TypeReference<ArrayList<Story>>() {});
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
         setStoryStatus();
         saveToFile();
@@ -52,7 +51,7 @@ public class StoryDatabaseManagement {
             objectMapper.writeValue(new File("src/stories.json"), stories);
         } catch (Exception e) {
             System.err.println("Error writing in JSON file: " + e.getMessage());
-            e.printStackTrace();
+            stories=new ArrayList<>();
         }
     }
 

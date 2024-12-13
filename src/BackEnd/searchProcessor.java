@@ -9,10 +9,10 @@ public class searchProcessor {  // hena asta5demna strategy design pattern 3shan
         this.strategy = strategy;
     }
 
-    public ArrayList<User> searchforusers(String name, User U)
+    public ArrayList<User> searchforusers(String name,String ID)
     {
 
-        return strategy.searchforusers(name, U);
+        return strategy.searchforusers(name, ID);
     }
 
 

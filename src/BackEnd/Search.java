@@ -1,10 +1,13 @@
 package BackEnd;
 
+
 import javax.swing.*;
+
 import java.util.ArrayList;
 
 public class Search {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
+
     MemberShipDataBase memberShipDataBase = MemberShipDataBase.getInstance();
     GroupDataBase groupDataBase = GroupDataBase.getInstance();
     PostDatabaseManagement postDatabaseManagement = PostDatabaseManagement.getInstance();
@@ -12,6 +15,7 @@ public class Search {
     public User getUser(String userId) {
         for (int i = 0; i < userDatabaseManagement.getUsers().size(); i++) {
             if (userId.equals(userDatabaseManagement.getUsers().get(i).getUserId())) {
+
                 return userDatabaseManagement.getUsers().get(i);
             }
         }
@@ -29,6 +33,7 @@ public class Search {
         }
         return users;
     }
+
 
     public ArrayList<Post> getPosts(ArrayList<String> postIds) {
         ArrayList<Post> posts = new ArrayList<>();
@@ -93,4 +98,5 @@ public class Search {
         }
         return null;
     }
+
 }
