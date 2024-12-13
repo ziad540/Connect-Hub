@@ -1,7 +1,7 @@
 [
   {
     "contentId": "1",
-    "autherId": "1001",
+    "autherId": "1003",
     "content": "This is my first post!",
     "imagePath": null,
     "timestamp": [
@@ -15,7 +15,7 @@
   },
   {
     "contentId": "2",
-    "autherId": "1001",
+    "autherId": "1003",
     "content": "Excited to share my journey.",
     "imagePath": "src/Image/new-post.png",
     "timestamp": [
@@ -28,7 +28,7 @@
   },
   {
     "contentId": "3",
-    "autherId": "1001",
+    "autherId": "1003",
     "content": "Check out this amazing recipe!",
     "imagePath": "src/Image/new-post.png",
     "timestamp": [
@@ -100,7 +100,7 @@
   },
   {
     "contentId": "8",
-    "autherId": "1002",
+    "autherId": "1001",
     "content": "lolololl",
     "imagePath": "src/Image/new-post.png",
     "timestamp": [

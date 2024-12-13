@@ -11,6 +11,13 @@ public class GroupDetailsGui {
     GroupOperation operation = new GroupOperation();
     Search search = new Search();
     MemberFactoryImpl memberFactory = new MemberFactoryImpl();
+    JPanel mainPanel = new JPanel(new BorderLayout());
+    JPanel groupDetailsPanel = new JPanel();
+    JPanel membersPanel = new JPanel();
+    JPanel bottomPanel = new JPanel();
+    JButton returnButton = new JButton();
+    JButton refresh = new JButton();
+
 
     public GroupDetailsGui(String Id, Groups group, JFrame frame) {
         JFrame frame2 = new JFrame("Group Details - " + group.getGroupName());
@@ -22,9 +29,7 @@ public class GroupDetailsGui {
         System.out.println(member.getUserID());
         MemberShip memberType = memberFactory.createMember(member.getStatus());
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
 
-        JPanel groupDetailsPanel = new JPanel();
         groupDetailsPanel.setLayout(new BoxLayout(groupDetailsPanel, BoxLayout.Y_AXIS));
 
         try {
@@ -50,6 +55,54 @@ public class GroupDetailsGui {
         // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل بوستات الجروب
         ArrayList<String> postId = operation.getPostId(group.getGroupId());
         ArrayList<Post> posts = operation.getObjPost(group.getGroupId());
+        createPostPanel(posts, memberType, mainPanel, frame2, group);
+        // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل اعضاء الجروب
+        ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
+        ArrayList<User> members = search.getUsers(memberShipUserId);
+
+        membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
+        createMemberPanel(members, memberType, frame2, group, membersPanel);
+
+        JScrollPane membersScrollPane = new JScrollPane(membersPanel);
+        membersScrollPane.setPreferredSize(new Dimension(200, 0));
+        membersScrollPane.setBorder(BorderFactory.createTitledBorder("Group Members"));
+
+        mainPanel.add(groupDetailsPanel, BorderLayout.NORTH);
+        mainPanel.add(membersScrollPane, BorderLayout.EAST);
+
+
+        createBottomPanel(returnButton, refresh, frame2, frame, group, Id);
+        bottomPanel.add(returnButton);
+        bottomPanel.add(refresh);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        frame2.add(mainPanel);
+        frame2.setVisible(true);
+
+    }
+
+    private void Refresh(String iD, Groups group, JFrame frame, JFrame frame2) {
+        MemberShip member = operation.getMemberShip(group.getGroupId(), iD);
+        MemberShip memberType = memberFactory.createMember(member.getStatus());
+        ArrayList<String> postId = operation.getPostId(group.getGroupId());
+        ArrayList<Post> posts = operation.getObjPost(group.getGroupId());
+        ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
+        ArrayList<User> members = search.getUsers(memberShipUserId);
+        bottomPanel.removeAll();
+        membersPanel.removeAll();
+        createPostPanel(posts, memberType, mainPanel, frame2, group);
+        createMemberPanel(members, memberType, frame2, group, membersPanel);
+        createBottomPanel(returnButton, refresh, frame2, frame, group, iD);
+        bottomPanel.add(returnButton);
+        bottomPanel.add(refresh);
+        bottomPanel.revalidate();
+        bottomPanel.repaint();
+        membersPanel.revalidate();
+        membersPanel.repaint();
+    }
+
+    public void createPostPanel(ArrayList<Post> posts, MemberShip memberType, JPanel groupDetailsPanel, JFrame frame2, Groups group) {
+
         if (posts.size() > 0) {
             JLabel postsTitleLabel = new JLabel("Posts", SwingConstants.CENTER);
             postsTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -63,7 +116,7 @@ public class GroupDetailsGui {
                 postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
                 postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 postPanel.setBackground(Color.WHITE);
-/// //////////////////////////////////////////////////////////  بضيف ااسم صاحب البوست
+                /// //////////////////////////////////////////////////////////  بضيف ااسم صاحب البوست
                 User postAuthor = search.getUser(post.getAutherId());
                 JPanel authorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 authorPanel.setBackground(Color.WHITE);
@@ -114,20 +167,22 @@ public class GroupDetailsGui {
                                     post.setContent(newContent);
                                     JOptionPane.showMessageDialog(null, "Post updated successfully!");
                                     frame2.dispose();
-                                    new GroupDetailsGui(Id, group, frame);
+//                                    new GroupDetailsGui(Id, group, frame);
                                 }
                             });
 
                             deletePost.addActionListener(ae -> {
+                                MemberShip member = operation.getMemberShip(group.getGroupId(), post.getAutherId());
                                 // هنا يا زيزي عايز امسح البوست
                                 if (memberType.canDeleteGroups()) {
+
                                     ((PrimaryAdmin) memberType).RemovePosts(group.getGroupId(), post.getContentId(), member.getMemberShipID());
                                 } else {
                                     ((NormalAdmin) memberType).RemovePosts(group.getGroupId(), post.getContentId(), member.getMemberShipID());
                                 }
                                 JOptionPane.showMessageDialog(null, "Post deleted successfully!");
                                 frame2.dispose();
-                                new GroupDetailsGui(Id, group, frame);
+//                                new GroupDetailsGui(Id, group, frame);
                             });
 
                             postMenu.add(editPost);
@@ -142,18 +197,15 @@ public class GroupDetailsGui {
             }
 
             JScrollPane postsScrollPane = new JScrollPane(postsPanel);
-            groupDetailsPanel.add(postsScrollPane);
+            groupDetailsPanel.add(postsScrollPane, BorderLayout.CENTER);
         } else {
             JLabel noPostsLabel = new JLabel("No posts in this group.", SwingConstants.CENTER);
             groupDetailsPanel.add(noPostsLabel);
         }
+    }
 
-        // هنا يا زيزي عايز ال arraylist ديه يكون جواها كل اعضاء الجروب
-        ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
-        ArrayList<User> members = search.getUsers(memberShipUserId);
-        JPanel membersPanel = new JPanel();
-        membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
-
+    public void createMemberPanel(ArrayList<User> members, MemberShip memberType, JFrame frame2, Groups group, JPanel membersPanel) {
+        System.out.println("CREATEMEMBER ANA HANA");
         for (User user : members) {
             MemberShip membership = operation.getMemberShip(group.getGroupId(), user.getUserId());
             MemberShip memberInGroup = memberFactory.createMember(membership.getStatus());
@@ -177,7 +229,7 @@ public class GroupDetailsGui {
                                     ((PrimaryAdmin) memberType).PromoteNewAdmin(group.getGroupId(), membership.getMemberShipID());
                                     JOptionPane.showMessageDialog(null, user.getUserName() + " promoted to Admin!");
                                     frame2.dispose();
-                                    new GroupDetailsGui(Id, group, frame);
+//                                    new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(promoteToAdmin);
                                 // هنا يا زيزي عايز اتأكد هو ادمن عادي و لا لأ
@@ -188,7 +240,7 @@ public class GroupDetailsGui {
                                     ((PrimaryAdmin) memberType).DemoteGroupAdmin(group.getGroupId(), membership.getMemberShipID());
                                     JOptionPane.showMessageDialog(null, user.getUserName() + " demoted to Normal User!");
                                     frame2.dispose();
-                                    new GroupDetailsGui(Id, group, frame);
+//                                    new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(demoteToUser);
                             }
@@ -201,7 +253,7 @@ public class GroupDetailsGui {
                                     ((PrimaryAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
                                     JOptionPane.showMessageDialog(null, "Member removed!");
                                     frame2.dispose();
-                                    new GroupDetailsGui(Id, group, frame);
+//                                    new GroupDetailsGui(Id, group, frame);
                                 }
                             });
                             memberMenu.add(removeMember);
@@ -217,7 +269,7 @@ public class GroupDetailsGui {
                                     JOptionPane.showMessageDialog(null, "Member removed!");
                                     frame2.dispose();
                                     //refresh
-                                    new GroupDetailsGui(Id, group, frame);
+//                                    new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(removeMember);
                             } else {
@@ -232,16 +284,9 @@ public class GroupDetailsGui {
 
             membersPanel.add(memberLabel);
         }
+    }
 
-        JScrollPane membersScrollPane = new JScrollPane(membersPanel);
-        membersScrollPane.setPreferredSize(new Dimension(200, 0));
-        membersScrollPane.setBorder(BorderFactory.createTitledBorder("Group Members"));
-
-        mainPanel.add(groupDetailsPanel, BorderLayout.CENTER);
-        mainPanel.add(membersScrollPane, BorderLayout.EAST);
-
-        JPanel bottomPanel = new JPanel();
-        JButton returnButton = new JButton();
+    public void createBottomPanel(JButton returnButton, JButton refresh, JFrame frame2, JFrame frame, Groups group, String id) {
         ImageIcon icon = new ImageIcon("src/Image/return.png");
         Image scaledImage = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -255,121 +300,21 @@ public class GroupDetailsGui {
             frame2.dispose();
             frame.setVisible(true);
         });
-        bottomPanel.add(returnButton);
 
-
-        JButton refresh = new JButton();
         ImageIcon icon2 = new ImageIcon("src/Image/refresh.png");
         Image scaledImage2 = icon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
         ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
-        returnButton.setIcon(scaledIcon2);
-        returnButton.setPreferredSize(new Dimension(60, 60));
-        returnButton.setContentAreaFilled(false);
-        returnButton.setBorderPainted(false);
-        returnButton.setFocusPainted(false);
+        refresh.setIcon(scaledIcon2);
+        refresh.setPreferredSize(new Dimension(60, 60));
+        refresh.setContentAreaFilled(false);
+        refresh.setBorderPainted(false);
+        refresh.setFocusPainted(false);
 
-        returnButton.addActionListener(e -> {
-            Refresh();
+        refresh.addActionListener(e -> {
+            Refresh(id, group, frame, frame2);
         });
-        bottomPanel.add(returnButton);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-
-
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-
-        frame2.add(mainPanel);
-        frame2.setVisible(true);
-
-
-    private void Refresh() {
-        mainPanel.removeAll();
-        JPanel updatedGroupDetailsPanel = new JPanel();
-        updatedGroupDetailsPanel.setLayout(new BoxLayout(updatedGroupDetailsPanel, BoxLayout.Y_AXIS));
-
-        try {
-            ImageIcon groupIcon = new ImageIcon(group.getGroupPhoto());
-            Image scaledImage = groupIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            JLabel groupImageLabel = new JLabel(new ImageIcon(scaledImage));
-            updatedGroupDetailsPanel.add(groupImageLabel);
-        } catch (Exception e) {
-            updatedGroupDetailsPanel.add(new JLabel("No Group Image"));
-        }
-
-        JLabel updatedGroupNameLabel = new JLabel(group.getGroupName(), SwingConstants.CENTER);
-        updatedGroupNameLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        updatedGroupDetailsPanel.add(updatedGroupNameLabel);
-
-        if (!group.getGroupDescription().isEmpty()) {
-            JLabel updatedGroupDescriptionLabel = new JLabel(group.getGroupDescription(), SwingConstants.CENTER);
-            updatedGroupDescriptionLabel.setFont(new Font("Arial", Font.ITALIC, 12));
-            updatedGroupDescriptionLabel.setForeground(Color.DARK_GRAY);
-            updatedGroupDetailsPanel.add(updatedGroupDescriptionLabel);
-        }
-
-        // Reload posts
-        ArrayList<Post> updatedPosts = operation.getObjPost(group.getGroupId());
-        if (updatedPosts.size() > 0) {
-            JPanel updatedPostsPanel = new JPanel();
-            updatedPostsPanel.setLayout(new BoxLayout(updatedPostsPanel, BoxLayout.Y_AXIS));
-
-            for (Post post : updatedPosts) {
-                JPanel postPanel = new JPanel();
-                postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
-                postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-                postPanel.setBackground(Color.WHITE);
-
-                JLabel postContentLabel = new JLabel(post.getContent());
-                postContentLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-                postPanel.add(postContentLabel);
-
-                if (post.getImagePath() != null) {
-                    try {
-                        ImageIcon postIcon = new ImageIcon(post.getImagePath());
-                        Image scaledPostImage = postIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                        JLabel postImageLabel = new JLabel(new ImageIcon(scaledPostImage));
-                        postPanel.add(postImageLabel);
-                    } catch (Exception e) {
-                        postPanel.add(new JLabel("No Post Image"));
-                    }
-                }
-
-                updatedPostsPanel.add(postPanel);
-                updatedPostsPanel.add(new JSeparator());
-            }
-
-            JScrollPane updatedPostsScrollPane = new JScrollPane(updatedPostsPanel);
-            updatedGroupDetailsPanel.add(updatedPostsScrollPane);
-        } else {
-            updatedGroupDetailsPanel.add(new JLabel("No posts in this group.", SwingConstants.CENTER));
-        }
-
-        // Reload members
-        ArrayList<String> updatedMemberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
-        ArrayList<User> updatedMembers = search.getUsers(updatedMemberShipUserId);
-        JPanel updatedMembersPanel = new JPanel();
-        updatedMembersPanel.setLayout(new BoxLayout(updatedMembersPanel, BoxLayout.Y_AXIS));
-
-        for (User user : updatedMembers) {
-            JLabel memberLabel = new JLabel(user.getUserName());
-            memberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            updatedMembersPanel.add(memberLabel);
-        }
-
-        JScrollPane updatedMembersScrollPane = new JScrollPane(updatedMembersPanel);
-        updatedMembersScrollPane.setPreferredSize(new Dimension(200, 0));
-        updatedMembersScrollPane.setBorder(BorderFactory.createTitledBorder("Group Members"));
-
-        // Add updated components to main panel
-        mainPanel.add(updatedGroupDetailsPanel, BorderLayout.CENTER);
-        mainPanel.add(updatedMembersScrollPane, BorderLayout.EAST);
-
-        // Revalidate and repaint the frame
-        mainPanel.revalidate();
-        mainPanel.repaint();
     }
 
-}}
+}
 
 

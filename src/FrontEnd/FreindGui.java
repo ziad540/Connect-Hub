@@ -274,14 +274,12 @@ public class FreindGui {
                 switch (choice) {
                     case 0:
                         FriendProfile friendProfile = new FriendProfile(frame, user);
-
                         break;
                     case 1:
                         UserRelationsManager.add_freind(currnetus, user);
                         JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();
-
                         break;
                     case 2:
                         UserRelationsManager.block_freind(currnetus, user);
