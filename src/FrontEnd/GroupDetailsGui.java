@@ -381,13 +381,13 @@ public class GroupDetailsGui {
 
     public void createBottomPanel(JButton returnButton, JButton refresh, JButton AddPostButton, JFrame frame2, JFrame frame, Groups group, String id) {
         ImageIcon icon = new ImageIcon("src/Image/return.png");
-        Image scaledImage = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
+        Image scaledImage = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         returnButton.setIcon(scaledIcon);
-        returnButton.setPreferredSize(new Dimension(60, 60)); // Adjust button size
-        returnButton.setContentAreaFilled(false); // Makes the button background transparent
-        returnButton.setBorderPainted(false);    // Removes the border around the button
-        returnButton.setFocusPainted(false);     // Removes focus outline
+        returnButton.setPreferredSize(new Dimension(60, 60));
+        returnButton.setContentAreaFilled(false);
+        returnButton.setBorderPainted(false);
+        returnButton.setFocusPainted(false);
 
         returnButton.addActionListener(e -> {
             frame2.dispose();
@@ -395,7 +395,7 @@ public class GroupDetailsGui {
         });
 
         ImageIcon icon2 = new ImageIcon("src/Image/refresh.png");
-        Image scaledImage2 = icon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
+        Image scaledImage2 = icon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
         refresh.setIcon(scaledIcon2);
         refresh.setPreferredSize(new Dimension(60, 60));
@@ -408,7 +408,7 @@ public class GroupDetailsGui {
 
 
         ImageIcon icon3 = new ImageIcon("src/Image/new-post.png");
-        Image scaledImage3 = icon3.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
+        Image scaledImage3 = icon3.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon3 = new ImageIcon(scaledImage3);
         AddPostButton.setIcon(scaledIcon3);
         AddPostButton.setPreferredSize(new Dimension(60, 60));
@@ -416,14 +416,54 @@ public class GroupDetailsGui {
         AddPostButton.setBorderPainted(false);
         AddPostButton.setFocusPainted(false);
         AddPostButton.addActionListener(e -> {
-            new AddPostGroupGui(group, frame2);
+            frame2.setVisible(false);
+            new AddPostGroupGui(member.getMemberShipID(), frame2);
+            Refresh(userID, group.getGroupId(), frame2);
         });
 
+        MemberShip member = operation.getMemberShip(group.getGroupId(), id);
+        MemberShip memberType = memberFactory.createMember(member.getStatus());
 
+        if (memberType.canDeleteGroups()) {
+            JButton deleteGroupButton = new JButton("Delete Group");
+            deleteGroupButton.setFont(new Font("Arial", Font.BOLD, 12));
+            deleteGroupButton.setForeground(Color.RED);
+            deleteGroupButton.addActionListener(e -> {
+                int confirm = JOptionPane.showConfirmDialog(frame2, "Are you sure you want to delete this group?", "Delete Group", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    ((PrimaryAdmin) memberType).DeleteGroup(group.getGroupId());
+                    JOptionPane.showMessageDialog(frame2, "Group deleted successfully!");
+                    frame2.dispose();
+                    frame.setVisible(true);
+                }
+            });
+            bottomPanel.add(deleteGroupButton);
+        } else if (!(memberType.canEditOrDeletePosts())) {
+            JButton leaveGroupButton = new JButton("Leave Group");
+            leaveGroupButton.setFont(new Font("Arial", Font.BOLD, 12));
+            leaveGroupButton.setForeground(Color.RED);
+            leaveGroupButton.addActionListener(e -> {
+                int confirm = JOptionPane.showConfirmDialog(frame2, "Are you sure you want to leave this group?", "Leave Group", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    /// هنا يا زيزي عايز الشخص ده عايز يطلع من المجموعه     مع العلم ان الشخص ده ممكن يكون Normal User او Other Admin
+//                    memberType.leaveGroup(group.getGroupId(), member.getMemberShipID());
+                    JOptionPane.showMessageDialog(frame2, "You have left the group.");
+                    frame2.dispose();
+                    frame.setVisible(true);
+                }
+            });
+            bottomPanel.add(leaveGroupButton);
+        }
 
-
+        bottomPanel.add(returnButton);
+        bottomPanel.add(refresh);
+        bottomPanel.add(AddPostButton);
     }
 
 }
+
+
+
+
 
 

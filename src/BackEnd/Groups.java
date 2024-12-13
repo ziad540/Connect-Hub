@@ -16,11 +16,18 @@ public class Groups {
     }
 
     public Groups(String groupName, String groupDescription, String groupOwnerId, String groupPhoto) {
-        groupId = String.valueOf('G' + uniqueId.loadcounterGroupsID());
+        groupId = "G" + uniqueId.loadcounterGroupsID();
         this.groupName = groupName;
         this.groupDescription = groupDescription;
         this.groupOwnerId = groupOwnerId;
-        this.groupPhoto = groupPhoto;
+        if (groupPhoto != null) {
+            this.groupPhoto = groupPhoto;
+        }
+        else{
+            this.groupPhoto = "";
+        }
+        memberShipId = new ArrayList<>();
+        pendingRequestId = new ArrayList<>();
     }
 
     /**

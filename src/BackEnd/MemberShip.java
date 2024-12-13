@@ -21,9 +21,10 @@ public abstract class MemberShip {
     }
 
     public MemberShip(String userID, String status) {
-        this.memberShipID = String.valueOf('M' + uniqueId.loadcounterMemberShipID());
+        this.memberShipID = "M" + uniqueId.loadcounterMemberShipID();
         this.userID = userID;
         this.status = status;
+        postId = new ArrayList<>();
     }
 
     /**

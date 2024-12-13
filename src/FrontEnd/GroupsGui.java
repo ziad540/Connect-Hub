@@ -173,9 +173,9 @@ public class GroupsGui {
         newGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open a new window or dialog for creating a new group
-                new CreateGroupGui(Id, frame); // You can implement CreateGroupGui class
-                frame.setVisible(false); // Optional: Hide current frame while creating a new group
+
+                new CreateGroupGui(Id, frame);
+                frame.setVisible(false);
             }
         });
 

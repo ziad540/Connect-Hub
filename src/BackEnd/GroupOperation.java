@@ -1,5 +1,6 @@
 package BackEnd;
 
+
 import java.util.ArrayList;
 
 public class GroupOperation {
@@ -41,6 +42,16 @@ public class GroupOperation {
             memberShipUserIds.add(memberShipList.get(i).getUserID());
         }
         return memberShipUserIds;
+    }
+
+    public MemberShip getMember(String id) {
+        ArrayList<MemberShip> memberShipList = MemberShipDataBase.getInstance().getMemberShips();
+        for (int i = 0; i < memberShipList.size(); i++) {
+            if (memberShipList.get(i).getMemberShipID().equals(id)) {
+                return memberShipList.get(i);
+            }
+        }
+        return null;
     }
 
 
