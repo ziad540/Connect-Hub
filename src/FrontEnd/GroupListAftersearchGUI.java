@@ -10,11 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class GroupsGui {
+public class GroupListAftersearchGUI {
     GroupOperation operation = new GroupOperation();
     Search search = new Search();
 
-    public GroupsGui(String Id,JFrame f) {
+    public GroupListAftersearchGUI(String Id,JFrame f) {
 
         JFrame frame = new JFrame("Groups");
         frame.setSize(600, 800);
@@ -26,7 +26,7 @@ public class GroupsGui {
 
 
         // هنا يا زيزي انا عايز ال arrayList ديه يكون جواها groups اللي صاحب ال Id ده مشترك فيها
-        ArrayList<Groups> groups = operation.getGroups(user.getGroupId());
+        ArrayList<Groups> groups = operation.getGroups(user.getGroupId()); // hena yegilo el array beta3t el search bto3 groupaty
         // ديه ال top panel يا زوز
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout()); // Use BorderLayout for more control
@@ -51,7 +51,7 @@ public class GroupsGui {
         searchPanel.add(searchButton);
 
         topPanel.add(searchPanel, BorderLayout.SOUTH);
-        frame.add(topPanel, BorderLayout.NORTH);
+      //  frame.add(topPanel, BorderLayout.NORTH);
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -122,6 +122,80 @@ public class GroupsGui {
                 public void mouseClicked(java.awt.event.MouseEvent e) {
                     new GroupDetailsGui(Id, group.getGroupId(), frame);
                     frame.setVisible(false);
+                }
+            });
+
+            groupPanel.add(groupInfo);
+            groupListPanel.add(groupPanel);
+        }
+/// ////////////////////////////////////////
+
+        /// / 2ablha en dol ely msh fi ya join ya l2a
+        for (Groups group : groups) {
+            JPanel groupPanel = new JPanel();
+            groupPanel.setLayout(new BoxLayout(groupPanel, BoxLayout.X_AXIS));
+            groupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            groupPanel.setBackground(Color.WHITE);
+
+            JLabel groupInfo = new JLabel(group.getGroupName());
+            groupInfo.setFont(new Font("Arial", Font.BOLD, 14));
+
+            try {
+                ImageIcon originalIcon = new ImageIcon(group.getGroupPhoto());
+                Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                groupInfo.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                groupInfo.setIcon(null);
+            }
+
+            // هنا بقا لما ادوس على اسم الجروب هفتحله شاشه جديده جواها بقا الجروب زات نفسه ب محتواياته
+            groupInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    String[] options = {"Send Request", "Cancel"};
+                    int choice = JOptionPane.showOptionDialog(null, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    switch (choice) {
+                        case 0:
+                           // send reqwuest
+                            //Refresh();
+
+                            break;
+                        case 1:
+                          return;
+
+
+
+
+                    }
+                }
+            });
+
+            groupPanel.add(groupInfo);
+            groupListPanel.add(groupPanel);
+        }
+
+/// /////////////////// pending
+        for (Groups group : groups) {
+            JPanel groupPanel = new JPanel();
+            groupPanel.setLayout(new BoxLayout(groupPanel, BoxLayout.X_AXIS));
+            groupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            groupPanel.setBackground(Color.WHITE);
+
+            JLabel groupInfo = new JLabel(group.getGroupName());
+            groupInfo.setFont(new Font("Arial", Font.BOLD, 14));
+
+            try {
+                ImageIcon originalIcon = new ImageIcon(group.getGroupPhoto());
+                Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                groupInfo.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                groupInfo.setIcon(null);
+            }
+
+            // هنا بقا لما ادوس على اسم الجروب هفتحله شاشه جديده جواها بقا الجروب زات نفسه ب محتواياته
+            groupInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    JOptionPane.showMessageDialog(null, "Pending request!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    return;
                 }
             });
 

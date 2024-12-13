@@ -25,9 +25,17 @@ public class GroupDetailsGui {
     JScrollPane membersScrollPane;
     String userID;
     MemberShip member;
+    String groupID;
 
 
-    public GroupDetailsGui(String Id, Groups group, JFrame frame) {
+    Groups group;
+
+    public GroupDetailsGui(String Id, String groupID, JFrame frame)
+    {this.groupID=groupID;
+        GroupDataBase.getInstance().loadGroupsFromFile();
+      group= search.getgroup(groupID);
+
+
         userID = Id;
         JFrame frame2 = new JFrame("Group Details - " + group.getGroupName());
         frame2.setSize(600, 800);
@@ -75,8 +83,12 @@ public class GroupDetailsGui {
         ArrayList<String> memberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
         ArrayList<User> members = search.getUsers(memberShipUserId);
 
+        ArrayList<String> pendingmembersID=group.getPendingRequestId();
+        ArrayList<User> pendingmembers= search.getUsers(pendingmembersID);
+
 
         createMemberPanel(members, memberType, frame2, group, membersPanel);
+
 
         membersScrollPane = new JScrollPane(membersPanel);
         membersScrollPane.setPreferredSize(new Dimension(200, 0));
@@ -91,13 +103,24 @@ public class GroupDetailsGui {
         bottomPanel.add(refresh);
         bottomPanel.add(AddPostButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        if (memberType.canDeleteGroups() || memberType.canEditOrDeletePosts()) //admin aw moderator
+        {
+            JLabel title2=new JLabel("Pending requests");
+            membersPanel.add(title2);
 
+            createMemberPanel2(pendingmembers,frame2,group,membersPanel);
+
+        }
         frame2.add(mainPanel);
         frame2.setVisible(true);
 
     }
 
-    private void Refresh(String iD, Groups group, JFrame frame2) {
+    private void Refresh(String iD, String groupID, JFrame frame2) {
+
+
+        GroupDataBase.getInstance().loadGroupsFromFile();
+        group= search.getgroup(groupID);
         MemberShip member = operation.getMemberShip(group.getGroupId(), iD);
         MemberShip memberType = memberFactory.createMember(member.getStatus());
         ArrayList<String> postId = operation.getPostId(group.getGroupId());
@@ -109,6 +132,17 @@ public class GroupDetailsGui {
         membersPanel.removeAll();
         createPostPanel(posts, memberType, mainPanel, frame2, group);
         createMemberPanel(members, memberType, frame2, group, membersPanel);
+
+        ArrayList<String> pendingmembersID=group.getPendingRequestId();
+        ArrayList<User> pendingmembers= search.getUsers(pendingmembersID);
+        if (memberType.canDeleteGroups() || memberType.canEditOrDeletePosts()) //admin aw moderator
+        {
+            JLabel title2=new JLabel("Pending requests");
+            membersPanel.add(title2);
+
+            createMemberPanel2(pendingmembers,frame2,group,membersPanel);
+
+        }
         postsScrollPane.revalidate();
         postsScrollPane.repaint();
         mainPanel.add(postsScrollPane, BorderLayout.CENTER);
@@ -182,7 +216,7 @@ public class GroupDetailsGui {
                                     post.setContent(newContent);
                                     JOptionPane.showMessageDialog(null, "Post updated successfully!");
 //                                    new GroupDetailsGui(Id, group, frame);
-                                    Refresh(userID, group, frame2);
+                                    Refresh(userID, group.getGroupId(), frame2);
                                 }
                             });
 
@@ -196,7 +230,7 @@ public class GroupDetailsGui {
                                     ((NormalAdmin) memberType).RemovePosts(group.getGroupId(), post.getContentId(), member.getMemberShipID());
                                 }
                                 JOptionPane.showMessageDialog(null, "Post deleted successfully!");
-                                Refresh(userID, group, frame2);
+                                Refresh(userID, group.getGroupId(), frame2);
                             });
 
                             postMenu.add(editPost);
@@ -250,7 +284,7 @@ public class GroupDetailsGui {
                                     // هنا عايز اخليه ادمن
                                     ((PrimaryAdmin) memberType).PromoteNewAdmin(group.getGroupId(), membership.getMemberShipID());
                                     JOptionPane.showMessageDialog(null, user.getUserName() + " promoted to Admin!");
-                                    Refresh(userID, group, frame2);
+                                    Refresh(userID, group.getGroupId(), frame2);
 //                                    new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(promoteToAdmin);
@@ -262,7 +296,7 @@ public class GroupDetailsGui {
                                     ((PrimaryAdmin) memberType).DemoteGroupAdmin(group.getGroupId(), membership.getMemberShipID());
                                     JOptionPane.showMessageDialog(null, user.getUserName() + " demoted to Normal User!");
 //                                    new GroupDetailsGui(Id, group, frame);
-                                    Refresh(userID, group, frame2);
+                                    Refresh(userID, group.getGroupId(), frame2);
                                 });
                                 memberMenu.add(demoteToUser);
 
@@ -275,7 +309,7 @@ public class GroupDetailsGui {
                                     } else {
                                         ((PrimaryAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
                                         JOptionPane.showMessageDialog(null, "Member removed!");
-                                        Refresh(userID, group, frame2);
+                                        Refresh(userID, group.getGroupId(), frame2);
                                     }
                                 });
                                 memberMenu.add(removeMember);
@@ -291,7 +325,7 @@ public class GroupDetailsGui {
                                     ((NormalAdmin) memberType).RemoveMember(membership.getMemberShipID(), group.getGroupId());
                                     JOptionPane.showMessageDialog(null, "Member removed!");
                                     //refresh
-                                    Refresh(userID, group, frame2);
+                                    Refresh(userID, group.getGroupId(), frame2);
                                 });
                                 memberMenu.add(removeMember);
                             } else {
@@ -301,6 +335,41 @@ public class GroupDetailsGui {
 
                         memberMenu.show(memberLabel, e.getX(), e.getY());
                     }
+                }
+            });
+
+            membersPanel.add(memberLabel);
+
+        }
+
+    }
+
+    public void createMemberPanel2(ArrayList<User> members,  JFrame frame2, Groups group, JPanel membersPanel) {
+        membersPanel.setLayout(new BoxLayout(membersPanel, BoxLayout.Y_AXIS));
+        for (User user : members) {
+
+            JLabel memberLabel = new JLabel(user.getUserName());
+            memberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+            memberLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+            memberLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    String[] options = {"Accept ", "Decline"};
+                    int choice = JOptionPane.showOptionDialog(null, "Please choose an option:", "Choose Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    switch (choice) {
+                        case 0:
+                           //accept logic
+                            Refresh(userID,group.getGroupId(),frame2);
+                            break;
+                        case 1:
+                            //decline logic
+                            Refresh(userID,group.getGroupId(),frame2);
+
+                            break;
+
+                    }
+
                 }
             });
 
@@ -333,6 +402,9 @@ public class GroupDetailsGui {
         refresh.setContentAreaFilled(false);
         refresh.setBorderPainted(false);
         refresh.setFocusPainted(false);
+        refresh.addActionListener(e -> {
+            Refresh(userID,groupID,frame2);
+        });
 
 
         ImageIcon icon3 = new ImageIcon("src/Image/new-post.png");

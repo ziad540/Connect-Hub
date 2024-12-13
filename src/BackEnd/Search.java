@@ -82,4 +82,15 @@ public class Search {
         }
         return groups;
     }
+
+
+
+    public Groups getgroup( String groupID) {
+        for (int i = 0; i < groupDataBase.getGroups().size(); i++) {
+            if (groupID.equals(groupDataBase.getGroups().get(i).getGroupId())) {
+                return groupDataBase.getGroups().get(i);
+            }
+        }
+        return null;
+    }
 }
