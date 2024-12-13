@@ -82,7 +82,6 @@ public class GroupDetailsGui {
                 postPanel.add(authorPanel);
 
 
-
                 JLabel postContentLabel = new JLabel(post.getContent());
                 postContentLabel.setFont(new Font("Arial", Font.PLAIN, 14));
                 postPanel.add(postContentLabel);
@@ -221,8 +220,7 @@ public class GroupDetailsGui {
                                     new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(removeMember);
-                            }
-                            else{
+                            } else {
                                 JOptionPane.showMessageDialog(null, "Do not have permission");
                             }
                         }
@@ -258,13 +256,119 @@ public class GroupDetailsGui {
             frame.setVisible(true);
         });
         bottomPanel.add(returnButton);
+
+
+        JButton refresh = new JButton();
+        ImageIcon icon2 = new ImageIcon("src/Image/refresh.png");
+        Image scaledImage2 = icon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Adjust size as needed
+        ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
+        returnButton.setIcon(scaledIcon2);
+        returnButton.setPreferredSize(new Dimension(60, 60));
+        returnButton.setContentAreaFilled(false);
+        returnButton.setBorderPainted(false);
+        returnButton.setFocusPainted(false);
+
+        returnButton.addActionListener(e -> {
+            Refresh();
+        });
+        bottomPanel.add(returnButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
 
-
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
 
         frame2.add(mainPanel);
         frame2.setVisible(true);
+
+
+    private void Refresh() {
+        mainPanel.removeAll();
+        JPanel updatedGroupDetailsPanel = new JPanel();
+        updatedGroupDetailsPanel.setLayout(new BoxLayout(updatedGroupDetailsPanel, BoxLayout.Y_AXIS));
+
+        try {
+            ImageIcon groupIcon = new ImageIcon(group.getGroupPhoto());
+            Image scaledImage = groupIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            JLabel groupImageLabel = new JLabel(new ImageIcon(scaledImage));
+            updatedGroupDetailsPanel.add(groupImageLabel);
+        } catch (Exception e) {
+            updatedGroupDetailsPanel.add(new JLabel("No Group Image"));
+        }
+
+        JLabel updatedGroupNameLabel = new JLabel(group.getGroupName(), SwingConstants.CENTER);
+        updatedGroupNameLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        updatedGroupDetailsPanel.add(updatedGroupNameLabel);
+
+        if (!group.getGroupDescription().isEmpty()) {
+            JLabel updatedGroupDescriptionLabel = new JLabel(group.getGroupDescription(), SwingConstants.CENTER);
+            updatedGroupDescriptionLabel.setFont(new Font("Arial", Font.ITALIC, 12));
+            updatedGroupDescriptionLabel.setForeground(Color.DARK_GRAY);
+            updatedGroupDetailsPanel.add(updatedGroupDescriptionLabel);
+        }
+
+        // Reload posts
+        ArrayList<Post> updatedPosts = operation.getObjPost(group.getGroupId());
+        if (updatedPosts.size() > 0) {
+            JPanel updatedPostsPanel = new JPanel();
+            updatedPostsPanel.setLayout(new BoxLayout(updatedPostsPanel, BoxLayout.Y_AXIS));
+
+            for (Post post : updatedPosts) {
+                JPanel postPanel = new JPanel();
+                postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
+                postPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                postPanel.setBackground(Color.WHITE);
+
+                JLabel postContentLabel = new JLabel(post.getContent());
+                postContentLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+                postPanel.add(postContentLabel);
+
+                if (post.getImagePath() != null) {
+                    try {
+                        ImageIcon postIcon = new ImageIcon(post.getImagePath());
+                        Image scaledPostImage = postIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                        JLabel postImageLabel = new JLabel(new ImageIcon(scaledPostImage));
+                        postPanel.add(postImageLabel);
+                    } catch (Exception e) {
+                        postPanel.add(new JLabel("No Post Image"));
+                    }
+                }
+
+                updatedPostsPanel.add(postPanel);
+                updatedPostsPanel.add(new JSeparator());
+            }
+
+            JScrollPane updatedPostsScrollPane = new JScrollPane(updatedPostsPanel);
+            updatedGroupDetailsPanel.add(updatedPostsScrollPane);
+        } else {
+            updatedGroupDetailsPanel.add(new JLabel("No posts in this group.", SwingConstants.CENTER));
+        }
+
+        // Reload members
+        ArrayList<String> updatedMemberShipUserId = operation.getMemberShipUserIds(group.getGroupId());
+        ArrayList<User> updatedMembers = search.getUsers(updatedMemberShipUserId);
+        JPanel updatedMembersPanel = new JPanel();
+        updatedMembersPanel.setLayout(new BoxLayout(updatedMembersPanel, BoxLayout.Y_AXIS));
+
+        for (User user : updatedMembers) {
+            JLabel memberLabel = new JLabel(user.getUserName());
+            memberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+            updatedMembersPanel.add(memberLabel);
+        }
+
+        JScrollPane updatedMembersScrollPane = new JScrollPane(updatedMembersPanel);
+        updatedMembersScrollPane.setPreferredSize(new Dimension(200, 0));
+        updatedMembersScrollPane.setBorder(BorderFactory.createTitledBorder("Group Members"));
+
+        // Add updated components to main panel
+        mainPanel.add(updatedGroupDetailsPanel, BorderLayout.CENTER);
+        mainPanel.add(updatedMembersScrollPane, BorderLayout.EAST);
+
+        // Revalidate and repaint the frame
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
-}
+
+}}
+
+
