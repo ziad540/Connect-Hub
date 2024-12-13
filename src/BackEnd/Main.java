@@ -9,7 +9,7 @@ public class Main {
 //        PrimaryAdmin ziad = new PrimaryAdmin();
 //        ziad.DeclineMembershipRequests("G1", "M1");
         //new StartWindow();
-        new GroupsGui("1003");
+        new GroupsGui("1002");
         //new FrontEnd.FreindGui(new BackEnd.User(),new JFrame());
         //new FrontEnd.AddStoryGui();
         //new FrontEnd.FreindListaftersearchGUI();

@@ -1,1 +1,46 @@
-[{"type":"BasicMemberShip","memberShipID":"M1","userID":"1003","status":"PrimaryAdmin","postId":["5","6","7"]},{"type":"BasicMemberShip","memberShipID":"M3","userID":"1004","status":"Member","postId":["5","6","7"]}]
+[
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M1",
+    "userID": "1003",
+    "status": "PrimaryAdmin",
+    "postId": [
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M3",
+    "userID": "1002",
+    "status": "NormalAdmin",
+    "postId": [
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M2",
+    "userID": "1004",
+    "status": "Member",
+    "postId": [
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M4",
+    "userID": "1005",
+    "status": "Member",
+    "postId": [
+      "5",
+      "6",
+      "7"
+    ]
+  }
+]

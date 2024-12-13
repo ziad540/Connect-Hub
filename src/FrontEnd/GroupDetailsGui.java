@@ -17,6 +17,7 @@ public class GroupDetailsGui {
         frame2.setSize(800, 400);
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.setLocationRelativeTo(null);
+        System.out.println(group.getGroupName());
         MemberShip member = operation.getMemberShip(group.getGroupId(), Id);
         System.out.println(member.getUserID());
         MemberShip memberType = memberFactory.createMember(member.getStatus());
@@ -201,6 +202,9 @@ public class GroupDetailsGui {
                                     new GroupDetailsGui(Id, group, frame);
                                 });
                                 memberMenu.add(removeMember);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Do not have permission");
                             }
                         }
 
