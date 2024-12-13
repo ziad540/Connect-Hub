@@ -278,6 +278,7 @@ public class FreindGui {
                         break;
                     case 1:
                         UserRelationsManager.add_freind(currnetus, user);
+                        user.getNotificationManager().addNotification(new FriendreqNotifiaction(currnetus.getUserName()+" sent you a freind request","20/5", user.getUserId(), currnetus.getUserId()));
                         JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                         UserDatabaseManagement.getInstance().saveToFile();
                         Refresh();

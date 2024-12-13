@@ -12,6 +12,8 @@ public class sentFreindRequestssearch implements SearchStrategy{
     {
         Search search = new Search();
         User U = search.getUser(ID);
+        System.out.println(U+" b3d el search");
+        System.out.println(U.getSentfreindrequestId());
         ArrayList<User> Data=new ArrayList<>();
         GetFreinds getFreinds=new GetFreinds(U.getSentfreindrequestId());
         ArrayList<User> requests =getFreinds.get();

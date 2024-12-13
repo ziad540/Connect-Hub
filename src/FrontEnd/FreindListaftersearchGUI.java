@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import BackEnd.*;
 
+import static java.lang.Thread.sleep;
+
 
 public class FreindListaftersearchGUI {
     ArrayList<User> allusers;
@@ -22,10 +24,14 @@ public class FreindListaftersearchGUI {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
     FreindListaftersearchGUI(JFrame recentframe, String userID, String name) {
+
         userDatabaseManagement.loadUsersFromFile();
+        System.out.println(userDatabaseManagement.getUsers()+"        el array");
         this.recentframe = recentframe;
         this.name = name;
+        System.out.println(currnetus+"     1");
         currnetus = search.getUser(userID);
+        System.out.println(currnetus+"     2");
         searchProcessor search = new searchProcessor(new Allsearch());
         allusers = search.searchforusers(name, userID);
 
@@ -40,7 +46,7 @@ public class FreindListaftersearchGUI {
 
         search = new searchProcessor(new sentFreindRequestssearch());
         allsent = search.searchforusers(name, userID);
-
+        System.out.println(userDatabaseManagement.getUsers()+"        el array b3d el search");
 
         frame = new JFrame("Freind list");
         frame.setSize(400, 800);
@@ -133,6 +139,8 @@ public class FreindListaftersearchGUI {
         }
         poulateAllusers(contentPanel);
 
+        System.out.println(userDatabaseManagement.getUsers()+"        el array b3d el pop");
+
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 4));
         bottomPanel.setPreferredSize(new Dimension(200, 50));
@@ -179,6 +187,7 @@ public class FreindListaftersearchGUI {
 
 
     private void populatesentfreindrequests(JPanel panel) {
+
         for (User freind : allsent) {
             panel.add(createGoingtfreindrequestsoPanel(freind.getUserId()));
         }
@@ -195,7 +204,8 @@ public class FreindListaftersearchGUI {
     }
 
 
-    private JPanel createfreindspanel(String userID) {  //sohaby view remove block
+    private JPanel createfreindspanel(String userID) {
+        //sohaby view remove block
         Search search = new Search();
         User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
@@ -288,7 +298,8 @@ else
     }
 
 
-    private JPanel createfreindrequestsspanel(String userID) {  // accept or decline or view
+    private JPanel createfreindrequestsspanel(String userID) {
+        // accept or decline or view
         Search search = new Search();
         User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
@@ -372,7 +383,8 @@ else
     }
 
 
-    private JPanel createGoingtfreindrequestsoPanel(String userID) {  // button 3aleh pendinggg
+    private JPanel createGoingtfreindrequestsoPanel(String userID) {
+        // button 3aleh pendinggg
         Search search = new Search();
         User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
@@ -400,22 +412,21 @@ else
         view.setBorderPainted(false);
         view.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
 
+            {
                 FriendProfile friendProfile = new FriendProfile(frame, user);
-
 
             }
         });
 
         postPanel.add(view);
-
-
         return postPanel;
     }
 
 
-    private JPanel createALLusersPanel(String userID) {  // add block view
+    private JPanel createALLusersPanel(String userID) {
+        // add block view
         Search search = new Search();
         User user = search.getUser(userID);
         JPanel postPanel = new JPanel();
@@ -443,7 +454,6 @@ else
         view.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
 
                 FriendProfile friendProfile = new FriendProfile(frame, user);
 
@@ -462,9 +472,13 @@ else
             public void actionPerformed(ActionEvent e) {
 
                 UserRelationsManager.add_freind(currnetus, user);
+                user.getNotificationManager().addNotification(new FriendreqNotifiaction(currnetus.getUserName()+" sent you a freind request","20/5", user.getUserId(), currnetus.getUserId()));
+
                 JOptionPane.showMessageDialog(postPanel, "Freind request sent");
                 UserDatabaseManagement.getInstance().saveToFile();
+
                 Refresh();
+
             }
         });
 
@@ -479,7 +493,7 @@ else
         block.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+               currnetus=search.getUser(currnetus.getUserId()) ;
 
                 UserRelationsManager.block_freind(currnetus, user);
                 JOptionPane.showMessageDialog(postPanel, "Blocked currentuser");
@@ -496,20 +510,27 @@ else
 
 
     public void Refresh() {
-        userDatabaseManagement.loadUsersFromFile();
+
+        UserDatabaseManagement.getInstance().loadUsersFromFile();
+
+
         currnetus = search.getUser(currnetus.getUserId());
+        System.out.println(currnetus+"     8");
         System.out.println(currnetus.getSentfreindrequestId());
         contentPanel.removeAll();
+        System.out.println("hhhh1");
         searchProcessor search = new searchProcessor(new Allsearch());
         allusers = search.searchforusers(name, currnetus.getUserId());
-
+        System.out.println(currnetus+"     9");
 
         search = new searchProcessor(new FreindsSearch());
         myfreindssearch = search.searchforusers(name, currnetus.getUserId());
-
+        System.out.println("hhhh2");
 
         search = new searchProcessor(new FreindRequestSearch());
         allrequests = search.searchforusers(name, currnetus.getUserId());
+
+        System.out.println("hhhh2");
 
 
         search = new searchProcessor(new sentFreindRequestssearch());

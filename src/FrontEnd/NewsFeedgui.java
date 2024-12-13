@@ -36,6 +36,9 @@ public class NewsFeedgui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
+        JLabel backgroundLabel = new JLabel(new ImageIcon("C:\\Users\\Abdallah\\Desktop\\conncect-hub.jpg"));
+        backgroundLabel.setBounds(-200, -200, 2100, 1400);
+
 
 
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -188,12 +191,31 @@ public class NewsFeedgui {
             }
         });
 
+        JButton notificaions = new JButton();
+       // ImageIcon image6 = new ImageIcon("src/Image/team.png");
+        notificaions.setContentAreaFilled(false);
+        notificaions.setFont(new Font("Arial", Font.BOLD, 16));
+        notificaions.setPreferredSize(new Dimension(50, 50));
+       // freind.setIcon(image6);
+        notificaions.setBorderPainted(false);
+        notificaions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new notificationsGUI(currentUserId,frame);//(4)
+                frame.setVisible(false);
+
+            }
+        });
+
+
+
 
         bottomPanel.add(profile);
         bottomPanel.add(stories);
 
         bottomPanel.add(freind);
         bottomPanel.add(logoutButton);
+        bottomPanel.add(notificaions);
 
 
         frame.add(bottomPanel, BorderLayout.SOUTH);

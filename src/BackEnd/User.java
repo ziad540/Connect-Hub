@@ -18,7 +18,8 @@ public class User {
     private ArrayList<String> sentfreindrequestId = new ArrayList<>(); //ely ana ba3thom
     private ArrayList<String> blockedID = new ArrayList<>(); //ely ana 3amlehom
     private ArrayList<String> blockedfromID = new ArrayList<>();// elyma3molymenhom
-    private UserRelationsManager relationsManage = new UserRelationsManager();
+    private NotificationManager notificationManager =new NotificationManager();
+
 
 
     public User(String email, String userName, String password, String status, LocalDate dateOfBirth) {
@@ -35,21 +36,12 @@ public class User {
     public User() {
     }
 
-    public ArrayList<String> getSentfreindrequestId() {
-        return relationsManage.getSentfreindrequestId();
-    }
+
 
     public void setSentfreindrequestId(ArrayList<String> sentfreindrequestId) {
         this.sentfreindrequestId = sentfreindrequestId;
     }
 
-    public ArrayList<String> getBlockedfromID() {
-        return relationsManage.getBlockedID();
-    }
-
-    public void setBlockedfromID(ArrayList<String> blockedfromID) {
-        relationsManage.setBlockedID(blockedfromID);
-    }
 
     public ArrayList<String> getFirndesId() {
         return firndesId;
@@ -99,21 +91,8 @@ public class User {
         this.storiesId = storiesId;
     }
 
-    public ArrayList<String> getFreindrequestId() {
-        return relationsManage.getFreindrequestId();
-    }
 
-    public void setFreindrequestId(ArrayList<String> freindrequestId) {
-        relationsManage.setFreindrequestId(freindrequestId);
-    }
 
-    public ArrayList<String> getBlockedID() {
-        return relationsManage.getBlockedID();
-    }
-
-    public void setBlockedID(ArrayList<String> blockedID) {
-        relationsManage.setBlockedID(blockedID);
-    }
 
     public String getEmail() {
         return email;
@@ -129,6 +108,34 @@ public class User {
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public ArrayList<String> getFreindrequestId() {
+        return freindrequestId;
+    }
+
+    public void setFreindrequestId(ArrayList<String> freindrequestId) {
+        this.freindrequestId = freindrequestId;
+    }
+
+    public ArrayList<String> getSentfreindrequestId() {
+        return sentfreindrequestId;
+    }
+
+    public ArrayList<String> getBlockedID() {
+        return blockedID;
+    }
+
+    public void setBlockedID(ArrayList<String> blockedID) {
+        this.blockedID = blockedID;
+    }
+
+    public ArrayList<String> getBlockedfromID() {
+        return blockedfromID;
+    }
+
+    public void setBlockedfromID(ArrayList<String> blockedfromID) {
+        this.blockedfromID = blockedfromID;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
@@ -151,4 +158,11 @@ public class User {
         this.profileInformation = profileInformation;
     }
 
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
+    }
+
+    public void setNotificationManager(NotificationManager notificationManager) {
+        this.notificationManager = notificationManager;
+    }
 }

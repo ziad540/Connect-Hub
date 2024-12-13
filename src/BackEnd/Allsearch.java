@@ -10,7 +10,7 @@ public class Allsearch implements SearchStrategy
             // el ba2y men sohabak
 
     {
-        UserDatabaseManagement.getInstance().loadUsersFromFile();
+
         Search search = new Search();
         User U = search.getUser(ID);
         ArrayList<User> all= UserDatabaseManagement.getInstance().getUsers();

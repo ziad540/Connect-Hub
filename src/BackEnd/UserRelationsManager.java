@@ -7,9 +7,7 @@ import java.util.ArrayList;
   such as sending friend requests, blocking user
  */
 public class UserRelationsManager {
-    private ArrayList<String> freindrequestId = new ArrayList<>(); //ely gayin leya
-    private ArrayList<String> sentfreindrequestId = new ArrayList<>(); //ely ana ba3thom
-    private ArrayList<String> blockedID = new ArrayList<>(); //ely ana 3amlehom
+
 
     /**
      * Block user and remove this friend from friend list
@@ -18,11 +16,14 @@ public class UserRelationsManager {
      */
     public static void block_freind(User blocker, User blocked) {
 
-        remove_freind(blocker, blocked);
-        ArrayList<String> ids = blocker.getBlockedID();
+       remove_freind(blocker, blocked);
+
+        ArrayList<String> ids =new ArrayList<>();
+           ids=     blocker.getBlockedID();
         ids.add(blocked.getUserId());
+
         ids = blocked.getBlockedfromID();
-        ids.add(blocked.getUserId());
+        ids.add(blocker.getUserId());
     }
 
     /**
@@ -90,36 +91,19 @@ public class UserRelationsManager {
 
     }
 
-    //Getter and setters
-    public ArrayList<String> getBlockedID() {
-        return blockedID;
-    }
 
-    public void setBlockedID(ArrayList<String> blockedID) {
-        this.blockedID = blockedID;
-    }
-
-    public ArrayList<String> getSentfreindrequestId() {
-        return sentfreindrequestId;
-    }
-
-    public void setSentfreindrequestId(ArrayList<String> sentfreindrequestId) {
-        this.sentfreindrequestId = sentfreindrequestId;
-    }
-
-    public ArrayList<String> getFreindrequestId() {
-        return freindrequestId;
-    }
-
-    public void setFreindrequestId(ArrayList<String> freindrequestId) {
-        this.freindrequestId = freindrequestId;
-    }
 
     public static void add_freind(User sender, User reciever) {
-        ArrayList<String> sendersent = sender.getSentfreindrequestId();
+        System.out.println(sender+"ana sender");
+
+
+        ArrayList<String> sendersent = new ArrayList<>();
+            sendersent=    sender.getSentfreindrequestId();
         sendersent.add(reciever.getUserId());
-        ArrayList<String> recieverrecieved = reciever.getFreindrequestId();
+        ArrayList<String> recieverrecieved = new ArrayList<>();
+        recieverrecieved=reciever.getFreindrequestId();
         recieverrecieved.add(sender.getUserId());
+
     }
 
 }
