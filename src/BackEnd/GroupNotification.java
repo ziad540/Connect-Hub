@@ -24,7 +24,7 @@ public class GroupNotification extends Notification{
 
     @Override
     public void interact() {
-        String[] options = {"View group", "leave group", "cancel"};
+        String[] options = {"View group", "mark as read"};
         int choice = JOptionPane.showOptionDialog(null, "New post in your group!", "Group Post",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
@@ -33,9 +33,6 @@ public class GroupNotification extends Notification{
 
                 break;
             case 1:
-
-                break;
-            case 2:
 
                 break;
         }

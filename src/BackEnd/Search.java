@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Search {
     UserDatabaseManagement userDatabaseManagement = UserDatabaseManagement.getInstance();
 
+
     public User getUser(String userId){
         for (int i=0;i<userDatabaseManagement.getUsers().size();i++)
         {

@@ -3,7 +3,7 @@
     "userId": "1001",
     "email": "a@a.com",
     "userName": "aaa",
-    "status": "online",
+    "status": "offline",
     "dateOfBirth": [
       2024,
       12,
@@ -12,8 +12,8 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "coverPicPath": "src/Image/unknown cover.png",
-      "profilePicPath": "src/Image/unknown user.png"
+      "profilePicPath": "src/Image/unknown user.png",
+      "coverPicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [
       "1003"
@@ -29,11 +29,6 @@
     "notificationManager": {
       "notifications": [
         {
-          "type": "friendRequest",
-          "recieverID": "1001",
-          "message": "ccc sent you a freind request",
-          "timestamp": "20/5",
-          "freindid": "1003"
         }
       ]
     }
@@ -51,8 +46,8 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "coverPicPath": "src/Image/unknown cover.png",
-      "profilePicPath": "src/Image/unknown user.png"
+      "profilePicPath": "src/Image/unknown user.png",
+      "coverPicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [],
     "postId": [
@@ -80,8 +75,8 @@
     "hashingPassword": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
     "profileInformation": {
       "bioData": "",
-      "coverPicPath": "src/Image/unknown cover.png",
-      "profilePicPath": "src/Image/unknown user.png"
+      "profilePicPath": "src/Image/unknown user.png",
+      "coverPicPath": "src/Image/unknown cover.png"
     },
     "firndesId": [
       "1001"
@@ -93,7 +88,10 @@
     "blockedID": [],
     "blockedfromID": [],
     "notificationManager": {
-      "notifications": []
+      "notifications": [
+        {
+        }
+      ]
     }
   }
 ]

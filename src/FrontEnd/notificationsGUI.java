@@ -20,7 +20,8 @@ public class notificationsGUI {
 
     public notificationsGUI(String userid,JFrame recentframe) {
         this.userid=userid;
-        this.recentframe=recentframe;this.sampleNotifications = createSampleNotifications();
+        this.recentframe=recentframe;
+        this.sampleNotifications = createSampleNotifications();
 
 
         initialize();
@@ -47,9 +48,9 @@ public class notificationsGUI {
 
     private  ArrayList<Notification>  createSampleNotifications() {
        ArrayList<Notification> not=new ArrayList<>();
-Search s=new Search();
-User u =s.getUser(userid);
-not=u.getNotificationManager().getNotifications();
+       Search s=new Search();
+       User u =s.getUser(userid);
+       not=u.getNotificationManager().getNotifications();
         return not;
     }
 
@@ -92,7 +93,8 @@ not=u.getNotificationManager().getNotifications();
                 public void mouseClicked(MouseEvent e) {
              n.interact();
                     sampleNotifications.remove(n);
-                    panel.removeAll();
+                    //panel.removeAll();
+                    Refresh();
                     displayNotifications();
 
                 }
@@ -101,6 +103,19 @@ not=u.getNotificationManager().getNotifications();
 
             height += 90;
         }
+    }
+
+    public void Refresh() {
+        UserDatabaseManagement.getInstance().loadUsersFromFile();
+        panel.removeAll();
+
+        new notificationsGUI(userid,frame);
+
+        panel.revalidate();
+        panel.repaint();
+
+
+
     }
 
 }
