@@ -19,7 +19,13 @@
     "status": "Member",
     "postId": [
       "4"
-
     ]
+  },
+  {
+    "type": "BasicMemberShip",
+    "memberShipID": "M3",
+    "userID": "1003",
+    "status": "PrimaryAdmin",
+    "postId": []
   }
 ]

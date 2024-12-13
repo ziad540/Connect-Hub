@@ -17,7 +17,7 @@ public class GroupsGui {
     GroupOperation operation = new GroupOperation();
     Search search = new Search();
 
-    public GroupsGui(String Id,JFrame f) {
+    public GroupsGui(String Id, JFrame f) {
         JFrame frame = new JFrame("Groups");
         frame.setSize(600, 800);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -35,8 +35,6 @@ public class GroupsGui {
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.setBackground(new Color(99, 190, 100));
         topPanel.setPreferredSize(new Dimension(600, 150));
-
-
 
 
         // هنا بقا يا زوز هعرض كل ال جروبات اللي جبتهم فوق
@@ -82,7 +80,6 @@ public class GroupsGui {
         JButton returnButton = new JButton();
 
 
-
         JButton backButton = new JButton();
         ImageIcon image3 = new ImageIcon("src/Image/return.png");
         backButton.setContentAreaFilled(false);
@@ -103,8 +100,6 @@ public class GroupsGui {
         bottomPanel.add(backButton);
 
 
-
-
         JButton newGroupButton = new JButton("New Group");
         newGroupButton.setFont(new Font("Arial", Font.BOLD, 14));
         newGroupButton.setBackground(new Color(99, 190, 100));
@@ -116,39 +111,13 @@ public class GroupsGui {
         newGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open a new window or dialog for creating a new group
-                new CreateGroupGui(Id, frame); // You can implement CreateGroupGui class
-                frame.setVisible(false); // Optional: Hide current frame while creating a new group
+
+                new CreateGroupGui(Id, frame);
+                frame.setVisible(false);
             }
         });
-
         bottomPanel.add(newGroupButton); // Add the button to the bottom panel
-
-
-
-
-
-
-
-
-
-
-
         frame.add(bottomPanel, BorderLayout.SOUTH);
-
         frame.setVisible(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

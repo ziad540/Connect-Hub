@@ -4,6 +4,13 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class PrimaryAdmin extends MemberShip implements PrimaryAdminOperation {
+    public PrimaryAdmin(String userID) {
+        super(userID, "PrimaryAdmin");
+    }
+
+    public PrimaryAdmin() {
+
+    }
 
     @Override
     public void RemoveMember(String memberID, String groupID) {
