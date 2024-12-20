@@ -169,6 +169,13 @@ public class GroupsGui {
             public void actionPerformed(ActionEvent e) {
 
 
+
+if(f==null)
+{
+    new NewsFeedgui(Id);
+    return;
+}
+
                 frame.dispose();
                 f.setVisible(true);
 

@@ -2,7 +2,7 @@ package BackEnd;
 
 import java.util.ArrayList;
 
-public class Groups {
+public class Groups implements Subject {
     private String groupName;
     private String groupDescription;
     private String groupOwnerId;
@@ -11,8 +11,18 @@ public class Groups {
     private ArrayList<String> memberShipId;
     private ArrayList<String> pendingRequestId;
 
+    private ArrayList<Observer> observers = new ArrayList<>();
+
     public Groups() {
 
+    }
+
+    public ArrayList<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(ArrayList<Observer> observers) {
+        this.observers = observers;
     }
 
     public Groups(String groupName, String groupDescription, String groupOwnerId, String groupPhoto) {
@@ -28,6 +38,27 @@ public class Groups {
         }
         memberShipId = new ArrayList<>();
         pendingRequestId = new ArrayList<>();
+    }
+
+    @Override
+    public void addObserver(Observer observer)
+    {
+        observers.add(observer);
+
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+
+    }
+//add post,add user
+    @Override
+    public void notifyObservers(String postMessage) {
+        for (Observer observer : observers) {
+            observer.update(postMessage);
+        }
+
     }
 
     /**

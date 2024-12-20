@@ -113,6 +113,7 @@ public class AddPostGroupGui {
                 String id = String.valueOf(idint);
                 Post post = new Post(id, memberShip.getUserID(), textArea.getText(), pathimage);
                 allposts.add(post);
+              //
                 PostDatabaseManagement.getInstance().saveToFile();
                 ArrayList<String> posts = memberShip.getPostId();
                 posts.add(id);
