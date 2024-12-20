@@ -101,6 +101,7 @@ public class notificationsGUI {
         Search s = new Search();
         User u = s.getUser(userid);
         not = u.getNotificationManager().getNotifications();
+        System.out.println(not.size()+"sizeeee not");
         return not;
     }
 

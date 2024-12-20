@@ -32,8 +32,7 @@ public class Groups implements Subject {
         this.groupOwnerId = groupOwnerId;
         if (groupPhoto != null) {
             this.groupPhoto = groupPhoto;
-        }
-        else{
+        } else {
             this.groupPhoto = "";
         }
         memberShipId = new ArrayList<>();
@@ -41,20 +40,22 @@ public class Groups implements Subject {
     }
 
     @Override
-    public void addObserver(Observer observer)
-    {
+    public void addObserver(Observer observer) {
+        System.out.println("ana");
         observers.add(observer);
-
+        System.out.println(observers.size());
     }
 
     @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
-
     }
-//add post,add user
+
+    //add post,add user
     @Override
     public void notifyObservers(String postMessage) {
+        System.out.println(postMessage);
+        System.out.println("ana hena gou groups");
         for (Observer observer : observers) {
             observer.update(postMessage);
         }

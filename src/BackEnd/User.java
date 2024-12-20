@@ -1,5 +1,6 @@
 package BackEnd;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -184,8 +185,7 @@ public class User implements Observer {
     @Override
     public void update(String groupID)
     {
-
+        System.out.println("ana hena go user"+groupID);
         notificationManager.addNotification(new GroupNotification("NEW POPST IN YOUR GROUP","20/5",this.getUserId(),groupID));
-
     }
 }

@@ -9,9 +9,6 @@ public class NotificationManager {
 
     {
         notifications.add(notification);
-
-
-
     }
 
     public ArrayList<Notification> getNotifications() {

@@ -427,7 +427,7 @@ public class GroupDetailsGui {
         AddPostButton.setFocusPainted(false);
         AddPostButton.addActionListener(e -> {
             frame2.setVisible(false);
-            new AddPostGroupGui(member.getMemberShipID(), frame2);
+            new AddPostGroupGui(member.getMemberShipID(), frame2,group.getGroupId());
             Refresh(userID, group.getGroupId(), frame2);
         });
 

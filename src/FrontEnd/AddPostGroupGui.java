@@ -15,7 +15,7 @@ public class AddPostGroupGui {
     GroupOperation groupOperation = new GroupOperation();
     Search search = new Search();
 
-    AddPostGroupGui(String memberId, JFrame frame2) {
+    AddPostGroupGui(String memberId, JFrame frame2, String groupiId) {
         MemberShip memberShip = groupOperation.getMember(memberId);
         JFrame frame = new JFrame("NewsFeed"); //new frame to Add post
         frame.setSize(400, 800);
@@ -101,6 +101,8 @@ public class AddPostGroupGui {
         addPostButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Search search = new Search();
+                Groups group=search.getgroup(groupiId);
                 int idint = uniqueId.loadCOUNTERPOSTID();
                 String idCheck = String.valueOf(idint);
                 ArrayList<Post> allposts = PostDatabaseManagement.getInstance().getPosts();
@@ -117,10 +119,11 @@ public class AddPostGroupGui {
                 PostDatabaseManagement.getInstance().saveToFile();
                 ArrayList<String> posts = memberShip.getPostId();
                 posts.add(id);
+
+                group.notifyObservers("New posts aded in "+group.getGroupName());
                 JOptionPane.showMessageDialog(null, "Added post", "added", JOptionPane.INFORMATION_MESSAGE);
                 UserDatabaseManagement.getInstance().saveToFile();
                 MemberShipDataBase.getInstance().saveToFile();
-
             }
         });
 
