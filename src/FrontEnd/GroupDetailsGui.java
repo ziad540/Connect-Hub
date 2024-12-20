@@ -139,9 +139,7 @@ public class GroupDetailsGui {
         {
             JLabel title2 = new JLabel("Pending requests");
             membersPanel.add(title2);
-
             createMemberPanel2(pendingmembers, frame2, memberType, group, membersPanel);
-
         }
         postsScrollPane.revalidate();
         postsScrollPane.repaint();
